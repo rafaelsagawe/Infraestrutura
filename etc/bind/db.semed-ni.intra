@@ -1,0 +1,31 @@
+;
+; BIND zone file for semed-ni.intra
+;
+ 
+$TTL    3D
+@	IN	SOA	@ root.semed-ni.intra. (
+			2017061236
+			8H
+			2H
+			4W
+			1D )
+;
+@               NS      ns              ; Inet address of name server
+;@               MX      10 mail         ; Primary mail exchanger
+ 
+ns				IN	A	192.168.31.192	 
+
+gateway         		CNAME   router
+gw              		CNAME   router
+servidor.semed-ni.intra.	IN	A	192.168.31.27
+openfire.semed-ni.intra.	IN	A	192.168.31.189
+owncloud.semed-ni.intra.	IN 	A 	192.168.31.180
+nas.semed-ni.intra.		IN	A	192.168.31.194
+educoon.semed-ni.intra.		IN	A	192.168.31.197
+proxmox.semed-ni.intra.		IN	A	192.168.31.193
+ieducar.semed-ni.intra.		IN	A	192.168.31.196
+nas.owncloud.semed-ni.intra.	IN	A	192.168.31.254
+chat.semed-ni.intra.		IN	CNAME	openfire.semed-ni.intra.
+www.				IN	CNAME	owncloud.semed-ni.intra.
+glpi.semed-ni.intra.	IN	A	192.168.31.195
+ti_gestao.semed-ni.intra.	IN	A	192.168.31.195

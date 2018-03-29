@@ -1,0 +1,24 @@
+;
+; BIND zone file for 192.168.31.xxx
+;
+ 
+$TTL    3H
+@	IN	SOA	@ root.semed-ni.intra. (
+			2017061230
+			8H
+			2H
+			4W
+			1D )
+;
+@               NS      ns.home.lan.    ; Nameserver address
+ 
+188.31.168.192.in-addr.arpa.	IN	PTR	owncloud.semed-ni.intra.
+189.31.168.192.in-addr.arpa.	IN	PTR	openfire.semed-ni.intra.
+194.31.168.192.in-addr.arpa.	IN	PTR	nas.semed-ni.intra.
+197.31.168.192.in-addr.arpa.	IN	PTR	educoon.semed-ni.intra.
+193.31.168.192.in-addr.arpa.	IN	PTR	proxmox.semed-ni.intra.
+190.31.168.192.in-addr.arpa.	IN	PTR	ad.semed-ni.intra.
+196.31.168.192.in-addr.arpa.	IN	PTR	ieducar.semed-ni.intra.
+123.31.168.192.in-addr.arpa.	IN	PTR	ldap.semed-ni.intra.
+254.31.168.192.in-addr.arpa.	IN	PTR	nas.owncloud.semed-ni.intra.
+195.31.168.192.in-addr.arpa.	IN	PTR	glpi.semed-ni.intra.
