@@ -1,0 +1,19 @@
+Memoria= 512mb
+core= 1
+HD= 32gb
+IP= 192.168.31.189/24
+
+java version "1.8.0_161"
+Java(TM) SE Runtime Environment (build 1.8.0_161-b12)
+Java HotSpot(TM) 64-Bit Server VM (build 25.161-b12, mixed mode)
+
+# Procedimentos de intalação
+
+echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list
+echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
+apt-get update
+apt-get upgrade
+apt-get install oracle-java8-installer
+apt install openjdk-8-jre
+dpkg -i openfire_4.2.2_all.deb
