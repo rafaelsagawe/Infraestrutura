@@ -1,0 +1,55 @@
+Testes no ubuntu 16.04 minimal
+
+*// Usuário root do sistema
+
+# Atualização do Linux
+sudo apt update && sudo apt upgrade
+sudo apt install git openssh-server proftpd-basic
+
+# Desligar o sistema
+sudo poweroff
+
+# Download do postgres
+wget https://ftp.postgresql.org/pub/source/v9.5.0/postgresql-9.5.0.tar.bz2
+
+# Extraindo o postgres
+tar zxvf postgresql-9.5.0.tar.bz2
+cd postgresql-9.5.0/
+
+# configurações e instalação
+./configure --prefix=/opt/postgres  --with-perl --with-python --with-openssl --with-pam -enable-thread-safety --with-libxml
+
+make
+make install / sudo make install
+
+# Criação do usuário postgres tendo a home direto na pasta da instalação
+sudo adduser postgres --home=/opt/postgres
+
+*// Usuario postgres
+
+# Inicialização do banco de dados
+cd bin/
+./pg_ctl -v
+./pg_ctl -D /opt/postgres/data/ start
+
+# Verificação 
+ps -aux | grep 9822
+
+# Acessando o terminadl do postgres (psql)
+cd bin/
+./psql -d template1
+
+# Configurações extras
+nano ../data/pg_hba.conf
+
+|
+|
+|
+|
+
+nano ../data/postgresql.conf
+
+|
+|
+|
+|
