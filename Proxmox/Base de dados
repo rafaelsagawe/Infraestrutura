@@ -6,7 +6,7 @@ Testes no ubuntu 16.04 minimal
 sudo apt update && sudo apt upgrade
 
 # Ambiente
-sudo apt install git openssh-server proftpd-basic build-essential
+sudo apt install git openssh-server proftpd-basic build-essential libexpat1-dev zlib1g-dev libssl-dev libpcre3 libpcre3-dev
 
 # Liberando acesso root via ssh
 nano /etc/ssh/sshd_config
@@ -18,6 +18,7 @@ service ssh restart
 # Apache2.4.9
 wget http://archive.apache.org/dist/httpd/httpd-2.4.9.tar.gz && tar zxvf httpd-2.4.9.tar.gz
 
+
 # Dependencias
 cd httpd-2.4.9/srclib/ && wget http://mirror.nbtelecom.com.br/apache//apr/apr-1.6.3.tar.gz && tar zxvf apr-1.6.3.tar.gz &&  mv apr-1.6.3 apr
 
@@ -25,12 +26,20 @@ wget http://mirror.nbtelecom.com.br/apache//apr/apr-util-1.6.1.tar.gz && tar zxv
 
 cd apr && ./configure && make && make install
 
+ cd ../apr-util && make && make install
+ cd ../../..
 
-cd httpd-2.4.9
+wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre2-10.21.tar.gz
+tar zxvf pcre2-10.21.tar.gz && cd pcre2-10.21 
+./configure --prefix=/usr/local/pcre && make && make install
+
+ cd ../httpd-2.4.9
 
 ./configure --prefix=/opt/apache2 --enable-file-cache --enable-cache --enable-disk-cache --enable-mem-cache --enable-deflate --enable-expires --enable-headers --enable-usertrack --enable-ssl --enable-cgi --enable-vhost-alias --enable-rewrite --enable-so --with-apr=/usr/local/apr/
-
-
+make
+#### Erro no make
+Makefile:48: recipe for target 'htpasswd' failed
+####
 
 # Desligar o sistema
 sudo poweroff
