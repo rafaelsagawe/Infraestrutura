@@ -6,7 +6,7 @@ Testes no ubuntu 16.04 minimal
 sudo apt update && sudo apt upgrade
 
 # Ambiente
-sudo apt install git openssh-server proftpd-basic build-essential libexpat1-dev zlib1g-dev libssl-dev libpcre3 libpcre3-dev libbz2-dev libjpeg-dev libpng12-dev libgmp-dev libwebp-dev libxpm-dev
+sudo apt install git openssh-server proftpd-basic build-essential libexpat1-dev zlib1g-dev libssl-dev libpcre3 libpcre3-dev libbz2-dev libjpeg-dev libpng12-dev libgmp-dev libwebp-dev libxpm-dev libc-client-dev libkrb5-dev 
 
 # Liberando acesso root via ssh
 nano /etc/ssh/sshd_config
@@ -46,30 +46,8 @@ make install
 cd /opt/apache2/bin
 ./apachectl start
 
-## PHP 7.0.31
 
-
- wget http://br2.php.net/distributions/php-7.0.31.tar.gz && tar zxvf php-7.0.31.tar.gz
- 
-tar zxvf db-4.8.30.tar.gz
-cd db-4.8.30/build_unix/
-../dist/configure --prefix=/opt/db4 --enable-cxx
-make
-make install
-cd
-
-cd php-7.0.31
- 
-
- ./configure --prefix=/opt/php --disable-static --with-apxs=/usr/sbin/apxs --sysconfdir=/etc --enable-discard-path --with-config-file-path=/etc/apache --enable-safe-mode --with-openssl --enable-bcmath --with-bz2 --with-pic --enable-calendar --enable-ctype --with-gdbm -with-db4=/opt/db4 --with-imap-ssl=/tmp/pine4.58/imap/c-client --with-imap=/tmp/pine4.58/imap/c-client --enable-dbase --enable-ftp --with-iconv --with-gd --enable-gd-native-ttf --with-jpeg-dir=/usr --with-png --with-gmp --with-pgsql=shared,/usr/local/pgsql --with-xml=shared,/usr --with-gettext=shared,/usr --with-mm=/usr --enable-trans-sid --enable-shmop --enable-sockets --with-regex=php --enable-sysvsem --enable-sysvshm --enable-yp --enable-memory-limit --with-tsrm-pthreads --enable-shared --disable-debug --with-zlib=/usr --enable-dba --with-webp-dir=/opt/apache2/htdocs/ --with-xpm-dir=/usr --with-freetype-dir=/usr/bin
-
-#### erro
-configure: error: utf8_mime2text() has new signature, but U8T_CANONICAL is missing. This should not happen. Check config.log for additional information.
-#### erro
-
-# Desligar o sistema
-poweroff
-
+## PostgresSQL
 # Download do postgres
 wget https://ftp.postgresql.org/pub/source/v9.5.0/postgresql-9.5.0.tar.bz2
 
@@ -115,3 +93,29 @@ nano ../data/postgresql.conf
 | host    all             all             127.0.0.1/32      trust
 | host    all             all             192.168.1.0/24    trust
 |
+
+
+
+### PHP 7.0.31
+
+
+wget http://br2.php.net/distributions/php-7.0.31.tar.gz && tar zxvf php-7.0.31.tar.gz
+ 
+tar zxvf db-4.8.30.tar.gz
+cd db-4.8.30/build_unix/
+../dist/configure --prefix=/opt/db4 --enable-cxx
+make
+make install
+cd
+
+rm -r /var/lib/apt/lists/*
+
+cd php-7.0.31
+ 
+./configure --prefix=/opt/php --disable-static --with-apxs=/usr/sbin/apxs --sysconfdir=/etc --enable-discard-path --with-config-file-path=/etc/apache --enable-safe-mode --with-openssl --enable-bcmath --with-bz2 --with-pic --enable-calendar --enable-ctype --with-gdbm -with-db4=/opt/db4 --with-imap-ssl=/tmp/pine4.58/imap/c-client --with-imap=/tmp/pine4.58/imap/c-client --enable-dbase --enable-ftp --with-iconv --with-gd --enable-gd-native-ttf --with-jpeg-dir=/usr --with-png --with-gmp --with-pgsql=shared,/usr/local/pgsql --with-xml=shared,/usr --with-gettext=shared,/usr --with-mm=/usr --enable-trans-sid --enable-shmop --enable-sockets --with-regex=php --enable-sysvsem --enable-sysvshm --enable-yp --enable-memory-limit --with-tsrm-pthreads --enable-shared --disable-debug --with-zlib=/usr --enable-dba --with-webp-dir=/opt/apache2/htdocs/ --with-xpm-dir=/usr --with-freetype-dir=/usr/bin --with-kerberos
+#### erro
+configure: error: Cannot find libpq-fe.h. Please specify correct PostgreSQL installation path
+#### erro
+
+# Desligar o sistema
+poweroff
