@@ -20,13 +20,16 @@ wget http://archive.apache.org/dist/httpd/httpd-2.4.9.tar.gz && tar zxvf httpd-2
 
 
 # Dependencias
-cd httpd-2.4.9/srclib/ && wget http://mirror.nbtelecom.com.br/apache//apr/apr-1.6.3.tar.gz && tar zxvf apr-1.6.3.tar.gz &&  mv apr-1.6.3 apr
+cd httpd-2.4.9/srclib/
+wget http://mirror.nbtelecom.com.br/apache//apr/apr-1.6.3.tar.gz && tar zxvf apr-1.6.3.tar.gz &&  mv apr-1.6.3 apr
 
 wget http://mirror.nbtelecom.com.br/apache//apr/apr-util-1.6.1.tar.gz && tar zxvf apr-util-1.6.1.tar.gz && mv apr-util-1.6.1 apr-util
 
 cd apr && ./configure && make && make install
 
- cd ../apr-util && make && make install
+ cd ../apr-util
+ ./configure --prefix=/usr/local/apr-util  --with-apr=/usr/local/apr/bin/apr-1-config
+ make && make install
  cd ../../..
 
 wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre2-10.21.tar.gz
@@ -37,12 +40,14 @@ tar zxvf pcre2-10.21.tar.gz && cd pcre2-10.21
 
 ./configure --prefix=/opt/apache2 --enable-file-cache --enable-cache --enable-disk-cache --enable-mem-cache --enable-deflate --enable-expires --enable-headers --enable-usertrack --enable-ssl --enable-cgi --enable-vhost-alias --enable-rewrite --enable-so --with-apr=/usr/local/apr/
 make
-#### Erro no make
-Makefile:48: recipe for target 'htpasswd' failed
-####
+make install
+
+# Iniciando o Apache
+cd /opt/apache2/bin
+./apachectl start
 
 # Desligar o sistema
-sudo poweroff
+poweroff
 
 # Download do postgres
 wget https://ftp.postgresql.org/pub/source/v9.5.0/postgresql-9.5.0.tar.bz2
