@@ -6,7 +6,8 @@ Testes no ubuntu 16.04 minimal
 sudo apt update && sudo apt upgrade
 
 # Ambiente
-sudo apt install git openssh-server proftpd-basic build-essential libexpat1-dev zlib1g-dev libssl-dev libpcre3 libpcre3-dev libbz2-dev libjpeg-dev libpng12-dev libgmp-dev libwebp-dev libxpm-dev libc-client-dev libkrb5-dev 
+sudo apt install git openssh-server proftpd-basic build-essential libexpat1-dev zlib1g-dev libssl-dev libpcre3 libpcre3-dev libbz2-dev libjpeg-dev libpng12-dev libgmp-dev libwebp-dev libxpm-dev libc-client-dev libkrb5-dev libmm-dev libmm14
+
 
 # Liberando acesso root via ssh
 nano /etc/ssh/sshd_config
@@ -46,40 +47,30 @@ make install
 cd /opt/apache2/bin
 ./apachectl start
 
-
+---------------------------------------------------
 ## PostgresSQL
 # Download do postgres
-wget https://ftp.postgresql.org/pub/source/v9.5.0/postgresql-9.5.0.tar.bz2
+wget https://ftp.postgresql.org/pub/source/v9.5.0/postgresql-9.5.0.tar.gz
 
 # Extraindo o postgres
-tar zxvf postgresql-9.5.0.tar.bz2
+tar zxvf postgresql-9.5.0.tar.gz
 cd postgresql-9.5.0/
 
 # configurações e instalação
 ./configure --prefix=/opt/postgres  --with-perl --with-python --with-openssl --with-pam -enable-thread-safety --with-libxml
-
 make
-make install / sudo make install
+make install
 
 # Criação do usuário postgres tendo a home direto na pasta da instalação
 sudo adduser postgres --home=/opt/postgres
 
-*// Usuario postgres
+# Pasta de data
+mkdir data
+cd chown postgres data
 
-# Inicialização do banco de dados
-cd bin/
-./pg_ctl -v
-./pg_ctl -D /opt/postgres/data/ start
 
-# Verificação 
-ps -aux | grep 9822
-
-# Acessando o terminadl do postgres (psql)
-cd bin/
-./psql -d template1
-
-# Configurações extras
-nano ../data/pg_hba.conf
+# Configurações extras (Liberando acesso externo)
+nano ../data/postgresql.conf
 
 |
 | listen_addresses = '*'
@@ -87,14 +78,34 @@ nano ../data/pg_hba.conf
 | port = 5432
 |
 
-nano ../data/postgresql.conf
+nano ../data/pg_hba.conf
 
 |
-| host    all             all             127.0.0.1/32      trust
-| host    all             all             192.168.1.0/24    trust
+| host    all             all             0.0.0.0/0      trust
+| host    all             all             192.168.30.0/24    trust
 |
 
+*// Usuario postgres
 
+# Inicialização do banco de dados
+cd bin/
+#./pg_ctl -v
+
+# Cria os arquivos da pasta data
+./initdb -D ../data 
+
+# Inicia o SGBD
+./pg_ctl -D /opt/postgres/data/ start
+
+# Verificação 
+ps -aux | grep 9822
+
+# Acessando o terminadl do postgres (psql)
+./psql -d template1
+
+su postgres
+cd bin
+ALTER USER postgres WITH PASSWORD 'nova_senha';
 
 ### PHP 7.0.31
 
@@ -112,10 +123,15 @@ rm -r /var/lib/apt/lists/*
 
 cd php-7.0.31
  
-./configure --prefix=/opt/php --disable-static --with-apxs=/usr/sbin/apxs --sysconfdir=/etc --enable-discard-path --with-config-file-path=/etc/apache --enable-safe-mode --with-openssl --enable-bcmath --with-bz2 --with-pic --enable-calendar --enable-ctype --with-gdbm -with-db4=/opt/db4 --with-imap-ssl=/tmp/pine4.58/imap/c-client --with-imap=/tmp/pine4.58/imap/c-client --enable-dbase --enable-ftp --with-iconv --with-gd --enable-gd-native-ttf --with-jpeg-dir=/usr --with-png --with-gmp --with-pgsql=shared,/usr/local/pgsql --with-xml=shared,/usr --with-gettext=shared,/usr --with-mm=/usr --enable-trans-sid --enable-shmop --enable-sockets --with-regex=php --enable-sysvsem --enable-sysvshm --enable-yp --enable-memory-limit --with-tsrm-pthreads --enable-shared --disable-debug --with-zlib=/usr --enable-dba --with-webp-dir=/opt/apache2/htdocs/ --with-xpm-dir=/usr --with-freetype-dir=/usr/bin --with-kerberos
-#### erro
-configure: error: Cannot find libpq-fe.h. Please specify correct PostgreSQL installation path
-#### erro
+ ./configure --prefix=/opt/php --disable-static --with-apxs=/usr/sbin/apxs --sysconfdir=/etc --enable-discard-path --with-config-file-path=/etc/apache --enable-safe-mode --with-openssl --enable-bcmath --with-bz2 --with-pic --enable-calendar --enable-ctype --with-gdbm -with-db4=/opt/db4 --with-imap-ssl=/tmp/pine4.58/imap/c-client --with-imap=/tmp/pine4.58/imap/c-client --enable-dbase --enable-ftp --with-iconv --with-gd --enable-gd-native-ttf --with-jpeg-dir=/usr --with-png --with-gmp --with-pgsql=shared,/opt/postgres --with-xml=shared,/usr --with-gettext=shared,/usr --with-mm=/usr --enable-trans-sid --enable-shmop --enable-sockets --with-regex=php --enable-sysvsem --enable-sysvshm --enable-yp --enable-memory-limit --with-tsrm-pthreads --enable-shared --disable-debug --with-zlib=/usr --enable-dba --with-webp-dir=/opt/apache2/htdocs/ --with-xpm-dir=/usr --with-freetype-dir=/usr/bin --with-kerberos
+
+#### WARNING
+configure: WARNING: unrecognized options: --with-apxs, --enable-discard-path, --enable-safe-mode, --enable-dbase, --with-png, --with-xml, --enable-trans-sid, --with-regex, --enable-yp, --enable-memory-limit
+#### WARNING
+
+make
+make test
+make install
 
 # Desligar o sistema
 poweroff
