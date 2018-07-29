@@ -4,7 +4,33 @@ Testes no ubuntu 16.04 minimal
 
 # Atualização do Linux
 sudo apt update && sudo apt upgrade
-sudo apt install git openssh-server proftpd-basic
+
+# Ambiente
+sudo apt install git openssh-server proftpd-basic build-essential
+
+# Liberando acesso root via ssh
+nano /etc/ssh/sshd_config
+|
+| PermitRootLogin yes
+|
+service ssh restart
+
+# Apache2.4.9
+wget http://archive.apache.org/dist/httpd/httpd-2.4.9.tar.gz && tar zxvf httpd-2.4.9.tar.gz
+
+# Dependencias
+cd httpd-2.4.9/srclib/ && wget http://mirror.nbtelecom.com.br/apache//apr/apr-1.6.3.tar.gz && tar zxvf apr-1.6.3.tar.gz &&  mv apr-1.6.3 apr
+
+wget http://mirror.nbtelecom.com.br/apache//apr/apr-util-1.6.1.tar.gz && tar zxvf apr-util-1.6.1.tar.gz && mv apr-util-1.6.1 apr-util
+
+cd apr && ./configure && make && make install
+
+
+cd httpd-2.4.9
+
+./configure --prefix=/opt/apache2 --enable-file-cache --enable-cache --enable-disk-cache --enable-mem-cache --enable-deflate --enable-expires --enable-headers --enable-usertrack --enable-ssl --enable-cgi --enable-vhost-alias --enable-rewrite --enable-so --with-apr=/usr/local/apr/
+
+
 
 # Desligar o sistema
 sudo poweroff
