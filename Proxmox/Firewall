@@ -1,0 +1,23 @@
+apt update && apt upgrade &&  apt install isc-dhcp-server bind9 bind9utils dnsutils
+
+
+## Erro
+nano /etc/apt/sources.list
+
+deb https://download.webmin.com/download/repository sarge contrib
+
+cd /root 
+wget http://www.webmin.com/jcameron-key.asc
+apt-key add jcameron-key.asc
+apt-get install apt-transport-https
+apt-get update
+apt-get install webmin
+##
+
+apt-get install perl libnet-ssleay-perl openssl libauthen-pam-perl libpam-runtime libio-pty-perl apt-show-versions python ca-certificates
+
+wget http://prdownloads.sourceforge.net/webadmin/webmin_1.890_all.deb
+
+dpkg --install webmin_1.890_all.deb
+
+
