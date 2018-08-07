@@ -17,3 +17,4 @@ apt-get upgrade
 apt-get install oracle-java8-installer
 apt install openjdk-8-jre
 dpkg -i openfire_4.2.2_all.deb
+apt-get install -f
