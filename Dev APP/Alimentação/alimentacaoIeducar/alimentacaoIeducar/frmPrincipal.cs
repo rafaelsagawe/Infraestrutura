@@ -16,5 +16,11 @@ namespace alimentacaoIeducar
         {
             InitializeComponent();
         }
+
+        private void cadastroToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmCadProduto cadProd = new frmCadProduto();
+            cadProd.ShowDialog();
+        }
     }
 }
