@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace alimentacaoIeducar
 {
-    public partial class cadCliente : Form
+    public partial class frmCadCliente : Form
     {
-        public cadCliente()
+        public frmCadCliente()
         {
             InitializeComponent();
         }
@@ -22,7 +22,6 @@ namespace alimentacaoIeducar
             this.Validate();
             this.clienteBindingSource.EndEdit();
             this.tableAdapterManager.UpdateAll(this.ieducarDataSet);
-
         }
 
         private void cadCliente_Load(object sender, EventArgs e)

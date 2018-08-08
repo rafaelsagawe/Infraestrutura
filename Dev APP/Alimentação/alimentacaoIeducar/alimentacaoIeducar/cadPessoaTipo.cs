@@ -34,7 +34,7 @@ namespace alimentacaoIeducar
 
         private void button1_Click(object sender, EventArgs e)
         {
-            cadCliente cadClie = new cadCliente();
+            frmCadCliente cadClie = new frmCadCliente();
             cadClie.Show();
 
         }

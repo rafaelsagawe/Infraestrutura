@@ -32,8 +32,11 @@
             System.Windows.Forms.Label idpesLabel;
             System.Windows.Forms.Label tipoLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(cadPessoaTipo));
+            System.Windows.Forms.Label idpesLabel2;
             this.pessoaBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.pessoaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ieducarDataSet = new alimentacaoIeducar.ieducarDataSet();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -47,13 +50,13 @@
             this.pessoaBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.idpesLabel1 = new System.Windows.Forms.Label();
             this.tipoComboBox = new System.Windows.Forms.ComboBox();
-            this.pessoaBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ieducarDataSet = new alimentacaoIeducar.ieducarDataSet();
             this.pessoaTableAdapter = new alimentacaoIeducar.ieducarDataSetTableAdapters.pessoaTableAdapter();
             this.tableAdapterManager = new alimentacaoIeducar.ieducarDataSetTableAdapters.TableAdapterManager();
             this.button1 = new System.Windows.Forms.Button();
+            this.idpesTextBox = new System.Windows.Forms.TextBox();
             idpesLabel = new System.Windows.Forms.Label();
             tipoLabel = new System.Windows.Forms.Label();
+            idpesLabel2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pessoaBindingNavigator)).BeginInit();
             this.pessoaBindingNavigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pessoaBindingSource)).BeginInit();
@@ -105,7 +108,7 @@
             this.pessoaBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.pessoaBindingNavigator.Name = "pessoaBindingNavigator";
             this.pessoaBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.pessoaBindingNavigator.Size = new System.Drawing.Size(307, 25);
+            this.pessoaBindingNavigator.Size = new System.Drawing.Size(376, 25);
             this.pessoaBindingNavigator.TabIndex = 0;
             this.pessoaBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -117,6 +120,16 @@
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem.Text = "Adicionar novo";
+            // 
+            // pessoaBindingSource
+            // 
+            this.pessoaBindingSource.DataMember = "pessoa";
+            this.pessoaBindingSource.DataSource = this.ieducarDataSet;
+            // 
+            // ieducarDataSet
+            // 
+            this.ieducarDataSet.DataSetName = "ieducarDataSet";
+            this.ieducarDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // bindingNavigatorCountItem
             // 
@@ -218,21 +231,12 @@
             this.tipoComboBox.FormattingEnabled = true;
             this.tipoComboBox.Items.AddRange(new object[] {
             "F",
-            "J"});
+            "C",
+            "U"});
             this.tipoComboBox.Location = new System.Drawing.Point(53, 35);
             this.tipoComboBox.Name = "tipoComboBox";
             this.tipoComboBox.Size = new System.Drawing.Size(121, 21);
             this.tipoComboBox.TabIndex = 4;
-            // 
-            // pessoaBindingSource
-            // 
-            this.pessoaBindingSource.DataMember = "pessoa";
-            this.pessoaBindingSource.DataSource = this.ieducarDataSet;
-            // 
-            // ieducarDataSet
-            // 
-            this.ieducarDataSet.DataSetName = "ieducarDataSet";
-            this.ieducarDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // pessoaTableAdapter
             // 
@@ -244,6 +248,7 @@
             this.tableAdapterManager.clienteTableAdapter = null;
             this.tableAdapterManager.fornecedorTableAdapter = null;
             this.tableAdapterManager.pessoaTableAdapter = this.pessoaTableAdapter;
+            this.tableAdapterManager.produtoTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = alimentacaoIeducar.ieducarDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // button1
@@ -256,11 +261,30 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // idpesLabel2
+            // 
+            idpesLabel2.AutoSize = true;
+            idpesLabel2.Location = new System.Drawing.Point(215, 14);
+            idpesLabel2.Name = "idpesLabel2";
+            idpesLabel2.Size = new System.Drawing.Size(35, 13);
+            idpesLabel2.TabIndex = 6;
+            idpesLabel2.Text = "idpes:";
+            // 
+            // idpesTextBox
+            // 
+            this.idpesTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.pessoaBindingSource, "idpes", true));
+            this.idpesTextBox.Location = new System.Drawing.Point(256, 11);
+            this.idpesTextBox.Name = "idpesTextBox";
+            this.idpesTextBox.Size = new System.Drawing.Size(100, 20);
+            this.idpesTextBox.TabIndex = 7;
+            // 
             // cadPessoaTipo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(307, 104);
+            this.ClientSize = new System.Drawing.Size(376, 104);
+            this.Controls.Add(idpesLabel2);
+            this.Controls.Add(this.idpesTextBox);
             this.Controls.Add(this.button1);
             this.Controls.Add(idpesLabel);
             this.Controls.Add(this.idpesLabel1);
@@ -302,5 +326,6 @@
         private System.Windows.Forms.Label idpesLabel1;
         private System.Windows.Forms.ComboBox tipoComboBox;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox idpesTextBox;
     }
 }

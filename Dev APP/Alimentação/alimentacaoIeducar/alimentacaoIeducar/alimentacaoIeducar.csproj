@@ -63,11 +63,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="cadCliente.cs">
+    <Compile Include="frmCadCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="cadCliente.Designer.cs">
-      <DependentUpon>cadCliente.cs</DependentUpon>
+    <Compile Include="frmCadCliente.Designer.cs">
+      <DependentUpon>frmCadCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="cadPessoaTipo.cs">
       <SubType>Form</SubType>
@@ -80,6 +80,12 @@
     </Compile>
     <Compile Include="frmCadProduto.Designer.cs">
       <DependentUpon>frmCadProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFornecedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFornecedor.Designer.cs">
+      <DependentUpon>frmFornecedor.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPrincipal.cs">
       <SubType>Form</SubType>
@@ -94,14 +100,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="cadCliente.resx">
-      <DependentUpon>cadCliente.cs</DependentUpon>
+    <EmbeddedResource Include="frmCadCliente.resx">
+      <DependentUpon>frmCadCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="cadPessoaTipo.resx">
       <DependentUpon>cadPessoaTipo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCadProduto.resx">
       <DependentUpon>frmCadProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFornecedor.resx">
+      <DependentUpon>frmFornecedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
