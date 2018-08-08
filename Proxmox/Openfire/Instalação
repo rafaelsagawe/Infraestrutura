@@ -18,3 +18,20 @@ apt-get install oracle-java8-installer
 apt install openjdk-8-jre
 dpkg -i openfire_4.2.2_all.deb
 apt-get install -f
+
+Porta do cliente: 5222
+Porta de webGui: 9090
+
+
+Openfire é o servidor, ou seja, oferece o serviço aos clientes.
+Spark é um mensageiro instantâneo que utiliza o protocolo Jabber e funciona conectando-se a um servidor Openfire.
+
+#Recursos
+
+os usuários do Spark podem trocar mensagens de texto, 
+conversar por voz (não testato), 
+enviar e receber arquivos (em implenmentação),
+enviar screenshots (imagens da tela/desktop) uns aos outros (em implenmentação). 
+
+#Evolução 
+Com o link de internet o intuito é levar este recursos para as UE's.

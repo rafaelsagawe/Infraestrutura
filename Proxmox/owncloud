@@ -4,3 +4,12 @@ HD= 32gb
 IP= 192.168.31.180/24
 
 Sistema já com owncloud instalado
+
+ O owncloud assim como os outros projetos tem a possibilidade de serem acessado de forma remota atraves da internet, sejá atraves:
+* da interface web;
+do programa de desktop;
+do aplicativo movel;
+e ou do recurso webdav, este presente nas novas versões do libreoffice.
+
+
+
