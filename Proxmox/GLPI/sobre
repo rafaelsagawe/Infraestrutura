@@ -1,0 +1,9 @@
+# sistema para inventario de TI
+
+git clone git@github.com:glpi-project/glpi.git
+
+Falta ativar o recurso de SNMP
+
+Integrar com sistema de monitoramento Zabbix
+
+E notificação por email (ou telegram)
