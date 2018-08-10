@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCadProduto));
             System.Windows.Forms.Label idproLabel;
             System.Windows.Forms.Label idcliLabel;
             System.Windows.Forms.Label idunpLabel;
@@ -48,22 +47,24 @@
             System.Windows.Forms.Label classeLabel;
             System.Windows.Forms.Label desc_compostoLabel;
             System.Windows.Forms.Label idforLabel;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCadProduto));
+            System.Windows.Forms.Label idforLabel1;
             this.ieducarDataSet = new alimentacaoIeducar.ieducarDataSet();
             this.produtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.produtoTableAdapter = new alimentacaoIeducar.ieducarDataSetTableAdapters.produtoTableAdapter();
             this.tableAdapterManager = new alimentacaoIeducar.ieducarDataSetTableAdapters.TableAdapterManager();
             this.produtoBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.produtoBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.produtoDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -96,6 +97,9 @@
             this.idforTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.idforComboBox = new System.Windows.Forms.ComboBox();
+            this.fornecedorBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fornecedorTableAdapter = new alimentacaoIeducar.ieducarDataSetTableAdapters.fornecedorTableAdapter();
             idproLabel = new System.Windows.Forms.Label();
             idcliLabel = new System.Windows.Forms.Label();
             idunpLabel = new System.Windows.Forms.Label();
@@ -114,6 +118,7 @@
             classeLabel = new System.Windows.Forms.Label();
             desc_compostoLabel = new System.Windows.Forms.Label();
             idforLabel = new System.Windows.Forms.Label();
+            idforLabel1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ieducarDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.produtoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.produtoBindingNavigator)).BeginInit();
@@ -121,7 +126,170 @@
             ((System.ComponentModel.ISupportInitialize)(this.produtoDataGridView)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fornecedorBindingSource)).BeginInit();
             this.SuspendLayout();
+            // 
+            // idproLabel
+            // 
+            idproLabel.AutoSize = true;
+            idproLabel.Location = new System.Drawing.Point(37, 410);
+            idproLabel.Name = "idproLabel";
+            idproLabel.Size = new System.Drawing.Size(33, 13);
+            idproLabel.TabIndex = 2;
+            idproLabel.Text = "idpro:";
+            // 
+            // idcliLabel
+            // 
+            idcliLabel.AutoSize = true;
+            idcliLabel.Location = new System.Drawing.Point(37, 436);
+            idcliLabel.Name = "idcliLabel";
+            idcliLabel.Size = new System.Drawing.Size(28, 13);
+            idcliLabel.TabIndex = 4;
+            idcliLabel.Text = "idcli:";
+            // 
+            // idunpLabel
+            // 
+            idunpLabel.AutoSize = true;
+            idunpLabel.Location = new System.Drawing.Point(37, 462);
+            idunpLabel.Name = "idunpLabel";
+            idunpLabel.Size = new System.Drawing.Size(36, 13);
+            idunpLabel.TabIndex = 6;
+            idunpLabel.Text = "idunp:";
+            // 
+            // idfndeLabel
+            // 
+            idfndeLabel.AutoSize = true;
+            idfndeLabel.Location = new System.Drawing.Point(37, 488);
+            idfndeLabel.Name = "idfndeLabel";
+            idfndeLabel.Size = new System.Drawing.Size(39, 13);
+            idfndeLabel.TabIndex = 8;
+            idfndeLabel.Text = "idfnde:";
+            // 
+            // idtipLabel
+            // 
+            idtipLabel.AutoSize = true;
+            idtipLabel.Location = new System.Drawing.Point(37, 514);
+            idtipLabel.Name = "idtipLabel";
+            idtipLabel.Size = new System.Drawing.Size(29, 13);
+            idtipLabel.TabIndex = 10;
+            idtipLabel.Text = "idtip:";
+            // 
+            // descricaoLabel
+            // 
+            descricaoLabel.AutoSize = true;
+            descricaoLabel.Location = new System.Drawing.Point(16, 44);
+            descricaoLabel.Name = "descricaoLabel";
+            descricaoLabel.Size = new System.Drawing.Size(56, 13);
+            descricaoLabel.TabIndex = 12;
+            descricaoLabel.Text = "descricao:";
+            // 
+            // nome_compraLabel
+            // 
+            nome_compraLabel.AutoSize = true;
+            nome_compraLabel.Location = new System.Drawing.Point(16, 16);
+            nome_compraLabel.Name = "nome_compraLabel";
+            nome_compraLabel.Size = new System.Drawing.Size(74, 13);
+            nome_compraLabel.TabIndex = 14;
+            nome_compraLabel.Text = "nome compra:";
+            // 
+            // referencia_ceasaLabel
+            // 
+            referencia_ceasaLabel.AutoSize = true;
+            referencia_ceasaLabel.Location = new System.Drawing.Point(37, 544);
+            referencia_ceasaLabel.Name = "referencia_ceasaLabel";
+            referencia_ceasaLabel.Size = new System.Drawing.Size(89, 13);
+            referencia_ceasaLabel.TabIndex = 16;
+            referencia_ceasaLabel.Text = "referencia ceasa:";
+            // 
+            // fator_coccaoLabel
+            // 
+            fator_coccaoLabel.AutoSize = true;
+            fator_coccaoLabel.Location = new System.Drawing.Point(16, 104);
+            fator_coccaoLabel.Name = "fator_coccaoLabel";
+            fator_coccaoLabel.Size = new System.Drawing.Size(70, 13);
+            fator_coccaoLabel.TabIndex = 18;
+            fator_coccaoLabel.Text = "fator coccao:";
+            // 
+            // fator_correcaoLabel
+            // 
+            fator_correcaoLabel.AutoSize = true;
+            fator_correcaoLabel.Location = new System.Drawing.Point(16, 130);
+            fator_correcaoLabel.Name = "fator_correcaoLabel";
+            fator_correcaoLabel.Size = new System.Drawing.Size(76, 13);
+            fator_correcaoLabel.TabIndex = 20;
+            fator_correcaoLabel.Text = "fator correcao:";
+            // 
+            // vlr_unitarioLabel
+            // 
+            vlr_unitarioLabel.AutoSize = true;
+            vlr_unitarioLabel.Location = new System.Drawing.Point(14, 25);
+            vlr_unitarioLabel.Name = "vlr_unitarioLabel";
+            vlr_unitarioLabel.Size = new System.Drawing.Size(58, 13);
+            vlr_unitarioLabel.TabIndex = 22;
+            vlr_unitarioLabel.Text = "vlr unitario:";
+            // 
+            // penultimo_vlr_unitarioLabel
+            // 
+            penultimo_vlr_unitarioLabel.AutoSize = true;
+            penultimo_vlr_unitarioLabel.Location = new System.Drawing.Point(14, 51);
+            penultimo_vlr_unitarioLabel.Name = "penultimo_vlr_unitarioLabel";
+            penultimo_vlr_unitarioLabel.Size = new System.Drawing.Size(106, 13);
+            penultimo_vlr_unitarioLabel.TabIndex = 24;
+            penultimo_vlr_unitarioLabel.Text = "penultimo vlr unitario:";
+            // 
+            // dt_ultima_compraLabel
+            // 
+            dt_ultima_compraLabel.AutoSize = true;
+            dt_ultima_compraLabel.Location = new System.Drawing.Point(14, 78);
+            dt_ultima_compraLabel.Name = "dt_ultima_compraLabel";
+            dt_ultima_compraLabel.Size = new System.Drawing.Size(87, 13);
+            dt_ultima_compraLabel.TabIndex = 26;
+            dt_ultima_compraLabel.Text = "dt ultima compra:";
+            // 
+            // dt_penultima_compraLabel
+            // 
+            dt_penultima_compraLabel.AutoSize = true;
+            dt_penultima_compraLabel.Location = new System.Drawing.Point(14, 104);
+            dt_penultima_compraLabel.Name = "dt_penultima_compraLabel";
+            dt_penultima_compraLabel.Size = new System.Drawing.Size(105, 13);
+            dt_penultima_compraLabel.TabIndex = 28;
+            dt_penultima_compraLabel.Text = "dt penultima compra:";
+            // 
+            // qtde_estoqueLabel
+            // 
+            qtde_estoqueLabel.AutoSize = true;
+            qtde_estoqueLabel.Location = new System.Drawing.Point(14, 129);
+            qtde_estoqueLabel.Name = "qtde_estoqueLabel";
+            qtde_estoqueLabel.Size = new System.Drawing.Size(72, 13);
+            qtde_estoqueLabel.TabIndex = 30;
+            qtde_estoqueLabel.Text = "qtde estoque:";
+            // 
+            // classeLabel
+            // 
+            classeLabel.AutoSize = true;
+            classeLabel.Location = new System.Drawing.Point(14, 155);
+            classeLabel.Name = "classeLabel";
+            classeLabel.Size = new System.Drawing.Size(40, 13);
+            classeLabel.TabIndex = 32;
+            classeLabel.Text = "classe:";
+            // 
+            // desc_compostoLabel
+            // 
+            desc_compostoLabel.AutoSize = true;
+            desc_compostoLabel.Location = new System.Drawing.Point(16, 72);
+            desc_compostoLabel.Name = "desc_compostoLabel";
+            desc_compostoLabel.Size = new System.Drawing.Size(82, 13);
+            desc_compostoLabel.TabIndex = 34;
+            desc_compostoLabel.Text = "desc composto:";
+            // 
+            // idforLabel
+            // 
+            idforLabel.AutoSize = true;
+            idforLabel.Location = new System.Drawing.Point(14, 181);
+            idforLabel.Name = "idforLabel";
+            idforLabel.Size = new System.Drawing.Size(30, 13);
+            idforLabel.TabIndex = 36;
+            idforLabel.Text = "idfor:";
             // 
             // ieducarDataSet
             // 
@@ -166,16 +334,41 @@
             this.bindingNavigatorAddNewItem,
             this.bindingNavigatorDeleteItem,
             this.produtoBindingNavigatorSaveItem});
-            this.produtoBindingNavigator.Location = new System.Drawing.Point(0, 577);
+            this.produtoBindingNavigator.Location = new System.Drawing.Point(0, 581);
             this.produtoBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.produtoBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.produtoBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
             this.produtoBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.produtoBindingNavigator.Name = "produtoBindingNavigator";
             this.produtoBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.produtoBindingNavigator.Size = new System.Drawing.Size(858, 25);
+            this.produtoBindingNavigator.Size = new System.Drawing.Size(872, 25);
             this.produtoBindingNavigator.TabIndex = 0;
             this.produtoBindingNavigator.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "Adicionar novo";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(37, 22);
+            this.bindingNavigatorCountItem.Text = "de {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Número total de itens";
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Text = "Excluir";
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -209,17 +402,10 @@
             this.bindingNavigatorPositionItem.Text = "0";
             this.bindingNavigatorPositionItem.ToolTipText = "Posição atual";
             // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(37, 15);
-            this.bindingNavigatorCountItem.Text = "de {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Número total de itens";
-            // 
             // bindingNavigatorSeparator1
             // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 6);
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // bindingNavigatorMoveNextItem
             // 
@@ -227,7 +413,7 @@
             this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
             this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
             this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 20);
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveNextItem.Text = "Mover próximo";
             // 
             // bindingNavigatorMoveLastItem
@@ -236,38 +422,20 @@
             this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
             this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 20);
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveLastItem.Text = "Mover último";
             // 
             // bindingNavigatorSeparator2
             // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 6);
-            // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "Adicionar novo";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 20);
-            this.bindingNavigatorDeleteItem.Text = "Excluir";
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // produtoBindingNavigatorSaveItem
             // 
             this.produtoBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.produtoBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("produtoBindingNavigatorSaveItem.Image")));
             this.produtoBindingNavigatorSaveItem.Name = "produtoBindingNavigatorSaveItem";
-            this.produtoBindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 23);
+            this.produtoBindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 22);
             this.produtoBindingNavigatorSaveItem.Text = "Salvar Dados";
             this.produtoBindingNavigatorSaveItem.Click += new System.EventHandler(this.produtoBindingNavigatorSaveItem_Click);
             // 
@@ -352,15 +520,6 @@
             this.dataGridViewTextBoxColumn18.HeaderText = "idfor";
             this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
             // 
-            // idproLabel
-            // 
-            idproLabel.AutoSize = true;
-            idproLabel.Location = new System.Drawing.Point(37, 410);
-            idproLabel.Name = "idproLabel";
-            idproLabel.Size = new System.Drawing.Size(33, 13);
-            idproLabel.TabIndex = 2;
-            idproLabel.Text = "idpro:";
-            // 
             // idproTextBox
             // 
             this.idproTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.produtoBindingSource, "idpro", true));
@@ -368,15 +527,6 @@
             this.idproTextBox.Name = "idproTextBox";
             this.idproTextBox.Size = new System.Drawing.Size(200, 20);
             this.idproTextBox.TabIndex = 3;
-            // 
-            // idcliLabel
-            // 
-            idcliLabel.AutoSize = true;
-            idcliLabel.Location = new System.Drawing.Point(37, 436);
-            idcliLabel.Name = "idcliLabel";
-            idcliLabel.Size = new System.Drawing.Size(28, 13);
-            idcliLabel.TabIndex = 4;
-            idcliLabel.Text = "idcli:";
             // 
             // idcliTextBox
             // 
@@ -386,15 +536,6 @@
             this.idcliTextBox.Size = new System.Drawing.Size(200, 20);
             this.idcliTextBox.TabIndex = 5;
             // 
-            // idunpLabel
-            // 
-            idunpLabel.AutoSize = true;
-            idunpLabel.Location = new System.Drawing.Point(37, 462);
-            idunpLabel.Name = "idunpLabel";
-            idunpLabel.Size = new System.Drawing.Size(36, 13);
-            idunpLabel.TabIndex = 6;
-            idunpLabel.Text = "idunp:";
-            // 
             // idunpTextBox
             // 
             this.idunpTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.produtoBindingSource, "idunp", true));
@@ -402,15 +543,6 @@
             this.idunpTextBox.Name = "idunpTextBox";
             this.idunpTextBox.Size = new System.Drawing.Size(200, 20);
             this.idunpTextBox.TabIndex = 7;
-            // 
-            // idfndeLabel
-            // 
-            idfndeLabel.AutoSize = true;
-            idfndeLabel.Location = new System.Drawing.Point(37, 488);
-            idfndeLabel.Name = "idfndeLabel";
-            idfndeLabel.Size = new System.Drawing.Size(39, 13);
-            idfndeLabel.TabIndex = 8;
-            idfndeLabel.Text = "idfnde:";
             // 
             // idfndeTextBox
             // 
@@ -420,15 +552,6 @@
             this.idfndeTextBox.Size = new System.Drawing.Size(200, 20);
             this.idfndeTextBox.TabIndex = 9;
             // 
-            // idtipLabel
-            // 
-            idtipLabel.AutoSize = true;
-            idtipLabel.Location = new System.Drawing.Point(37, 514);
-            idtipLabel.Name = "idtipLabel";
-            idtipLabel.Size = new System.Drawing.Size(29, 13);
-            idtipLabel.TabIndex = 10;
-            idtipLabel.Text = "idtip:";
-            // 
             // idtipTextBox
             // 
             this.idtipTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.produtoBindingSource, "idtip", true));
@@ -436,15 +559,6 @@
             this.idtipTextBox.Name = "idtipTextBox";
             this.idtipTextBox.Size = new System.Drawing.Size(200, 20);
             this.idtipTextBox.TabIndex = 11;
-            // 
-            // descricaoLabel
-            // 
-            descricaoLabel.AutoSize = true;
-            descricaoLabel.Location = new System.Drawing.Point(16, 44);
-            descricaoLabel.Name = "descricaoLabel";
-            descricaoLabel.Size = new System.Drawing.Size(56, 13);
-            descricaoLabel.TabIndex = 12;
-            descricaoLabel.Text = "descricao:";
             // 
             // descricaoTextBox
             // 
@@ -454,15 +568,6 @@
             this.descricaoTextBox.Size = new System.Drawing.Size(200, 20);
             this.descricaoTextBox.TabIndex = 13;
             // 
-            // nome_compraLabel
-            // 
-            nome_compraLabel.AutoSize = true;
-            nome_compraLabel.Location = new System.Drawing.Point(16, 16);
-            nome_compraLabel.Name = "nome_compraLabel";
-            nome_compraLabel.Size = new System.Drawing.Size(74, 13);
-            nome_compraLabel.TabIndex = 14;
-            nome_compraLabel.Text = "nome compra:";
-            // 
             // nome_compraTextBox
             // 
             this.nome_compraTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.produtoBindingSource, "nome_compra", true));
@@ -470,15 +575,6 @@
             this.nome_compraTextBox.Name = "nome_compraTextBox";
             this.nome_compraTextBox.Size = new System.Drawing.Size(200, 20);
             this.nome_compraTextBox.TabIndex = 15;
-            // 
-            // referencia_ceasaLabel
-            // 
-            referencia_ceasaLabel.AutoSize = true;
-            referencia_ceasaLabel.Location = new System.Drawing.Point(37, 544);
-            referencia_ceasaLabel.Name = "referencia_ceasaLabel";
-            referencia_ceasaLabel.Size = new System.Drawing.Size(89, 13);
-            referencia_ceasaLabel.TabIndex = 16;
-            referencia_ceasaLabel.Text = "referencia ceasa:";
             // 
             // referencia_ceasaTextBox
             // 
@@ -488,15 +584,6 @@
             this.referencia_ceasaTextBox.Size = new System.Drawing.Size(200, 20);
             this.referencia_ceasaTextBox.TabIndex = 17;
             // 
-            // fator_coccaoLabel
-            // 
-            fator_coccaoLabel.AutoSize = true;
-            fator_coccaoLabel.Location = new System.Drawing.Point(16, 104);
-            fator_coccaoLabel.Name = "fator_coccaoLabel";
-            fator_coccaoLabel.Size = new System.Drawing.Size(70, 13);
-            fator_coccaoLabel.TabIndex = 18;
-            fator_coccaoLabel.Text = "fator coccao:";
-            // 
             // fator_coccaoTextBox
             // 
             this.fator_coccaoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.produtoBindingSource, "fator_coccao", true));
@@ -504,15 +591,6 @@
             this.fator_coccaoTextBox.Name = "fator_coccaoTextBox";
             this.fator_coccaoTextBox.Size = new System.Drawing.Size(200, 20);
             this.fator_coccaoTextBox.TabIndex = 19;
-            // 
-            // fator_correcaoLabel
-            // 
-            fator_correcaoLabel.AutoSize = true;
-            fator_correcaoLabel.Location = new System.Drawing.Point(16, 130);
-            fator_correcaoLabel.Name = "fator_correcaoLabel";
-            fator_correcaoLabel.Size = new System.Drawing.Size(76, 13);
-            fator_correcaoLabel.TabIndex = 20;
-            fator_correcaoLabel.Text = "fator correcao:";
             // 
             // fator_correcaoTextBox
             // 
@@ -522,15 +600,6 @@
             this.fator_correcaoTextBox.Size = new System.Drawing.Size(200, 20);
             this.fator_correcaoTextBox.TabIndex = 21;
             // 
-            // vlr_unitarioLabel
-            // 
-            vlr_unitarioLabel.AutoSize = true;
-            vlr_unitarioLabel.Location = new System.Drawing.Point(14, 25);
-            vlr_unitarioLabel.Name = "vlr_unitarioLabel";
-            vlr_unitarioLabel.Size = new System.Drawing.Size(58, 13);
-            vlr_unitarioLabel.TabIndex = 22;
-            vlr_unitarioLabel.Text = "vlr unitario:";
-            // 
             // vlr_unitarioTextBox
             // 
             this.vlr_unitarioTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.produtoBindingSource, "vlr_unitario", true));
@@ -538,15 +607,6 @@
             this.vlr_unitarioTextBox.Name = "vlr_unitarioTextBox";
             this.vlr_unitarioTextBox.Size = new System.Drawing.Size(200, 20);
             this.vlr_unitarioTextBox.TabIndex = 23;
-            // 
-            // penultimo_vlr_unitarioLabel
-            // 
-            penultimo_vlr_unitarioLabel.AutoSize = true;
-            penultimo_vlr_unitarioLabel.Location = new System.Drawing.Point(14, 51);
-            penultimo_vlr_unitarioLabel.Name = "penultimo_vlr_unitarioLabel";
-            penultimo_vlr_unitarioLabel.Size = new System.Drawing.Size(106, 13);
-            penultimo_vlr_unitarioLabel.TabIndex = 24;
-            penultimo_vlr_unitarioLabel.Text = "penultimo vlr unitario:";
             // 
             // penultimo_vlr_unitarioTextBox
             // 
@@ -556,15 +616,6 @@
             this.penultimo_vlr_unitarioTextBox.Size = new System.Drawing.Size(200, 20);
             this.penultimo_vlr_unitarioTextBox.TabIndex = 25;
             // 
-            // dt_ultima_compraLabel
-            // 
-            dt_ultima_compraLabel.AutoSize = true;
-            dt_ultima_compraLabel.Location = new System.Drawing.Point(14, 78);
-            dt_ultima_compraLabel.Name = "dt_ultima_compraLabel";
-            dt_ultima_compraLabel.Size = new System.Drawing.Size(87, 13);
-            dt_ultima_compraLabel.TabIndex = 26;
-            dt_ultima_compraLabel.Text = "dt ultima compra:";
-            // 
             // dt_ultima_compraDateTimePicker
             // 
             this.dt_ultima_compraDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.produtoBindingSource, "dt_ultima_compra", true));
@@ -572,15 +623,6 @@
             this.dt_ultima_compraDateTimePicker.Name = "dt_ultima_compraDateTimePicker";
             this.dt_ultima_compraDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.dt_ultima_compraDateTimePicker.TabIndex = 27;
-            // 
-            // dt_penultima_compraLabel
-            // 
-            dt_penultima_compraLabel.AutoSize = true;
-            dt_penultima_compraLabel.Location = new System.Drawing.Point(14, 104);
-            dt_penultima_compraLabel.Name = "dt_penultima_compraLabel";
-            dt_penultima_compraLabel.Size = new System.Drawing.Size(105, 13);
-            dt_penultima_compraLabel.TabIndex = 28;
-            dt_penultima_compraLabel.Text = "dt penultima compra:";
             // 
             // dt_penultima_compraDateTimePicker
             // 
@@ -590,15 +632,6 @@
             this.dt_penultima_compraDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.dt_penultima_compraDateTimePicker.TabIndex = 29;
             // 
-            // qtde_estoqueLabel
-            // 
-            qtde_estoqueLabel.AutoSize = true;
-            qtde_estoqueLabel.Location = new System.Drawing.Point(14, 129);
-            qtde_estoqueLabel.Name = "qtde_estoqueLabel";
-            qtde_estoqueLabel.Size = new System.Drawing.Size(72, 13);
-            qtde_estoqueLabel.TabIndex = 30;
-            qtde_estoqueLabel.Text = "qtde estoque:";
-            // 
             // qtde_estoqueTextBox
             // 
             this.qtde_estoqueTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.produtoBindingSource, "qtde_estoque", true));
@@ -606,15 +639,6 @@
             this.qtde_estoqueTextBox.Name = "qtde_estoqueTextBox";
             this.qtde_estoqueTextBox.Size = new System.Drawing.Size(200, 20);
             this.qtde_estoqueTextBox.TabIndex = 31;
-            // 
-            // classeLabel
-            // 
-            classeLabel.AutoSize = true;
-            classeLabel.Location = new System.Drawing.Point(14, 155);
-            classeLabel.Name = "classeLabel";
-            classeLabel.Size = new System.Drawing.Size(40, 13);
-            classeLabel.TabIndex = 32;
-            classeLabel.Text = "classe:";
             // 
             // classeTextBox
             // 
@@ -624,15 +648,6 @@
             this.classeTextBox.Size = new System.Drawing.Size(200, 20);
             this.classeTextBox.TabIndex = 33;
             // 
-            // desc_compostoLabel
-            // 
-            desc_compostoLabel.AutoSize = true;
-            desc_compostoLabel.Location = new System.Drawing.Point(16, 72);
-            desc_compostoLabel.Name = "desc_compostoLabel";
-            desc_compostoLabel.Size = new System.Drawing.Size(82, 13);
-            desc_compostoLabel.TabIndex = 34;
-            desc_compostoLabel.Text = "desc composto:";
-            // 
             // desc_compostoTextBox
             // 
             this.desc_compostoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.produtoBindingSource, "desc_composto", true));
@@ -640,15 +655,6 @@
             this.desc_compostoTextBox.Name = "desc_compostoTextBox";
             this.desc_compostoTextBox.Size = new System.Drawing.Size(200, 20);
             this.desc_compostoTextBox.TabIndex = 35;
-            // 
-            // idforLabel
-            // 
-            idforLabel.AutoSize = true;
-            idforLabel.Location = new System.Drawing.Point(14, 181);
-            idforLabel.Name = "idforLabel";
-            idforLabel.Size = new System.Drawing.Size(30, 13);
-            idforLabel.TabIndex = 36;
-            idforLabel.Text = "idfor:";
             // 
             // idforTextBox
             // 
@@ -700,11 +706,43 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Dados de compra";
             // 
+            // idforLabel1
+            // 
+            idforLabel1.AutoSize = true;
+            idforLabel1.Location = new System.Drawing.Point(554, 459);
+            idforLabel1.Name = "idforLabel1";
+            idforLabel1.Size = new System.Drawing.Size(30, 13);
+            idforLabel1.TabIndex = 39;
+            idforLabel1.Text = "idfor:";
+            // 
+            // idforComboBox
+            // 
+            this.idforComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.produtoBindingSource, "idfor", true));
+            this.idforComboBox.DataSource = this.fornecedorBindingSource;
+            this.idforComboBox.DisplayMember = "nome_fantasia";
+            this.idforComboBox.FormattingEnabled = true;
+            this.idforComboBox.Location = new System.Drawing.Point(590, 456);
+            this.idforComboBox.Name = "idforComboBox";
+            this.idforComboBox.Size = new System.Drawing.Size(121, 21);
+            this.idforComboBox.TabIndex = 40;
+            this.idforComboBox.ValueMember = "idfor";
+            // 
+            // fornecedorBindingSource
+            // 
+            this.fornecedorBindingSource.DataMember = "fornecedor";
+            this.fornecedorBindingSource.DataSource = this.ieducarDataSet;
+            // 
+            // fornecedorTableAdapter
+            // 
+            this.fornecedorTableAdapter.ClearBeforeFill = true;
+            // 
             // frmCadProduto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(858, 602);
+            this.ClientSize = new System.Drawing.Size(872, 606);
+            this.Controls.Add(idforLabel1);
+            this.Controls.Add(this.idforComboBox);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(idproLabel);
@@ -733,6 +771,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fornecedorBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -788,5 +827,8 @@
         private System.Windows.Forms.TextBox idforTextBox;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ComboBox idforComboBox;
+        private System.Windows.Forms.BindingSource fornecedorBindingSource;
+        private ieducarDataSetTableAdapters.fornecedorTableAdapter fornecedorTableAdapter;
     }
 }

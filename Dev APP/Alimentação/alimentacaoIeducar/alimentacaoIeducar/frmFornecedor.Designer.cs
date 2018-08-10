@@ -44,11 +44,11 @@
             System.Windows.Forms.Label cpf_cnpjLabel;
             System.Windows.Forms.Label inscr_estadualLabel;
             System.Windows.Forms.Label inscr_municipalLabel;
-            System.Windows.Forms.Label idcliLabel;
             System.Windows.Forms.Label cidadeLabel;
             System.Windows.Forms.Label ufLabel;
             System.Windows.Forms.Label tipoLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFornecedor));
+            System.Windows.Forms.Label idcliLabel;
             this.ieducarDataSet = new alimentacaoIeducar.ieducarDataSet();
             this.fornecedorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fornecedorTableAdapter = new alimentacaoIeducar.ieducarDataSetTableAdapters.fornecedorTableAdapter();
@@ -106,8 +106,10 @@
             this.cidadeTextBox = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.idcliTextBox = new System.Windows.Forms.TextBox();
             this.tipoTextBox = new System.Windows.Forms.TextBox();
+            this.idcliComboBox = new System.Windows.Forms.ComboBox();
+            this.clienteBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.clienteTableAdapter = new alimentacaoIeducar.ieducarDataSetTableAdapters.clienteTableAdapter();
             idforLabel = new System.Windows.Forms.Label();
             idpesLabel = new System.Windows.Forms.Label();
             razao_socialLabel = new System.Windows.Forms.Label();
@@ -123,10 +125,10 @@
             cpf_cnpjLabel = new System.Windows.Forms.Label();
             inscr_estadualLabel = new System.Windows.Forms.Label();
             inscr_municipalLabel = new System.Windows.Forms.Label();
-            idcliLabel = new System.Windows.Forms.Label();
             cidadeLabel = new System.Windows.Forms.Label();
             ufLabel = new System.Windows.Forms.Label();
             tipoLabel = new System.Windows.Forms.Label();
+            idcliLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ieducarDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fornecedorBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fornecedorBindingNavigator)).BeginInit();
@@ -135,6 +137,7 @@
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.clienteBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // idforLabel
@@ -272,15 +275,6 @@
             inscr_municipalLabel.TabIndex = 36;
             inscr_municipalLabel.Text = "inscr municipal:";
             // 
-            // idcliLabel
-            // 
-            idcliLabel.AutoSize = true;
-            idcliLabel.Location = new System.Drawing.Point(459, 522);
-            idcliLabel.Name = "idcliLabel";
-            idcliLabel.Size = new System.Drawing.Size(28, 13);
-            idcliLabel.TabIndex = 42;
-            idcliLabel.Text = "idcli:";
-            // 
             // cidadeLabel
             // 
             cidadeLabel.AutoSize = true;
@@ -358,7 +352,7 @@
             this.fornecedorBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.fornecedorBindingNavigator.Name = "fornecedorBindingNavigator";
             this.fornecedorBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.fornecedorBindingNavigator.Size = new System.Drawing.Size(833, 25);
+            this.fornecedorBindingNavigator.Size = new System.Drawing.Size(850, 25);
             this.fornecedorBindingNavigator.TabIndex = 0;
             this.fornecedorBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -486,7 +480,7 @@
             this.fornecedorDataGridView.DataSource = this.fornecedorBindingSource;
             this.fornecedorDataGridView.Location = new System.Drawing.Point(3, 4);
             this.fornecedorDataGridView.Name = "fornecedorDataGridView";
-            this.fornecedorDataGridView.Size = new System.Drawing.Size(827, 220);
+            this.fornecedorDataGridView.Size = new System.Drawing.Size(844, 220);
             this.fornecedorDataGridView.TabIndex = 1;
             // 
             // dataGridViewTextBoxColumn1
@@ -794,14 +788,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Inscriçoes";
             // 
-            // idcliTextBox
-            // 
-            this.idcliTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.fornecedorBindingSource, "idcli", true));
-            this.idcliTextBox.Location = new System.Drawing.Point(493, 519);
-            this.idcliTextBox.Name = "idcliTextBox";
-            this.idcliTextBox.Size = new System.Drawing.Size(100, 20);
-            this.idcliTextBox.TabIndex = 43;
-            // 
             // tipoTextBox
             // 
             this.tipoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.fornecedorBindingSource, "tipo", true));
@@ -810,15 +796,45 @@
             this.tipoTextBox.Size = new System.Drawing.Size(100, 20);
             this.tipoTextBox.TabIndex = 44;
             // 
+            // idcliLabel
+            // 
+            idcliLabel.AutoSize = true;
+            idcliLabel.Location = new System.Drawing.Point(483, 517);
+            idcliLabel.Name = "idcliLabel";
+            idcliLabel.Size = new System.Drawing.Size(28, 13);
+            idcliLabel.TabIndex = 44;
+            idcliLabel.Text = "idcli:";
+            // 
+            // idcliComboBox
+            // 
+            this.idcliComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.fornecedorBindingSource, "idcli", true));
+            this.idcliComboBox.DataSource = this.clienteBindingSource;
+            this.idcliComboBox.DisplayMember = "nome";
+            this.idcliComboBox.FormattingEnabled = true;
+            this.idcliComboBox.Location = new System.Drawing.Point(517, 514);
+            this.idcliComboBox.Name = "idcliComboBox";
+            this.idcliComboBox.Size = new System.Drawing.Size(121, 21);
+            this.idcliComboBox.TabIndex = 45;
+            this.idcliComboBox.ValueMember = "idcli";
+            // 
+            // clienteBindingSource
+            // 
+            this.clienteBindingSource.DataMember = "cliente";
+            this.clienteBindingSource.DataSource = this.ieducarDataSet;
+            // 
+            // clienteTableAdapter
+            // 
+            this.clienteTableAdapter.ClearBeforeFill = true;
+            // 
             // frmFornecedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(833, 621);
+            this.ClientSize = new System.Drawing.Size(850, 621);
+            this.Controls.Add(idcliLabel);
+            this.Controls.Add(this.idcliComboBox);
             this.Controls.Add(tipoLabel);
             this.Controls.Add(this.tipoTextBox);
-            this.Controls.Add(idcliLabel);
-            this.Controls.Add(this.idcliTextBox);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -845,6 +861,7 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.clienteBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -909,7 +926,9 @@
         private System.Windows.Forms.TextBox cidadeTextBox;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox idcliTextBox;
         private System.Windows.Forms.TextBox tipoTextBox;
+        private System.Windows.Forms.ComboBox idcliComboBox;
+        private System.Windows.Forms.BindingSource clienteBindingSource;
+        private ieducarDataSetTableAdapters.clienteTableAdapter clienteTableAdapter;
     }
 }

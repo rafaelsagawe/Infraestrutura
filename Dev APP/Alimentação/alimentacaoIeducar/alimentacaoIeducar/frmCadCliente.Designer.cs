@@ -135,6 +135,7 @@
             // enderecoLabel
             // 
             enderecoLabel.AutoSize = true;
+            enderecoLabel.ForeColor = System.Drawing.Color.Red;
             enderecoLabel.Location = new System.Drawing.Point(10, 22);
             enderecoLabel.Name = "enderecoLabel";
             enderecoLabel.Size = new System.Drawing.Size(55, 13);
@@ -144,6 +145,7 @@
             // bairroLabel
             // 
             bairroLabel.AutoSize = true;
+            bairroLabel.ForeColor = System.Drawing.Color.Red;
             bairroLabel.Location = new System.Drawing.Point(10, 48);
             bairroLabel.Name = "bairroLabel";
             bairroLabel.Size = new System.Drawing.Size(36, 13);
@@ -153,6 +155,7 @@
             // cidadeLabel
             // 
             cidadeLabel.AutoSize = true;
+            cidadeLabel.ForeColor = System.Drawing.Color.Red;
             cidadeLabel.Location = new System.Drawing.Point(10, 74);
             cidadeLabel.Name = "cidadeLabel";
             cidadeLabel.Size = new System.Drawing.Size(42, 13);
@@ -171,6 +174,7 @@
             // ufLabel
             // 
             ufLabel.AutoSize = true;
+            ufLabel.ForeColor = System.Drawing.Color.Red;
             ufLabel.Location = new System.Drawing.Point(10, 103);
             ufLabel.Name = "ufLabel";
             ufLabel.Size = new System.Drawing.Size(19, 13);
@@ -180,6 +184,7 @@
             // telefoneLabel
             // 
             telefoneLabel.AutoSize = true;
+            telefoneLabel.ForeColor = System.Drawing.Color.Red;
             telefoneLabel.Location = new System.Drawing.Point(7, 19);
             telefoneLabel.Name = "telefoneLabel";
             telefoneLabel.Size = new System.Drawing.Size(48, 13);
@@ -207,6 +212,7 @@
             // prefeitoLabel
             // 
             prefeitoLabel.AutoSize = true;
+            prefeitoLabel.ForeColor = System.Drawing.Color.Red;
             prefeitoLabel.Location = new System.Drawing.Point(10, 22);
             prefeitoLabel.Name = "prefeitoLabel";
             prefeitoLabel.Size = new System.Drawing.Size(45, 13);
@@ -216,6 +222,7 @@
             // educacaoLabel
             // 
             educacaoLabel.AutoSize = true;
+            educacaoLabel.ForeColor = System.Drawing.Color.Red;
             educacaoLabel.Location = new System.Drawing.Point(10, 48);
             educacaoLabel.Name = "educacaoLabel";
             educacaoLabel.Size = new System.Drawing.Size(58, 13);
@@ -225,6 +232,7 @@
             // administracaoLabel
             // 
             administracaoLabel.AutoSize = true;
+            administracaoLabel.ForeColor = System.Drawing.Color.Red;
             administracaoLabel.Location = new System.Drawing.Point(10, 74);
             administracaoLabel.Name = "administracaoLabel";
             administracaoLabel.Size = new System.Drawing.Size(75, 13);
@@ -234,6 +242,7 @@
             // coordenacaoLabel
             // 
             coordenacaoLabel.AutoSize = true;
+            coordenacaoLabel.ForeColor = System.Drawing.Color.Red;
             coordenacaoLabel.Location = new System.Drawing.Point(10, 100);
             coordenacaoLabel.Name = "coordenacaoLabel";
             coordenacaoLabel.Size = new System.Drawing.Size(73, 13);
@@ -243,6 +252,7 @@
             // inscritosLabel
             // 
             inscritosLabel.AutoSize = true;
+            inscritosLabel.ForeColor = System.Drawing.Color.Red;
             inscritosLabel.Location = new System.Drawing.Point(444, 189);
             inscritosLabel.Name = "inscritosLabel";
             inscritosLabel.Size = new System.Drawing.Size(48, 13);

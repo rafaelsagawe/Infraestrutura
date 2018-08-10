@@ -27,6 +27,8 @@ namespace alimentacaoIeducar
 
         private void frmFornecedor_Load(object sender, EventArgs e)
         {
+            // TODO: esta linha de código carrega dados na tabela 'ieducarDataSet.cliente'. Você pode movê-la ou removê-la conforme necessário.
+            this.clienteTableAdapter.Fill(this.ieducarDataSet.cliente);
             // TODO: esta linha de código carrega dados na tabela 'ieducarDataSet.fornecedor'. Você pode movê-la ou removê-la conforme necessário.
             this.fornecedorTableAdapter.Fill(this.ieducarDataSet.fornecedor);
 
