@@ -1,6 +1,14 @@
 # sistema para inventario de TI
 
-git clone git@github.com:glpi-project/glpi.git
+Um apt-get update
+
+apt-get install ca-certificates apache2 libapache2-mod-php5 php5-cli php5 php5-gd php5-imap php5-ldap php5-mysql php-soap php5-xmlrpc /
+zip unzip bzip2 unrar-free php5-snmp php5-curl git -y
+
+git clone https://github.com/glpi-project/glpi.git
+
+# Apois atualização
+em glpi/scripts chamada “innodb_migration.php”
 
 Falta ativar o recurso de SNMP
 
