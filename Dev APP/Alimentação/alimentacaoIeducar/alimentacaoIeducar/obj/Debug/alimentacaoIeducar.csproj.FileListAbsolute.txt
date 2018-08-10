@@ -40,3 +40,4 @@ C:\Users\bruna\Infraestrutura-da-SEMED-NI\Dev APP\Alimentação\alimentacaoIeduc
 C:\Users\bruna\Infraestrutura-da-SEMED-NI\Dev APP\Alimentação\alimentacaoIeducar\alimentacaoIeducar\obj\Debug\alimentacaoIeducar.exe
 C:\Users\bruna\Infraestrutura-da-SEMED-NI\Dev APP\Alimentação\alimentacaoIeducar\alimentacaoIeducar\obj\Debug\alimentacaoIeducar.pdb
 C:\Users\bruna\Infraestrutura-da-SEMED-NI\Dev APP\Alimentação\alimentacaoIeducar\alimentacaoIeducar\obj\Debug\alimentacaoIeducar.frmLogin.resources
+C:\Users\bruna\Infraestrutura-da-SEMED-NI\Dev APP\Alimentação\alimentacaoIeducar\alimentacaoIeducar\obj\Debug\alimentacaoIeducar.frmSobre.resources

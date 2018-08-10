@@ -15,6 +15,10 @@ namespace alimentacaoIeducar
         public frmPrincipal()
         {
             InitializeComponent();
+            // Data no rodapé
+            statusLabelData.Text = DateTime.Now.ToShortDateString();
+            //Horario no rodapé
+            statusLabelHorario.Text = DateTime.Now.ToShortTimeString();
         }
 
         private void cadastroToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -40,6 +44,24 @@ namespace alimentacaoIeducar
         {
             frmFornecedor cadFornec = new frmFornecedor();
             cadFornec.Show();
+        }
+
+        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLogin login = new frmLogin();
+            login.Show();
+            this.Dispose();
+        }
+
+        private void frmPrincipal_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sobreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmSobre sobre = new frmSobre();
+            sobre.ShowDialog();
         }
     }
 }

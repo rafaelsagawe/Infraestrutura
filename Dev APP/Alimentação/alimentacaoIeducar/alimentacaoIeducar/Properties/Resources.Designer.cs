@@ -59,5 +59,15 @@ namespace alimentacaoIeducar.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Brasão_de_Nova_Iguaçu_svg {
+            get {
+                object obj = ResourceManager.GetObject("Brasão_de_Nova_Iguaçu.svg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

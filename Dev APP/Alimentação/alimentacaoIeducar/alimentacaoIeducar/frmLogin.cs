@@ -21,5 +21,12 @@ namespace alimentacaoIeducar
         {
             Application.Exit();
         }
+
+        private void btnEntra_Click(object sender, EventArgs e)
+        {
+            frmPrincipal princ = new frmPrincipal();
+            princ.Show();
+            this.Visible = false;
+        }
     }
 }
