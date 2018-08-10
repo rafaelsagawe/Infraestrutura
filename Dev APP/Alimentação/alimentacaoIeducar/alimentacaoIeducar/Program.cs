@@ -16,7 +16,7 @@ namespace alimentacaoIeducar
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmSplash());
+            Application.Run(new frmFornecedor());
         }
     }
 }
