@@ -6,29 +6,38 @@ Hostname = nuvem
 domain = semed-ni.intra
 senha (padrão)
 
+(Proxmox) apt install openssl ca-certificates
+
 # Servidor web
 
 apt update
 apt upgrade
-apt install apache2 apache2-utils
-apt install php-pclzip php-curl php-xmlrpc php-imagick php-redis php-memcached php-apcu php-gmp php-imap php-ldap php-intl php-pgsql
+apt install apache2 apache2-utils php php-xml php-gd php-mbstring php-zip php-pclzip php-curl php-xmlrpc php-imagick php-redis php-memcached php-apcu php-gmp php-imap php-ldap php-intl php-pgsql
 
 a2enmod rewrite && a2enmod headers
 
 /etc/init.d/apache2 restart
 
 # Servidor de Banco de dados (Postgres)
-sudo apt install postgresql libpq5 postgresql-9.5 postgresql-client-9.5 postgresql-client-common postgresql-contrib
+apt install postgresql libpq5 postgresql postgresql-client postgresql-client-common postgresql-contrib
 
-$ sudo -i -u postgres
+$ sudo postgres
 $ psql
-# CREATE USER root WITH PASSWORD 'root';
-# CREATE DATABASE "test";
-# GRANT ALL ON DATABASE "test" TO root;
+# CREATE USER root WITH PASSWORD 'semed-ni';
+# CREATE DATABASE "nextcloud";
+# GRANT ALL ON DATABASE "nextcloud" TO root;
 # \q
 $ exit
 
-# HTTPS
+# Nextcloud
+cd /var/www/
+wget https://download.nextcloud.com/server/releases/nextcloud-14.0.0.zip
+ mv /var/www/html /var/www/html_old
+ mv nextcloud /var/www/html
+
+
+
+# HTTPS (EXTRA)
 
 Podemos obter um certificado TLS/SSL grátis vamos usar o Let’s Encrypt CA.
 Caso queira deixar seu servidor sem https pule esta etapa.
@@ -62,25 +71,36 @@ Com o ONLYOFFICE conectado à instalação do ownCloud/Nextcloud, você será ca
 – Usar centenas de recursos de formatação. Adicione gráficos, formas automáticas, equações matemáticas complexas, decore a fonte, edite cabeçalhos / rodapés, crie estilos, altere o design do documento inteiro com dois cliques e mais.
 – Editar documentos em tempo real com outras pessoas. Use o modo rápido para ver o que seus colegas estão digitando no momento ou o modo estrito para trabalhar no fragmento do documento sem ser distraído por outros.
 
-# apt install git
-# cd /var/www/html/apps/
-# git clone https://github.com/ONLYOFFICE/onlyoffice-owncloud.git onlyoffice
-# chown  www-data. onlyoffice -R
+apt install git
+cd /var/www/
+git clone https://github.com/ONLYOFFICE/onlyoffice-owncloud.git onlyoffice
+chown  www-data. onlyoffice -R
+
 Docker se encontra nos repositório backports, caso você tenha instalado o letsencrypt (https) você ja fez este procedimento, pode pular para a instalacao do docker.io
 
-# echo 'deb http://ftp.debian.org/debian jessie-backports main' >> /etc/apt/sources.list.d/backports.list
-# apt update
-# apt install docker.io
-# systemctl enable docker
-# cd /tmp/
-# openssl genrsa -out onlyoffice.key 2048
-# openssl req -new -key onlyoffice.key -out onlyoffice.csr
-# openssl x509 -req -days 1825 -in onlyoffice.csr -signkey onlyoffice.key -out onlyoffice.crt
-# openssl dhparam -out dhparam.pem 2048
-# mkdir -p /app/onlyoffice/DocumentServer/data/certs
-# cp onlyoffice.key /app/onlyoffice/DocumentServer/data/certs/
-# cp onlyoffice.crt /app/onlyoffice/DocumentServer/data/certs/
-# cp dhparam.pem /app/onlyoffice/DocumentServer/data/certs/
-# chmod 400 /app/onlyoffice/DocumentServer/data/certs/onlyoffice.key
-# docker run -i -t -d -p 448:443 --restart always -v /app/onlyoffice/DocumentServer/data:/var/www/onlyoffice/Data onlyoffice/documentserver
-# docker pull onlyoffice/documentserver
+echo 'deb http://ftp.debian.org/debian jessie-backports main' >> /etc/apt/sources.list.d/backports.list
+apt update
+apt install docker.io
+systemctl enable docker
+
+________________________________
+Sem NÃO instalou os certificados https rode o comando abaixo.
+docker run -i -t -d -p 88:80 --restart always onlyoffice/documentserver
+________________________________
+cd /tmp/
+openssl genrsa -out onlyoffice.key 2048
+openssl req -new -key onlyoffice.key -out onlyoffice.csr
+openssl x509 -req -days 1825 -in onlyoffice.csr -signkey onlyoffice.key -out onlyoffice.crt
+openssl dhparam -out dhparam.pem 2048
+mkdir -p /app/onlyoffice/DocumentServer/data/certs
+cp onlyoffice.key /app/onlyoffice/DocumentServer/data/certs/
+cp onlyoffice.crt /app/onlyoffice/DocumentServer/data/certs/
+cp dhparam.pem /app/onlyoffice/DocumentServer/data/certs/
+chmod 400 /app/onlyoffice/DocumentServer/data/certs/onlyoffice.key
+docker run -i -t -d -p 448:443 --restart always -v /app/onlyoffice/DocumentServer/data:/var/www/onlyoffice/Data onlyoffice/documentserver
+docker pull onlyoffice/documentserver
+
+
+
+## Fontes
+https://blog.remontti.com.br/1557
