@@ -1,0 +1,109 @@
+ apt-get update && apt-get upgrade
+
+ apt-get install acl attr autoconf bison build-essential
+  debhelper dnsutils docbook-xml docbook-xsl flex gdb krb5-user \
+  libacl1-dev libaio-dev libattr1-dev libblkid-dev libbsd-dev \
+  libcap-dev libcups2-dev libgnutls28-dev libjson-perl \
+  libldap2-dev libncurses5-dev libpam0g-dev libparse-yapp-perl \
+  libpopt-dev libreadline-dev perl perl-modules pkg-config \
+  python-all-dev python-dev python-dnspython python-crypto \
+  xsltproc zlib1g-dev libgpgme11-dev python-gpgme python-m2crypto libsystemd-dev
+
+nano /etc/resolv.conf
+    domain SEMED-NI.INTRA
+    nameserver 172.15.0.3
+    nameserver 172.15.254.254
+    search SRV-UBUNTU-AD.SEMED-NI.INTRA
+
+nano /etc/hosts
+    172.15.0.3      SRV-UBUNTU-AD.SEMED-NI.INTRA SRV-UBUNTU-AD
+
+chattr +i /etc/resolv.conf
+
+wget https://download.samba.org/pub/samba/stable/samba-4.6.5.tar.gz
+tar -zxvf samba-4.6.5.tar.gz
+cd samba-4.6.5
+
+./configure --enable-debug --enable-selftest
+
+make
+
+make install
+
+Once the above files are installed, your Samba4 server will be ready to use
+Server Role:           active directory domain controller
+Hostname:              SRV-UBUNTU-AD
+NetBIOS Domain:        SEMED-NI
+DNS Domain:            semed-ni.intra
+DOMAIN SID:            S-1-5-21-3143567915-1843976643-863846537
+
+ nano /etc/systemd/system/samba4.service
+        [Unit]
+        Description=Samba Active Directory Domain Controller
+        After=network.target remote-fs.target nss-lookup.target
+
+        [Service]
+        Type=forking
+        ExecStart=/usr/local/samba/sbin/samba -D
+        PIDFile=/usr/local/samba/var/run/samba.pid
+        [Install]
+        WantedBy=multi-user.target
+
+systemctl daemon-reload
+systemctl enable samba4.service
+systemctl is-enabled samba4.service
+systemctl start samba4.service
+systemctl status samba4.service -l
+
+/usr/local/samba/bin/smbclient --version
+/usr/local/samba/bin/smbclient -L localhost -U%
+/usr/local/samba/bin/smbclient //localhost/netlogon -Uadministrator%'***********'
+exit
+
+host -t SRV _ldap._tcp.SEMED-NI.INTRA
+_ldap._tcp.SEMED-NI.INTRA has SRV record 0 100 389 srv-ubuntu-ad.semed-ni.intra.
+
+host -t SRV _kerberos._udp.SEMED-NI.INTRA
+_kerberos._udp.SEMED-NI.INTRA has SRV record 0 100 88 srv-ubuntu-ad.semed-ni.intra.
+
+host -t A SRV-UBUNTU-AD.SEMED-NI.INTRA
+SRV-UBUNTU-AD.SEMED-NI.INTRA has address 172.15.0.3
+
+cat /usr/local/samba/private/krb5.conf
+  [libdefaults]
+  	default_realm = SEMED-NI.INTRA
+  	dns_lookup_realm = false
+  	dns_lookup_kdc = true
+
+kinit administrator@SEMED-NI.INTRA
+    Warning: Your password will expire in 41 days on Qui 01 Nov 2018 12:57:31 -02
+
+apt-get install ntp
+
+cp /etc/ntp.conf /etc/ntp.conf.BK
+
+nano /etc/ntp.conf
+
+# Local clock. Note that is not the "localhost" address!
+server 127.127.1.0
+fudge  127.127.1.0 stratum 10
+# Where to retrieve the time from
+server 0.pool.ntp.org     iburst prefer
+server 1.pool.ntp.org     iburst prefer
+server 2.pool.ntp.org     iburst prefer
+driftfile               /var/lib/ntp/ntp.drift
+logfile                /var/log/ntp
+ntpsigndsocket  /usr/local/samba/var/lib/ntp_signd/
+# Access control
+# Default restriction: Allow clients only to query the time
+restrict default kod nomodify notrap nopeer mssntp
+# No restrictions for "localhost"
+restrict 127.0.0.1
+# Enable the time sources to only provide time to this host
+restrict 0.pool.ntp.org   mask 255.255.255.255    nomodify notrap nopeer noquery
+restrict 1.pool.ntp.org   mask 255.255.255.255    nomodify notrap nopeer noquery
+restrict 2.pool.ntp.org   mask 255.255.255.255    nomodify notrap nopeer noquery
+
+
+http://www.bosontreinamentos.com.br/linux/samba-4-instalacao-e-provisionamento/
+http://www.bosontreinamentos.com.br/linux/samba-4-adicionando-um-host-windows-ao-dominio-e-administracao-remota/
