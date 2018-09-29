@@ -78,6 +78,8 @@ cat /usr/local/samba/private/krb5.conf
 kinit administrator@SEMED-NI.INTRA
     Warning: Your password will expire in 41 days on Qui 01 Nov 2018 12:57:31 -02
 
+## Sincronização dos relogios
+
 apt-get install ntp
 
 cp /etc/ntp.conf /etc/ntp.conf.BK
