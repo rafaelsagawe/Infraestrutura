@@ -1,0 +1,11 @@
+Erro cluster not ready - no quorum? (500)
+      nano /etc/hosts (Ajuste de IPs)
+
+      systemctl stop pve-cluster
+      systemctl stop corosync
+      pmxcfs -l
+      rm /etc/pve/corosync.conf
+      rm /etc/corosync/*
+      killall pmxcfs
+      systemctl start pve-cluster
+      pvecm delnode oldnode
