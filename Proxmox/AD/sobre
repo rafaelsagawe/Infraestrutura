@@ -3,3 +3,9 @@
 O projeto conta com uma controlador de dominio para realizar a integração entre sistemas.
 
 No predio novo conta com um AD do Windowns Server pre instalado
+
+@SemedNI#
+
+(&(|(objectclass=person))(|(|(memberof=CN=Domain Users,CN=Users,DC=semed-ni,DC=intra)(primaryGroupID=513))))
+
+(&(|(objectclass=person))(|(|(memberof=OU=SEMED,DC=semed-ni,DC=intra)(primaryGroupID=513))))

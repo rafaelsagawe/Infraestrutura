@@ -1,0 +1,76 @@
+apt-get -y update
+
+apt-get install -y --no-install-recommends apache2 php7.0 libapache2-mod-php7.0 php7.0-pgsql php-pear php-zip php7.0-curl rpl wget git php-xdebug php-mbstring libreadline6  libreadline6-dev make gcc zlib1g-dev openjdk-8-jre
+
+apt-get clean && apt-get purge --auto-remove -y && rm -rf /var/lib/apt/lists/*
+
+a2enmod rewrite
+
+pear install XML_RPC2
+
+
+echo "xdebug.remote_enable=\${XDEBUG_REMOTE_ENABLE}" >> /etc/php/7.0/apache2/conf.d/20-xdebug.ini \
+echo "xdebug.remote_autostart=off" >> /etc/php/7.0/apache2/conf.d/20-xdebug.ini \
+echo "xdebug.remote_host=\${XDEBUG_REMOTE_HOST}" >> /etc/php/7.0/apache2/conf.d/20-xdebug.ini \
+echo "xdebug.remote_port=\${XDEBUG_REMOTE_PORT}" >> /etc/php/7.0/apache2/conf.d/20-xdebug.ini \
+echo "xdebug.idekey=\${XDEBUG_IDEKEY}" >> /etc/php/7.0/apache2/conf.d/20-xdebug.ini
+
+cd /var/www
+git clone https://github.com/portabilis/i-educar.git i-educar
+cd i-educar
+cp .env.example .env
+cp ieducar/configuration/ieducar.ini.sample ieducar/configuration/ieducar.ini
+cp phinx.php.sample phinx.php
+
+
+
+nano /etc/apache2/sites-available/000-default.conf
+                  <VirtualHost *:80>
+
+                    ServerName ieducar.local
+                    DocumentRoot /var/www/html/ieducar
+
+                    <Directory /var/www/html/ieducar>
+                      AllowOverride All
+                      Require all granted
+                    </Directory>
+
+                  </VirtualHost>
+
+cp html/docker/ieducar_1604/apache2-foreground /usr/local/bin/
+apache2-foreground
+
+apt install postgresql-9.5 postgresql-contrib-9.5
+su postgres
+  psql
+    CREATE USER ieducar SUPERUSER INHERIT CREATEDB CREATEROLE;
+    ALTER USER ieducar PASSWORD 'semed-ni';
+    CREATE DATABASE ieducar;
+    \q
+  exit
+
+nano ieducar/configuration/ieducar.ini
+            [production]
+            ; Configura    es de banco de dados
+            app.database.dbname   = ieducar
+            app.database.username = ieducar
+            app.database.hostname = localhost
+            app.database.password = semed-ni
+            app.database.port     = 5432
+            app.name              = "i-Educar"
+
+
+            $environments = array(
+                    "development" => array(
+                            "adapter" => "pgsql",
+                            "host" => "localhost",
+                            "user" => "ieducar",
+                            "pass" => "semed-ni",
+                            "port" => "5432",
+                            "charset" => "utf8",
+                            "name" => "ieducar",
+                    ),
+            );
+
+Instalando relatórios
+$ git clone https://github.com/portabilis/i-educar-reports-package.git ieducar/modules/Reports

@@ -1,0 +1,36 @@
+debian-9.0-standard_9.5-1_amd64
+
+sudo apt-get install apache2 vim build-essential cups cups-pdf apparmor-utils pkpgcounter samba mysql-server php-mbstring php7.0-mbstring php-gettext phpmyadmin libdbd-mysql-perl
+
+sudo vim /etc/cups/cupsd.conf
+          Restrict access to the server...
+           <Location />
+           Allow all
+           Order allow,deny
+           </Location>
+          Restrict access to the admin pages...
+           <Location /admin>
+           Allow all
+           Order allow,deny
+           </Location>
+          Restrict access to configuration files...
+           <Location /admin/conf>
+           Allow all
+           AuthType Default
+           Require user @SYSTEM
+           Order allow,deny
+           </Location>
+
+smbpasswd -a root
+
+  net -S localhost -U root -W HOSTNAME-DO-SERVIDOR rpc rights grant 'root' SePrintOperatorPrivilege
+
+
+  sudo nano /etc/cups/cups-pdf.conf
+  Altere a linha 45 com o atributo “Out ${HOME}/PDF” para “Out /var/spool/cups-pdf/${USER}”
+          Label 1 - Linha 98
+          Log /var/log/cups - Linha 201
+          DecodeHexStrings 1 - Linha 279
+
+
+          Instalando o JASmine
