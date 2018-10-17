@@ -9,3 +9,7 @@ No predio novo conta com um AD do Windowns Server pre instalado
 (&(|(objectclass=person))(|(|(memberof=CN=Domain Users,CN=Users,DC=semed-ni,DC=intra)(primaryGroupID=513))))
 
 (&(|(objectclass=person))(|(|(memberof=OU=SEMED,DC=semed-ni,DC=intra)(primaryGroupID=513))))
+
+
+Comando para busca de usuarios
+ldapsearch -b DC=semed-ni,DC=intra -H ldap://172.15.0.3 -D administrator@SEMED-NI.intra -w '********' '(&(sAMAccountName=nextcloud))'

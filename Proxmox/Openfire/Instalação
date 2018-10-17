@@ -1,7 +1,9 @@
 Memoria= 512mb
 core= 1
-HD= 32gb
+HD= 20gb
 IP= 192.168.31.189/24
+
+Debian-9.0-standard_9.5-1_amd64
 
 java version "1.8.0_161"
 Java(TM) SE Runtime Environment (build 1.8.0_161-b12)
@@ -16,12 +18,17 @@ apt-get update
 apt-get upgrade
 apt-get install oracle-java8-installer
 apt install openjdk-8-jre
+apt install openssl ca-certificates
+wget https://www.igniterealtime.org/downloadServlet?filename=openfire/openfire_4.2.3_all.deb
 dpkg -i openfire_4.2.2_all.deb
 apt-get install -f
 
 Porta do cliente: 5222
 Porta de webGui: 9090
 
+Integração com Zentyal/AD
+adminDN	CN=Admin AD,CN=Users,DC=semed-ni,DC=intra
+baseDN	DC=semed-ni,DC=intra
 
 Openfire é o servidor, ou seja, oferece o serviço aos clientes.
 Spark é um mensageiro instantâneo que utiliza o protocolo Jabber e funciona conectando-se a um servidor Openfire.
