@@ -1,3 +1,26 @@
+# Servidor Proxmox VE
+CPU -> 4
+Memoria -> 8GB
+HD -> 400GB
+
+Sistema responsavel pelas instancias de conteiners e vm's
+
+Storage NAS
+  Primeiro compartilhar uma pasta em NFS
+  No Datacenter do Proxmox em Storage
+    Add NFS
+      ID: nome
+      Server: IP do NAS
+
+Atualização dos Templates
+pveam update
+
+Verificar a vesão
+pveversion
+
+Detalhes do ambiente
+pveperf
+
 Erro cluster not ready - no quorum? (500)
       nano /etc/hosts (Ajuste de IPs)
 
