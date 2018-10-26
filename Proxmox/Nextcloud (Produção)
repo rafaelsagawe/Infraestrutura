@@ -168,5 +168,14 @@ chmod 400 /app/onlyoffice/DocumentServer/data/certs/onlyoffice.key
 docker run -i -t -d -p 448:443 --restart always -v /app/onlyoffice/DocumentServer/data:/var/www/onlyoffice/Data onlyoffice/documentserver
 docker pull onlyoffice/documentserver
 
+##
+nano 000-default.conf
+    ProxyPass /http-bind/ http://openfire.semed-ni.intra:7070/http-bind/
+    ProxyPassReverse /http-bind/ http://openfire.semed-ni.intra:7070/http-bind/
+
+    a2enmod proxy
+    a2enmod proxy_http
+
 ## Fontes
 https://blog.remontti.com.br/1557
+https://www.youtube.com/watch?v=Elq61urmlDY
