@@ -45,6 +45,11 @@ Integração com Zentyal/AD
 
 Banco de dados
 
+Visualizar os usuarios
+Usuarios/Grupos
+  Grupos
+    nos Grupos Ativar o compartilhamento de lista de contatos de grupo e dar um nome ao Grupo.
+
 Openfire é o servidor, ou seja, oferece o serviço aos clientes.
 Spark é um mensageiro instantâneo que utiliza o protocolo Jabber e funciona conectando-se a um servidor Openfire.
 
