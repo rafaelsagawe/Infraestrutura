@@ -1,3 +1,15 @@
+A plataforma visa trazer uma maneira simples e objetiva de gerenciar maquinas virtuais com a tecnologia KVM, em uma única interface web dispensando o uso do tão temido shell por alguns iniciantes nesta área (sendo necessário apenas em casos específicos).
+
+Além da virtualização de máquinas com o KVM, o Proxmox disponibiliza a criação e gerenciamento de contêineres OpenVZ, tecnologia que tem se mostrado muito promissora visando o baixo consumo de recursos que ela exige do servidor.
+
+Ainda sobre as funcionalidades da ferramenta, a configuração de rede do PVE usa inicialmente das Linux Bridges, onde você pode conectar diversas placas de redes virtuais em uma única placa de rede física, para usuários mais avançados é possível configurar ainda o bonding de placas de rede, que seria a agregação de duas placas de rede para um mesmo ou diversos servidores virtuais.
+
+Com suporte a HA (High Availability), você poderá migrar as suas máquinas virtuais em tempo real entre servidores sem causar impacto aos usuários ou serviços disponibilizados pelas mesmas.
+
+O PVE conta com um gerenciamento de storages onde você pode configurar um compartilhamento NFS, iSCSI, e ZFS entre outros, além de um segundo disco adicionado ao servidor.
+
+A ferramenta ainda conta com um utilitário de backup integrado. Que possibilita o backup de máquinas virtuais em plena carga com a técnica de snapshot’s, é possivel criar agendamentos para os backup’s, fazer o envio de logs por e-mail e fazer a rotação de backup mais antigos.
+
 # Servidor Proxmox VE
 CPU -> 4
 Memoria -> 8GB
