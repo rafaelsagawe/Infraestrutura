@@ -1,4 +1,6 @@
-# sistema para inventario de TI
+O GLPI é uma ferramenta de software ITSM gratuita e de código aberto incrível que ajuda você a planejar e gerenciar mudanças de TI de maneira fácil, resolver problemas eficientemente quando eles surgirem e permitir que você tenha controle legítimo sobre o orçamento de TI e despesas da empresa.
+
+# Instalação
 
 Um apt-get update
 
