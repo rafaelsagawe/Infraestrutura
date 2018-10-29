@@ -88,22 +88,33 @@ wget https://download.nextcloud.com/server/releases/nextcloud-14.0.0.zip
 * Contacts
 * Full text search - Files
 * Flow Upload
-
+* JavaScript XMPP Chat
+* Mind Map
 
 Integração LDAP / AD
 
 Servidor
-  ldap://172.15.0.1:389
-  CN=USUARIOADMINISTRADOR,CN=Users,DC=pcni,DC=local
+  ldap://172.15.0.3:389
+  administrator@semed-ni.intra
   ************
-  CN=Users,DC=pcni,DC=local
-usuarios (Editar consulta LDAP)
-(&(|(objectclass=person))(|(|(memberof=CN=Domain Users,CN=Users,DC=pcni,DC=local)(primaryGroupID=513))))
+  OU=SEMED,DC=semed-ni,DC=intra
+
+Usuarios (Editar consulta LDAP)
+(&(|(objectclass=user))(|(|(memberof=CN=Domain Users,CN=Users,DC=semed-ni,DC=intra)(primaryGroupID=513))))
+
 Atributos de acesso (Editar consulta LDAP)
-(&(&(|(objectclass=person))(|(|(memberof=CN=Domain Users,CN=Users,DC=pcni,DC=local)(primaryGroupID=513))))(|(samaccountname=%uid)(|(sAMAccountName=%uid))))
+(&(&(|(objectclass=user))(|(|(memberof=CN=Domain Users,CN=Users,DC=semed-ni,DC=intra)(primaryGroupID=513))))(|(samaccountname=%uid)(|(sAMAccountName=%uid)(userPrincipalName=%uid))))
+
 Grupos
+Sem alteração
 
-
+Avançado
+  Árvore de Usuário Base
+    CN=Users,DC=semed-ni,DC=intra
+    OU=SEMED,DC=semed-ni,DC=intra
+  Árvore de Grupo Base
+    CN=Users,DC=semed-ni,DC=intra
+    OU=SEMED,DC=semed-ni,DC=intra
 
 # HTTPS (EXTRA)
 
@@ -168,13 +179,14 @@ chmod 400 /app/onlyoffice/DocumentServer/data/certs/onlyoffice.key
 docker run -i -t -d -p 448:443 --restart always -v /app/onlyoffice/DocumentServer/data:/var/www/onlyoffice/Data onlyoffice/documentserver
 docker pull onlyoffice/documentserver
 
-##
+## JavaScript XMPP Chat
 nano 000-default.conf
     ProxyPass /http-bind/ http://openfire.semed-ni.intra:7070/http-bind/
     ProxyPassReverse /http-bind/ http://openfire.semed-ni.intra:7070/http-bind/
 
     a2enmod proxy
     a2enmod proxy_http
+    service apache2 restart
 
 ## Fontes
 https://blog.remontti.com.br/1557
