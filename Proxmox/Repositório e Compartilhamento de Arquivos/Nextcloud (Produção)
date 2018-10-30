@@ -1,3 +1,5 @@
+OwnCloud é um serviço de nuvem (Cloud Storage) totalmente ilimitado e livre, onde você mesmo cria seu servidor e hospeda o que quiser e quanto quiser, e isso pode ser feito no seu próprio desktop que você tem em casa. E agora, pra melhorar ainda mais, você pode acessá-lo através de um App para Android!
+
 Nextcloud tem funcionalidade muito semelhante ao Dropbox, com a diferença de ser código aberto, e assim permitir que qualquer pessoa instalar e operá-lo sem custo em um servidor privado. Nextcloud é um fork do projeto ownCloud.
 
 Para a instalação estou usando a distribuição: Debian 9.5 netinstall

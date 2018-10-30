@@ -6,7 +6,7 @@ nano /etc/apt/sources.list
 
 deb https://download.webmin.com/download/repository sarge contrib
 
-cd /root 
+cd /root
 wget http://www.webmin.com/jcameron-key.asc
 apt-key add jcameron-key.asc
 apt-get install apt-transport-https
@@ -21,3 +21,16 @@ wget http://prdownloads.sourceforge.net/webadmin/webmin_1.890_all.deb
 dpkg --install webmin_1.890_all.deb
 
 
+
+
+
+
+
+Comando do Firewall
+
+# slurm -i eth0
+# iftop -i eth1
+# colortail -f /var/log/messages
+# tail -f /var/log/squid3/access.log | ccze -A
+# speedtest-cli --server 7521
+# nano /etc/network/interfaces && service networking restart

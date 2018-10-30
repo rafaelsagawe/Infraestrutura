@@ -1,0 +1,89 @@
+Sobre o i-Educar -.
+
+Características do i-educar
+Importação e exportação para o Educa Censo
+Escolas
+    • Infraestrutura
+        ◦ Área do terreno total
+        ◦ Área construída
+        ◦ Área disponível
+        ◦ Número de pavimentos
+        ◦ Tipo de piso
+        ◦ Medidor de energia
+        ◦ Água consumida pelos alunos
+        ◦ Abastecimento de água
+        ◦ Abastecimento de energia elétrica
+        ◦ Esgoto sanitário
+        ◦ Destinação do lixo
+    • Dependências
+        ◦ Sala de diretoria
+        ◦ Sala de professores
+        ◦ Sala de secretaria
+        ◦ Laboratório de informática
+        ◦ Laboratório de ciências
+        ◦ Sala de recursos multifuncionais para atendimento educacional especializado - AEE
+        ◦ Quadra de esportes coberta
+        ◦ Quadra de esportes descoberta
+        ◦ Cozinha
+        ◦ Biblioteca
+        ◦ Sala de leitura
+        ◦ Banheiro adequado à Educação infantil
+        ◦ Banheiro adequado a alunos com deficiência ou mobilidade reduzida
+        ◦ Dependências e vias adequadas a alunos com deficiência ou mobilidade reduzida
+        ◦ Banheiro com chuveiro
+        ◦ Refeitório
+        ◦ Despensa
+        ◦ Almoxarifado
+        ◦ Auditório
+        ◦ Pátio coberto
+        ◦ Pátio descoberto
+        ◦ Alojamento de professor
+        ◦ Área verde
+        ◦ Número de salas de aula existentes na escola
+        ◦ Número de salas utilizadas como sala de aula - Dentro e fora do prédio
+    • Equipamentos
+        ◦ Quantidade de televisores
+        ◦ Quantidade de videocassetes
+        ◦ Quantidade de DVDs
+        ◦ Quantidade de antenas parabólicas
+        ◦ Quantidade de copiadoras
+        ◦ Quantidade de retroprojetores
+        ◦ Quantidade de impressoras
+        ◦ Quantidade de aparelhos de som
+        ◦ Quantidade de data show
+        ◦ Quantidade de FAXs
+        ◦ Quantidade de máquinas fotográficas ou filmadoras
+        ◦ Quantidade de impressoras multifuncionais
+        ◦ Quantidade de computadores de uso administrativo
+        ◦ Quantidade de computadores de uso dos alunos
+        ◦ Quantidade total de computadores
+        ◦ Possui internet banda larga
+        ◦ Total de funcionários da escola (inclusive profissionais escolares em sala de aula)
+
+Professores/Servidor
+    • Cadastro de pessoa
+        ◦ Contatos
+        ◦ Endereçamento
+        ◦ Números de documentos
+    • Cadastro de Servidor
+        ◦ Código INEP
+        ◦ Função
+        ◦ Carga Horária
+        ◦ Escolaridade
+        ◦ Possui cursos de formação continuada
+        ◦ Falta/Atraso
+        ◦ Afastar
+        ◦ Vinculação em turma
+Alunos
+    • Cadastro de pessoa
+        ◦ Contatos
+        ◦ Endereçamento
+        ◦ Números de documentos
+    • Cadastro de Aluno
+        ◦ Código INEP
+        ◦ NIS
+        ◦ Necessidade Especia
+        ◦  Geração de ficha médica
+        ◦ Cadastro das características da moradia
+        ◦ Distribuição de uniformes
+        ◦ Alocação em turma

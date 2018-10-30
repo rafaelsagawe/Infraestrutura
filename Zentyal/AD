@@ -1,8 +1,0 @@
-localização da pasta de scripts
-/var/lib/samba/sysvol/semed-ni.intra/scripts
-gpupdate /force
-
-Configurações de Usuário/Políticas/Modelos Administrativos/Área de Trabalho/Active Desktop
-
-
-http://blog.astreinamentos.com.br/2016/02/como-criar-varios-usuarios-em-massa-no-samba-4.html
