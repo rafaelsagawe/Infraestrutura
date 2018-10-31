@@ -12,3 +12,11 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys CB2DE8E5
 sudo echo "deb http://download.onlyoffice.com/repo/debian squeeze main" | sudo tee /etc/apt/sources.list.d/onlyoffice.list
 sudo apt-get update
 sudo apt-get install onlyoffice-documentserver
+
+
+Idioma das formulas
+  Localizando os arquivos
+  find / -name "de.json"
+  Pasta de arquivos
+  cd /var/www/onlyoffice/documentserver/web-apps/apps/spreadsheeteditor/main/resources/formula-lang
+https://helpcenter.onlyoffice.com/de/server/linux/document/add-interface-language.aspx

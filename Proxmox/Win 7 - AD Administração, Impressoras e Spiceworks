@@ -12,7 +12,11 @@ Windows 7 Pro 32bits
  Para sua implementação será instalado um agente que envia os dados do computado para o servidor do sistema está forma e a menos invasiva de anexação no sistema. 
  Vale ressaltar que este sistema não monitora as ações realizadas no computador, ele apenas informa o estado do equipamento.
 
-localização da pasta de scripts
+    Adição dos Telefones VoIP
+      Primeiro adicionar as credenciais em Settings -> Device Scanning -> Stored Passwords -> HTTP usuario e senha
+      Agora no despositivo Edit -> Scan Using de Default para HTTP e em Device Type para VoIP Device
+
+ localização da pasta de scripts
 /var/lib/samba/sysvol/semed-ni.intra/scripts
 
 Configurações de Usuário/Políticas/Modelos Administrativos/Área de Trabalho/Active Desktop
