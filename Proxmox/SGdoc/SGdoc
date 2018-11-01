@@ -1,0 +1,157 @@
+Sistema Operacional CentOS 8
+
+yum install nano wget mod_ssl zlib-devel gcc readline-devel git zip unzip
+
+PostgreSQL
+mkdir /usr/local/pgsql /usr/local/pgsql/data /usr/local/pgsql/install
+cd /usr/local/pgsql/install
+wget http://ftp.postgresql.org/pub/source/v9.2.4/postgresql-9.2.4.tar.bz2
+tar -xjvf postgresql-9.2.4.tar.bz2
+cd postgresql-9.2.4
+./configure && make && make install
+adduser postgres
+cd /usr/local/pgsql/
+chown postgres ./ -R
+su postgres
+        cd /usr/local/pgsql/bin
+        ./initdb ../data/
+        exit
+
+cd /usr/local/pgsql/install/postgresql-9.2.4/contrib/start-scripts/
+cp linux /etc/init.d/postgresql
+cd /etc/init.d/
+chmod a+x postgresql
+/postgresql start
+chkconfig postgresql on
+
+Zend-server-ce
+nano /etc/yum.repos.d/zend.repo
+        [Zend]
+        name=Zend Server
+        baseurl=http://repos.zend.com/zend-server/rpm/$basearch
+        enabled=1
+        gpgcheck=0
+
+        [Zend_noarch]
+        name=Zend Server - noarch
+        baseurl=http://repos.zend.com/zend-server/rpm/noarch
+        enabled=1
+        gpgcheck=0
+
+yum install zend-server-ce-php-5.3
+yum install php-5.3-source-zend-server
+http://[server url or IP address]:10081
+Aceite os termos
+
+ImageMagick 6.8.7-10
+yum install gcc-c++ libxml2-devel libwmf-devel graphviz-devel libpng-devel libjpeg-devel libtiff-devel freetype-devel ghostscript-devel bzip2-devel gd-devel lcms-devel re2c
+yum remove ImageMagick
+wget http://sourceforge.net/projects/imagemagick/files/old-sources/6.x/6.8/ImageMagick-6.8.7-10.tar.gz
+tar -zxvf ImageMagick-6.8.7-10.tar.gz
+cd ImageMagick-6.8.7-10
+./configure
+make && make install
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+MagickWand-config —version —cflags —cppflags —ldflags
+wget http://www.magickwand.org/download/php/MagickWandForPHP-1.0.9-2.tar.gz && tar -zxvf MagickWandForPHP-1.0.9-2.tar.gz && mv MagickWandForPHP-1.0.9 /usr/local/zend/share/php-source/ext/magickwand && /usr/local/zend/share/php-source/ext/magickwand
+cd /usr/local/zend/share/php-source/ext/magickwand
+/usr/local/zend/bin/phpize
+./configure -with-php-config=/usr/local/zend/bin/php-config && make && make install
+
+http://[server url or IP address]:10081/ZendServer/
+          Clique em “Load or Unload PHP Extensions”
+          Procure pelo nome magickwand e habilite para on. E reinicie o zend-server.
+service zend-server restart
+/usr/local/zend/bin/pecl install imagick
+
+Xebium
+git clone git://github.com/xebia/Xebium
+cd ~/Xebium && nohup ./run.sh > run.log & Xvfb :1 -screen 0 1024x768x16 -nolisten inet6 & export DISPLAY=:1
+
+
+wget https://github.com/sgdoc/sgdoc-codigo/archive/v4.3.1.zip
+unzip v4.3.1.zip
+mv sgdoc-codigo-4.3.1 /var/www/html/sgdoc
+
+yum install postgresql-server postgresql-contrib
+su postgres
+  psql
+    ALTER ROLE postgres ENCRYPTED PASSWORD 'md53175bce1d3201d16594cebf9d7eb3f9d'
+    CREATE ROLE usr_sgdoc4 LOGIN ENCRYPTED PASSWORD 'usr_sgdoc4' SUPERUSER VALID UNTIL 'infinity';
+    CREATE DATABASE db_sgdoc4 WITH OWNER=usr_sgdoc4;
+  \q
+  exit
+
+cp -r sgdoc-codigo-4.3.1/ sgdoc
+
+cd /var/www/html/sgdoc/instalacao/database/
+gunzip -c Sgdoc_New_20140410.dump.gz | psql -U postgres -d db_sgdoc4
+psql -U postgres -d db_sgdoc4 < initial.sql
+
+
+
+
+
+
+
+
+
+
+
+Sistema Operacional Debian 8
+
+nano /etc/ssh/sshd_config
+      PermitRootLogin yes
+service ssh restart
+
+apt update
+apt install postgresql apache2 php5 php5-pgsql libapache2-mod-php5 zip
+apt install openssl ca-certificates
+wget https://github.com/sgdoc/sgdoc-codigo/archive/v4.3.1.zip
+unzip v4.3.1.zip
+mv sgdoc-codigo-4.3.1 /var/www/html/sgdoc
+su postgres
+  psql
+    CREATE ROLE usr_sgdoc4 LOGIN ENCRYPTED PASSWORD 'usr_sgdoc4' SUPERUSER VALID UNTIL 'infinity';
+    CREATE DATABASE db_sgdoc4 WITH ENCODING='UTF8' OWNER=usr_sgdoc4;
+  \q
+  exit
+
+cd /var/www/html/sgdoc/instalacao/database/
+gunzip -c Sgdoc_New_20140410.dump.gz | psql -U postgres -d db_sgdoc4
+psql -U postgres -d db_sgdoc4 < initial.sql
+
+ cd /etc/apache2/sites-enabled/
+ mv 000-default.conf 000-default.conf.bkp
+ nano 000-default.conf
+
+               <VirtualHost *:80>
+                  ServerAdmin webmaster@icmbio.gov.br
+                  DocumentRoot /var/www/html/sgdoc
+                  ServerName localhost.sgdoc
+                  ErrorLog logs/localhost.sgdoc-error_log
+                  CustomLog logs/localhost.sgdoc-access_log common
+
+                  SetEnv APPLICATION_ENV dsv
+                  #SetEnv APPLICATION_ENV prd
+                  #SetEnv APPLICATION_ENV hmg
+
+                   <Directory "/var/www/html/sgdoc">
+                       php_value session.gc_maxlifetime 18050
+                       php_value session.gc_probability 1
+                       php_value session.gc_divisor 500
+                       php_value session.save_path "/var/www/html/sgdoc/cache/sessions"
+                       Options FollowSymLinks
+                       AllowOverride All
+                       Order allow,deny
+                       Allow from all
+                   </Directory>
+
+               </VirtualHost>
+
+nano  /var/www/html/sgdoc/cfg/configuration.ini
+
+
+chmod -R -v 775 /var/www/html/sgdoc/documento_virtual
+chmod -R -v 775 /var/www/html/sgdoc/documento_virtual/TMP
+chmod -R -v 775 /var/www/html/sgdoc/cache
