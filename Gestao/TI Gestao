@@ -1,8 +1,10 @@
 Ambiente linux de administração dos recursos da rede da SEMED
 
-Ativação do calendario do thunderbird
-sudo apt install xul-ext-lightning
+Copiar arquivo via ssh
+    scp user.txt  semed@172.15.0.3:/home/semed
 
+Ativação do calendario do thunderbird
+    sudo apt install xul-ext-lightning
 
 Ligar o thunderbird no Dominio
 Ferramentas -> Catalogo de Endereços -> Arquivo novo -> Novo Diretorio ldap
