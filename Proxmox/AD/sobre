@@ -13,3 +13,9 @@ No predio novo conta com um AD do Windowns Server pre instalado
 
 Comando para busca de usuarios
 ldapsearch -b DC=semed-ni,DC=intra -H ldap://172.15.0.3 -D administrator@SEMED-NI.intra -w '********' '(&(sAMAccountName=nextcloud))'
+
+
+Adição de usuarios em lote
+apt install gawk
+gawk -F ":" '{ print $2,$3 }' openfire.txt | while read LISTA; do $(echo "/usr/bin/samba-tool user add $LISTA --must-change-at-next-login --use-username-as-cn"); done;
+:ti-04:123
