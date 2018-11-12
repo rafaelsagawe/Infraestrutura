@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AD</title>
+</head>
+
+<body>
+
+  <p>O Zentyal Server é um aplicativo open source de web decorrente da evolução da plataforma eBox, que começou a ser utilizada em 2004. Atualmente seu código base pertence à eBox Technologies, e o código fonte está disponível de acordo com os
+    termos da licença pública geral GNU.</p>
+
+  <p>Com foco na usabilidade, seu grande objetivo é a administração de redes de pequenas e médias empresas que buscam uma solução alternativa aos tradicionais produtos com estrutura da Microsoft.</p>
+
+  <p>Utilizando uma interface amigável, busca reunir em um único local diversos serviços de uma empresa, como acesso à internet, segurança de rede, compartilhamento de arquivos, infraestrutura de redes e comunicação.</p>
+
+  <h2>Ferramentas e serviços do Zentyal server</h2>
+
+  As funcionalidades do Zentyal podem ser agrupadas. Vejamos quais são estes grupos e algumas dessas funcionalidades.<br>
+
+  <ul>
+    <li> Mail: permite a interação com o Microsoft Outlook e possui compatibilidade com o Microsoft Active Directory (integração com Samba4.1). Controla o sistema de e-mails, calendários, contatos e webmail. Também é capaz de sincronizar
+      dispositivos móveis com segurança, pois possui antivírus e AntiSpam.
+    </li>
+    <br>
+    <li>
+      Domínios e diretórios: Tem um gerenciamento central de grupos usuários e equipes em forma de árvore. Lida com autenticações, permissões e compartilhamentos de arquivos com o sistema operacional Windows. Também agrega Single Sign-On, unidades
+      organizacionais múltiplas e gerenciamento de impressoras.
+    </li>
+    <br>
+    <li>
+      Infraestrutura: trabalha com servers DNS, DHCP, NTP, VPN e autorizações.
+    </li>
+    <br>
+    <li>
+      Network: lida com interfaces estáticas e DHCP, com filtro de pacotes e port forwarding. Possui firewall avançado, routing, traffic shaping e QoS, entre outras propriedades.
+    </li>
+  </ul>
+
+  <br>
+  <h2>Controlador de Dominio</h2>
+  <table border="1">
+    <tr>
+      <td colspan="2">Hardware</td>
+    </tr>
+    <tr>
+      <td>Placa-Mãe:</td>
+      <td>Dell OptiPlex 760</td>
+    </tr>
+    <tr>
+      <td>CPU:</td>
+      <td>Intel Core 2 Duo E8400 de 3.00GHz</td>
+    </tr>
+    <tr>
+      <td>Memória</td>
+      <td> 4 pentes de 1 GB DDR2, 4GB para uso </td>
+    </tr>
+    <tr>
+      <td>HD:</td>
+      <td>320GB + 500GB em RAID 0 (820GB de Espaço)</td>
+    </tr>
+  </table>
+
+  <h2>Justificativa</h2>
+  Para proporcionar um ambiente com maior segurança e flexibilidade nos computadores, torna-se necessário a implantação do Sistema de Autenticação de Usuários, para tanto é preciso a realização ações previas, como:
+
+  <ol>
+    <li>Relação dos funcionários com os seguintes dados: nome e Sobrenome para gerar nome de usuário (nome.sobrenome), setor, email e telefone;</li> <br>
+    <li>Todos os funcionários serão cadastrados com a mesma senha (semed123), ao acessar um computador pela primeira vez será solicitador a troca;</li> <br>
+    <li>Backup das pastas dos usuários para migração;</li> <br>
+    <li>Formatação dos computadores não compatíveis com o recurso;</li> <br>
+    <li>Criação de pastas compartilhadas no servidor de arquivos para conforme os setores;</li> <br>
+    <li>Criação de Regras de acesso no servidor;</li> <br>
+    <li>Criação de Regras de Usuários nos computadores.</li> <br>
+  </ol>
+
+  <p>Nos computadores implementado qualquer funcionário cadastrado poderá utilizar com o seu usuário tendo acesso à pasta compartilhada e a impressora do setor.</p>
+  <p>Em caso do funcionário trocar de setor será necessário a alteração do seu perfil, ela equipe da TI, para que este tenha acesso aos recursos do novo setor.</p>
+  <p>Vale ressaltar que o Setor de TI não tem acesso as senhas uma vez esta alterada, caso seja necessário trocar a senha será colocada a inicial para ser trocada novamente.</p>
+
+  <br>
+  ADM: administrator
+  PSSWD: ********
+  <h2>Comando para busca de usuarios <br></h2>
+  ldapsearch -b DC=semed-ni,DC=intra -H ldap://172.15.0.3 -D administrator@SEMED-NI.intra -w '********' '(&(sAMAccountName=nextcloud))' <br>
+
+  <h2>Adição de usuarios em lote</h2> <br>
+
+  <a href="http://blog.astreinamentos.com.br/2016/02/como-criar-varios-usuarios-em-massa-no-samba-4.html"> Link da Materia </a> <br>
+  apt install gawk <br>
+  nano usuarios.sh <br>
+  gawk -F ":" '{ print $2,$3 }' user.txt | while read LISTA; do $(echo "/usr/bin/samba-tool user add $LISTA --must-change-at-next-login <br> --use-username-as-cn"); done; <br>
+  nano user.txt <br>
+  :ti-04:123 <br>
+  chmod +x usuarios.sh <br>
+  sh ./usuarios.sh <br>
+</body>
+
+</html>
