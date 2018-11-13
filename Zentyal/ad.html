@@ -7,8 +7,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>AD</title>
 </head>
+<link rel="stylesheet" href="../index.css">
 
 <body>
+
+<h1>Zentyal Server</h1>
 
   <p>O Zentyal Server é um aplicativo open source de web decorrente da evolução da plataforma eBox, que começou a ser utilizada em 2004. Atualmente seu código base pertence à eBox Technologies, e o código fonte está disponível de acordo com os
     termos da licença pública geral GNU.</p>
@@ -20,7 +23,7 @@
   <h2>Ferramentas e serviços do Zentyal server</h2>
 
   As funcionalidades do Zentyal podem ser agrupadas. Vejamos quais são estes grupos e algumas dessas funcionalidades.<br>
-
+  <!--Inicio de lista -->
   <ul>
     <li> Mail: permite a interação com o Microsoft Outlook e possui compatibilidade com o Microsoft Active Directory (integração com Samba4.1). Controla o sistema de e-mails, calendários, contatos e webmail. Também é capaz de sincronizar
       dispositivos móveis com segurança, pois possui antivírus e AntiSpam.
@@ -39,9 +42,10 @@
       Network: lida com interfaces estáticas e DHCP, com filtro de pacotes e port forwarding. Possui firewall avançado, routing, traffic shaping e QoS, entre outras propriedades.
     </li>
   </ul>
+  <!-- Final de lista -->
 
-  <br>
   <h2>Controlador de Dominio</h2>
+  <!-- Inicio de tabela-->
   <table border="1">
     <tr>
       <td colspan="2">Hardware</td>
@@ -63,10 +67,10 @@
       <td>320GB + 500GB em RAID 0 (820GB de Espaço)</td>
     </tr>
   </table>
-
+  <!-- Final de tabela-->
   <h2>Justificativa</h2>
   Para proporcionar um ambiente com maior segurança e flexibilidade nos computadores, torna-se necessário a implantação do Sistema de Autenticação de Usuários, para tanto é preciso a realização ações previas, como:
-
+  <!-- Inicio de lista ordenada -->
   <ol>
     <li>Relação dos funcionários com os seguintes dados: nome e Sobrenome para gerar nome de usuário (nome.sobrenome), setor, email e telefone;</li> <br>
     <li>Todos os funcionários serão cadastrados com a mesma senha (semed123), ao acessar um computador pela primeira vez será solicitador a troca;</li> <br>
@@ -76,6 +80,7 @@
     <li>Criação de Regras de acesso no servidor;</li> <br>
     <li>Criação de Regras de Usuários nos computadores.</li> <br>
   </ol>
+  <!-- Final de lista ordenada -->
 
   <p>Nos computadores implementado qualquer funcionário cadastrado poderá utilizar com o seu usuário tendo acesso à pasta compartilhada e a impressora do setor.</p>
   <p>Em caso do funcionário trocar de setor será necessário a alteração do seu perfil, ela equipe da TI, para que este tenha acesso aos recursos do novo setor.</p>

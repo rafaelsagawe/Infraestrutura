@@ -10,79 +10,82 @@
 <body>
   <h1>Proxmox VE</h1>
 
+  <p>A plataforma visa trazer uma maneira simples e objetiva de gerenciar maquinas virtuais com a tecnologia KVM, em uma única interface web dispensando o uso do tão temido shell por alguns iniciantes nesta área (sendo necessário apenas em casos
+    específicos).
+  </p>
 
-  Hardware
-  Placa-Mãe: Dell OptiPlex 990
-  CPU: Intel Core i5-2400 3.10GHz
-  Memória: 4 pentes de 2GB DDR3
-  HD: 2 de 250GB em ZFS
+  <p>Além da virtualização de máquinas com o KVM, o Proxmox disponibiliza a criação e gerenciamento de contêineres OpenVZ, tecnologia que tem se mostrado muito promissora visando o baixo consumo de recursos que ela exige do servidor.</p>
 
-  A plataforma visa trazer uma maneira simples e objetiva de gerenciar maquinas virtuais com a tecnologia KVM, em uma única interface web dispensando o uso do tão temido shell por alguns iniciantes nesta área (sendo necessário apenas em casos
-  específicos).
-<br>
+  <p> Ainda sobre as funcionalidades da ferramenta, a configuração de rede do PVE usa inicialmente das Linux Bridges, onde você pode conectar diversas placas de redes virtuais em uma única placa de rede física, para usuários mais avançados é
+    possível
+    configurar ainda o bonding de placas de rede, que seria a agregação de duas placas de rede para um mesmo ou diversos servidores virtuais.</p>
 
-Além da virtualização de máquinas com o KVM, o Proxmox disponibiliza a criação e gerenciamento de contêineres OpenVZ, tecnologia que tem se mostrado muito promissora visando o baixo consumo de recursos que ela exige do servidor.
-  <br>
+  <p>
+    Com suporte a HA (High Availability), você poderá migrar as suas máquinas virtuais em tempo real entre servidores sem causar impacto aos usuários ou serviços disponibilizados pelas mesmas.
+  </p>
+  <p>
+    O PVE conta com um gerenciamento de storages onde você pode configurar um compartilhamento NFS, iSCSI, e ZFS entre outros, além de um segundo disco adicionado ao servidor.
+  </p>
+  <p>
+    A ferramenta ainda conta com um utilitário de backup integrado. Que possibilita o backup de máquinas virtuais em plena carga com a técnica de snapshot’s, é possivel criar agendamentos para os backup’s, fazer o envio de logs por e-mail e fazer a
+    rotação de backup mais antigos.
+  </p>
 
-  Ainda sobre as funcionalidades da ferramenta, a configuração de rede do PVE usa inicialmente das Linux Bridges, onde você pode conectar diversas placas de redes virtuais em uma única placa de rede física, para usuários mais avançados é possível
-  configurar ainda o bonding de placas de rede, que seria a agregação de duas placas de rede para um mesmo ou diversos servidores virtuais.<br>
-
-  Com suporte a HA (High Availability), você poderá migrar as suas máquinas virtuais em tempo real entre servidores sem causar impacto aos usuários ou serviços disponibilizados pelas mesmas.<br>
-
-  O PVE conta com um gerenciamento de storages onde você pode configurar um compartilhamento NFS, iSCSI, e ZFS entre outros, além de um segundo disco adicionado ao servidor.<br>
-
-  A ferramenta ainda conta com um utilitário de backup integrado. Que possibilita o backup de máquinas virtuais em plena carga com a técnica de snapshot’s, é possivel criar agendamentos para os backup’s, fazer o envio de logs por e-mail e fazer a
-  rotação de backup mais antigos.<br>
-
-  <table border="1" id="hardware_proxmox"
+  <table border="1" id="hardware_proxmox" <tr>
+    <td colspan="2">Hardware</td>
+    </tr>
     <tr>
-      <td colspan="2">Servidor Proxmox VE</td>
+      <td>Placa-Mãe:</td>
+      <td>Dell OptiPlex 990</td>
     </tr>
     <tr>
       <td>CPU</td>
-      <td>4</td>
+      <td>Intel Core i5-2400 3.10GHz</td>
     </tr>
     <tr>
       <td>Memoria</td>
-      <td>8GB</td>
+      <td>4 pentes de 2GB DDR3</td>
     </tr>
     <tr>
       <td>HD</td>
-      <td>400GB</td>
+      <td>2 de 250GB em ZFS</td>
     </tr>
   </table>
 
-
   <h2>Sistema responsavel pelo backup das instancias</h2>
 
-  Storage NAS
-  Primeiro compartilhar uma pasta em NFS
-  No Datacenter do Proxmox em Storage
-  Add NFS
-  ID: nome
-  Server: IP do NAS
+  <ul>
+    <li>Storage NAS</li>
+    <li>Primeiro compartilhar uma pasta em NFS</li>
+    <li>No Datacenter do Proxmox em Storage</li>
+    <li>Add NFS</li>
+    <li>ID: nome</li>
+    <li>Server: IP do NAS</li>
+  </ul>
 
-<h2>Dicas</h2>
-  Atualização dos Templates <br>
-  pveam update <br>
+  <h2>Dicas</h2>
+  <h3>Atualização dos Templates</h3>
+  pveam update
 
-  Verificar a vesão <br>
-  pveversion <br>
+  <h3>Verificar a vesão</h3>
+  pveversion
 
-  Detalhes do ambiente <br>
-  pveperf <br>
+  <h3>Detalhes do ambiente</h3>
+  pveperf
 
-  Erro cluster not ready - no quorum? (500)
-  nano /etc/hosts (Ajuste de IPs)
+  <h3>Erro cluster not ready - no quorum? (500)</h3>
+  <ol>
+    <li>nano /etc/hosts (Ajuste de IPs)</li>
+    <li>systemctl stop pve-cluster</li>
+    <li>systemctl stop corosync</li>
+    <li>pmxcfs -l</li>
+    <li>rm /etc/pve/corosync.conf</li>
+    <li>rm /etc/corosync/*</li>
+    <li>killall pmxcfs</li>
+    <li>systemctl start pve-cluster</li>
+    <li>pvecm delnode oldnode</li>
+  </ol>
 
-  systemctl stop pve-cluster
-  systemctl stop corosync
-  pmxcfs -l
-  rm /etc/pve/corosync.conf
-  rm /etc/corosync/*
-  killall pmxcfs
-  systemctl start pve-cluster
-  pvecm delnode oldnode
 </body>
 
 </html>
