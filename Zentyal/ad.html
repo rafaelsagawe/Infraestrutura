@@ -79,6 +79,7 @@
     <li>Criação de pastas compartilhadas no servidor de arquivos para conforme os setores;</li> <br>
     <li>Criação de Regras de acesso no servidor;</li> <br>
     <li>Criação de Regras de Usuários nos computadores.</li> <br>
+    <li>Criação de uma tela de boas vindas</li>
   </ol>
   <!-- Final de lista ordenada -->
 
@@ -86,9 +87,21 @@
   <p>Em caso do funcionário trocar de setor será necessário a alteração do seu perfil, ela equipe da TI, para que este tenha acesso aos recursos do novo setor.</p>
   <p>Vale ressaltar que o Setor de TI não tem acesso as senhas uma vez esta alterada, caso seja necessário trocar a senha será colocada a inicial para ser trocada novamente.</p>
 
+<h2>Serviços Integrados</h2>
+<ol>
+<li>Estação de Trabalho;</li>
+  <li>Servidor de Arquivos;</li>
+</ol>
+
   <br>
-  ADM: administrator
-  PSSWD: ********
+<table border="2" >
+<tr>
+  <td colspan="2">Usuario Administrador</td>
+</tr>
+  <td>ADM: administrator</td> <td>  PSSWD: ********</td>
+</table>
+
+
   <h2>Comando para busca de usuarios <br></h2>
   ldapsearch -b DC=semed-ni,DC=intra -H ldap://172.15.0.3 -D administrator@SEMED-NI.intra -w '********' '(&(sAMAccountName=nextcloud))' <br>
 

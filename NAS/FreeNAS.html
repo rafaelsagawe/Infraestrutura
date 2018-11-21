@@ -1,37 +1,85 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>FreeNAS</title>
 
-  </head>
-  <link rel="stylesheet" href="../index.css">
+<head>
+  <meta charset="utf-8">
+  <title>FreeNAS</title>
 
-  <body>
-    <h1>Servidor de Arquivos (FreeNAS)</h1>
+</head>
+<link rel="stylesheet" href="../index.css">
 
-    <h2>Historico</h2>
+<body>
+  <h1>Servidor de Arquivos (FreeNAS)</h1>
 
-    <p>
-      Inicialmente a SEMED contava com um servidor de arquivos com o Windows XP com uma pasta compartilhada com os computadores do financeiros, mas esta sistema não possuia cabacidade suficiente para atender a demanda de acesso a pasta de varios usuarios simultaneamente, cousando probremas de acesso.
-    </p>
-    <p>
-Para sanar esse problema foi subintituido o sistema pelo FreeNAS e criado a distribuição de varios pastas para os diverços setores.
-    </p>
+  <h2>Historico</h2>
+
+  <p>
+    Inicialmente a SEMED contava com um servidor de arquivos com o Windows XP com uma pasta compartilhada com os computadores do financeiros, mas esta sistema não possuia cabacidade suficiente para atender a demanda de acesso a pasta de varios
+    usuarios simultaneamente, cousando probremas de acesso.
+  </p>
+  <p>
+    Para sanar esse problema foi subintituido o sistema pelo FreeNAS e criado a distribuição de varios pastas para os diverços setores.
+  </p>
+
+  <h3>Roteiro de Integração ao AD</h3>
+  <ol>
+    <li>Ajustar o hostname: hostname e NetBIOS Name devem ser iguais; <br>
+      hostname: nas2 e Domain: semed-ni.intra | em Services - SMB - netbios: nas2.
+    </li>
+    <li>Ajustar os DNS: Apontar para os AD;<br>
+      Network - Global Configurarion - Nameserver 1: 172.15.0.3, Nameserver 2: 172.15.0.4, Nameserver 3 172.15.254.254.
+    </li>
+    <li>Ajustar NTP; <br>
+      Em System - NTP Servers adiconar o servidor de AD - 172.15.0.3.
+     </li>
+     <li>Integração do FreeNAs com o AD:<br>
+       em Directory Services - Active Directory.
+       <ol>
+         <li>Criar o Usuario do freenas no AD: freenas.</li>
+         <li>Domain Nome: semed-ni.intra</li>
+         <li>Domain Account Name: freenas</li>
+         <li>Domain Controller: adserver.semed-ni.intra </li>
+         <li>Global Catalog Server: adserver.semed-ni.intra</li>
+       </ol>
+      </li>
+<li> Teste no terminal</li>
+<ol>
+  <li>wbinf -t <br>
+    checking the trust secret for domain SEMED-NI via RPC calls succeeded
+  </li>
+  <li> wbinf -t <br>
+retorna lista de usuarios do dominio
+  </li>
+  <li> wbinf -g<br>
+    retorna lista de grupos do dominio
+  </li>
+  <li>getent passwd<br>
+    retorna lista de usuarios do dominio e locais
+  </li>
+</ol>
+    <li>Configura compartilhamento SMB;</li>
+    <li>Criação do grupos dos compartilhamentos;</li>
+    <li>Realizar teste em Windowns e no FreeNAS;</li>
+    <li>Não permiteir que usuarios fora do grupo tenha acesso a pasta.</li>
+  </ol>
 
 
+  <h2> Erro smartd_daemon is not running</h2>
+  To disable SMART for USB devices, perform the following steps (old UI):
+  <ol>
+    <li>Storage Tab</li>
+    <li>Volumes View Disks</li>
+    <li>Click on da0 (single boot device, might differ)</li>
+    <li>Click edit and deselect the SMART service</li>
+  </ol>
 
-<h2>    Erro smartd_daemon is not running</h2>
-          To disable SMART for USB devices, perform the following steps (old UI):
-          <ol>
-            <li>Storage Tab</li>
-            <li>Volumes  View Disks</li>
-            <li>Click on da0 (single boot device, might differ)</li>
-            <li>Click edit and deselect the SMART service</li>
-          </ol>
 
+  <h2>Informações do SAMBA</h2>
+  smbstatus
 
-    <h2>Informações do SAMBA</h2>
-    smbstatus
-  </body>
+<h1>Nas NOVO</h1>
+RAID Z
+
+</body>
+
 </html>
