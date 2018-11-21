@@ -29,7 +29,15 @@ https://tableless.com.br/criando-um-menu-horizontal-com-css/
       <li> <a href="#">Home</a> </li>
       <li> <a href="#">Firewall</a> </li>
       <li> <a href="#">NAS</a> </li>
-      <li> <a href="Proxmox/proxmox.html"> Proxmox </a> </li>
+      <li> <a href="Proxmox/proxmox.html"> Proxmox </a>
+        <div class="dropdown">
+          <button class="dropbtn"> Proxmox </button>
+          <div class="dropdown-content">
+            <a id="dropdown" href="#">Openfire</a>
+            <a id="dropdown" href="#">NextCloud</a>
+            <a id="dropdown" href="#">Relatorios</a>
+          </div>
+        </div> </li>
       <li> <a href="#">VMware</a> </li>
     </ul>
   </nav>
