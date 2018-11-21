@@ -16,12 +16,19 @@ h2 {
   font-family: 'Prosto One', cursive;
 }
 
-p {
+#menu p {
   font-size: 2rem;
   font-family: 'Arial', sans-serif;
   color: "red";
-  align-items: center;
+  align-items: baseline;
 }
+
+/*Centralizar tabela*/
+table{
+  margin-left: auto;
+  margin-right: auto;
+}
+
 
 /* Configuraçoes do menu */
 /*Centraliznado o menu*/
@@ -46,7 +53,7 @@ p {
   padding: 2px 10px;
   display: inline-block;
   /* Visual do link */
- 
+
   color: #333;
   text-decoration: none;
   border-bottom: 3px solid #56bf9d;
