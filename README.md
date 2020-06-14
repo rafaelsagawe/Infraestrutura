@@ -4,4 +4,5 @@ Arquivos de configuração, guias de instalções e utilizações dos sitemas da
 Usarei esse repositorio apenas para documentar o ambiente de servidores
 
 As pastas simbolizam o ambiente, o servidor ou instancia
-Os arquivos são as confiurações e documentação basica 
+Os arquivos são as confiurações e documentação basica
+

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <link rel="stylesheet" href="../index.css">
+  <body>
+<h1>Ambiente de administração dos recursos da rede</h1>
+
+<h2>Sobre o Sistema</h2>
+<p>Este computador tem a função de servir de estação de trabalho, possui instalado o Ubuntu 18.04, todo ambiente foi costumizada de forma atende melhor as minhas nessecidade</p>
+
+<h2>    Copiar arquivo via ssh</h2>
+        scp user.txt  semed@172.15.0.3:/home/semed
+
+<h2>Ativação do calendario do thunderbird</h2>
+        sudo apt install xul-ext-lightning
+
+    Ligar o thunderbird no Dominio
+    Ferramentas -> Catalogo de Endereços -> Arquivo novo -> Novo Diretorio ldap
+          Nome: SEMED (Item de escolha do usuario)
+          Servidor: 172.15.0.3
+          Base DN: OU=SEMED,DC=semed-ni,DC=intra
+          Porta: 389
+          Bind DN: rafael.sagawe@semed-ni.intra (nome de usuario com o dominio)
+
+  </body>
+</html>
