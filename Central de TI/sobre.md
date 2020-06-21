@@ -25,11 +25,9 @@ Rede|
 `timedatectl set-timezone America/Sao_Paulo`
 
 
-
 ## Sistema Operacional 
 
 ## Inventario (GLPI)
-
 
 ***
 ## Monitoramento (Zabbix)
@@ -95,7 +93,30 @@ Start Zabbix server and agent processes and make it start at system boot.
 # sudo systemctl enable zabbix-server zabbix-agent apache2
 # sudo service apache2 restart
 ~~~~
-Instalação no frontend
+### Finalização da instalação no frontend
+![tela 01](img/1.png)
+Confirmação das dependências
+![tela 02](img/2.png)
+Configurações do acesso ao banco de dados
+![tela 03](img/3.png)
+Detalhes do servidor, host, porta, hostname
+![tela 04](img/4.png)
+Sumário da Pre-instalação
+![tela 05](img/5.png)
+Finalização da instalação
+![tela 06](img/6.png)
+Tela login
+![tela 07](img/7.png)
+Dashboard inicial
+![tela 08](img/8.png)
+Tela de configuração do perfil administrador 
+![tela 09](img/9.png)
 
+### Ativação da tradução
+A tradução é ativada através da localização do sistema
 
+~~~~shell
+sudo locale-gen pt_BR && sudo locale-gen pt_BR.UTF-8
+~~~~
 
+![tela 10](img/10.png)
