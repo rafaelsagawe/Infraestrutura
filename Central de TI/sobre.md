@@ -9,10 +9,10 @@ Esse PC terá a função de fornecer uma central de serviços de ti:
 
 Hardware | Recursos
 ---------|-----------
-CPU | 
-Men|
-HD|
-Rede|
+CPU | Intel Core2 Duo E8400
+Men| 5GB
+HD| 250GB
+Rede| 2 
 
 ### Ajustes iniciais 
  Localização
