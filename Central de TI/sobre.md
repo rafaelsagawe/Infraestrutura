@@ -120,3 +120,17 @@ sudo locale-gen pt_BR && sudo locale-gen pt_BR.UTF-8
 ~~~~
 
 ![tela 10](img/10.png)
+
+## zabbix_get
+O Zabbix Get é um utilitário de linha de comando que pode ser utilizado para se comunicar com o agente de monitoração do Zabbix e requisitar um dado do agente.
+lado servidor
+zabbix_get -s 172.15.0.3 -p 10050 -k system.hostname
+
+log
+sudo tail -f /var/log/zabbix/zabbix_server.log
+sudo cat /var/log/zabbix/zabbix_server.log | grep "adserver"
+
+lado agente
+netstat -a | grep "zabbix"
+
+sudo nano /etc/zabbix/zabbix_agentd.conf && sudo service zabbix-agent restart &&  sudo  tail -f /var/log/zabbix-agent/zabbix_agentd.log
