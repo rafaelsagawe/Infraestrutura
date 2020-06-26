@@ -12,7 +12,8 @@ Hardware | Recursos
 CPU | Intel Core2 Duo E8400
 Men| 5GB
 HD| 250GB
-Rede| 2 
+Rede| 172.15.0.2 - 172.15.31.200
+
 
 ### Ajustes iniciais 
  Localização
@@ -94,23 +95,23 @@ Start Zabbix server and agent processes and make it start at system boot.
 # sudo service apache2 restart
 ~~~~
 ### Finalização da instalação no frontend
-![tela 01](img/1.png)
+![tela 01](img-zabbix/1.png)
 Confirmação das dependências
-![tela 02](img/2.png)
+![tela 02](img-zabbix/2.png)
 Configurações do acesso ao banco de dados
-![tela 03](img/3.png)
+![tela 03](img-zabbix/3.png)
 Detalhes do servidor, host, porta, hostname
-![tela 04](img/4.png)
+![tela 04](img-zabbix/4.png)
 Sumário da Pre-instalação
-![tela 05](img/5.png)
+![tela 05](img-zabbix/5.png)
 Finalização da instalação
-![tela 06](img/6.png)
+![tela 06](img-zabbix/6.png)
 Tela login
-![tela 07](img/7.png)
+![tela 07](img-zabbix/7.png)
 Dashboard inicial
-![tela 08](img/8.png)
+![tela 08](img-zabbix/8.png)
 Tela de configuração do perfil administrador 
-![tela 09](img/9.png)
+![tela 09](img-zabbix/9.png)
 
 ### Ativação da tradução
 A tradução é ativada através da localização do sistema
@@ -119,18 +120,59 @@ A tradução é ativada através da localização do sistema
 sudo locale-gen pt_BR && sudo locale-gen pt_BR.UTF-8
 ~~~~
 
-![tela 10](img/10.png)
+![tela 10](img-zabbix/10.png)
+
+## Zabbix agent
+
+~~~~shell
+# sudo apt-cache search zabbix
+~~~~~
+
+    zabbix-agent - network monitoring solution - agent 
+    zabbix-cli - Command-line interface for Zabbix monitoring system
+    zabbix-frontend-php - network monitoring solution - PHP front-end
+    zabbix-java-gateway - network monitoring solution - Java gateway
+    zabbix-proxy-mysql - network monitoring solution - proxy (using MySQL)
+    zabbix-proxy-pgsql - network monitoring solution - proxy (using PostgreSQL)
+    zabbix-proxy-sqlite3 - network monitoring solution - proxy (using SQLite3)
+    zabbix-server-mysql - network monitoring solution - server (using MySQL)
+    zabbix-server-pgsql - network monitoring solution - server (using PostgreSQL)
+
+~~~~shell
+# sudo apt install zabbix-agent
+~~~~
+É necessário a edição do arquivo conf do agent ``sudo nano /etc/zabbix/zabbix_agentd.conf``, editando os campos 
+
 
 ## zabbix_get
+
+Os controladores de domínio (adserver e ad2server) não estavam tendo acesso liberando acesso ao servidor do Zabbix, para verificar o motivo foi instalado a recurso zabbix_get e a verificação dos log's. 
+
 O Zabbix Get é um utilitário de linha de comando que pode ser utilizado para se comunicar com o agente de monitoração do Zabbix e requisitar um dado do agente.
+
 lado servidor
-zabbix_get -s 172.15.0.3 -p 10050 -k system.hostname
+~~~~shell
+# zabbix_get -s 172.15.0.3 -p 10050 -k system.hostname
+~~~~
+log do server
+~~~~shell
+# sudo tail -f /var/log/zabbix/zabbix_server.log
+# sudo cat /var/log/zabbix/zabbix_server.log | grep "adserver"
+~~~~
 
-log
-sudo tail -f /var/log/zabbix/zabbix_server.log
-sudo cat /var/log/zabbix/zabbix_server.log | grep "adserver"
 
-lado agente
+Lado agente adserver
+
+~~~~shell
 netstat -a | grep "zabbix"
+~~~~
+A solução que encontrei foi adicionar os dois endereços de IP do servidor do Zabbix
 
-sudo nano /etc/zabbix/zabbix_agentd.conf && sudo service zabbix-agent restart &&  sudo  tail -f /var/log/zabbix-agent/zabbix_agentd.log
+~~~~shell
+# sudo nano /etc/zabbix/zabbix_agentd.conf 
+   server=172.15.0.2, 172.15.31.200
+
+# sudo service zabbix-agent restart 
+# sudo tail -f /var/log/zabbix-agent/zabbix_agentd.log
+~~~~
+  
