@@ -175,4 +175,11 @@ A solução que encontrei foi adicionar os dois endereços de IP do servidor do 
 # sudo service zabbix-agent restart 
 # sudo tail -f /var/log/zabbix-agent/zabbix_agentd.log
 ~~~~
-  
+
+## Auto Descoberta e registro
+
+Para facilitar o cadastro dos equipamentos foi utilizado o recurso de auto descoberta.
+
+### Tela da Regra de Descoberta
+![tela 11](img-zabbix/Regras_descoberta.png)
+
