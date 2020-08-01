@@ -6,3 +6,15 @@ Usarei esse repositorio apenas para documentar o ambiente de servidores
 As pastas simbolizam o ambiente, o servidor ou instancia
 Os arquivos são as confiurações e documentação basica
 
+## Índice dos projetos
+
+[Zabbix (Monitoramennto)](Central_de_TI/zabbix.md)
+
+[GLPI (Inventario)](Central_de_TI/glpi.md)
+
+----
+
+## Dicas Extras
+
+[MySQL]
+
