@@ -7,14 +7,16 @@ As pastas simbolizam o ambiente, o servidor ou instancia
 Os arquivos são as confiurações e documentação basica
 
 ## Índice dos projetos
+1. Central da TI
+* [Administração Remota](Central_de_TI/adm_linux.md)
 
-[Zabbix (Monitoramennto)](Central_de_TI/zabbix.md)
+* [Zabbix (Monitoramennto)](Central_de_TI/zabbix.md)
 
-[GLPI (Inventario)](Central_de_TI/glpi.md)
+* [GLPI (Inventario)](Central_de_TI/glpi.md)
 
 ----
 
 ## Dicas Extras
 
-[MySQL]
+[MySQL](Extras/mysql.md)
 
