@@ -1,0 +1,8 @@
+# O que é o Grafana?
+O Grafana é uma plataforma para visualizar e analisar métricas por meio de gráficos. Ele tem suporte para diversos tipos de bancos de dados — tanto gratuitos quanto pagos —, e pode ser instalado em qualquer sistema operacional.
+
+Para facilitar a visualização dos gráficos, é possível criar dashboards dinâmicos que podem ser compartilhados com toda a equipe. Além disso, a ferramenta permite configurar alertas com base nas métricas, que são analisadas de forma contínua para notificar o usuário sempre que preciso, de acordo com as regras definidas por ele. É bastante utilizado por sistemas de monitoramento para gerar gráficos real-time.
+
+# Por que utilizar Grafana na sua empresa?
+Com o Grafana, a empresa pode acompanhar todas as informações importantes vindas de diversas fontes — como bancos de dados e outras ferramentas — por meio de uma única interface intuitiva e completa. Isso facilita a gestão de indicadores e o monitoramento de dados em tempo real, o que torna a tomada de decisões na empresa mais rápida e eficiente.
+
