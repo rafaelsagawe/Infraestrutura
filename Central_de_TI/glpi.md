@@ -65,14 +65,41 @@ Tela de login do GLPI
 ![tela13](img-glpi/glpi_02.png)
 Tela Inicial do GLPI 9.5 recém instalado
 
-# Inventario Automatico
+## Ajustes pos instalação
 
-## Download do Fusion 
+1. Alterar a senhas dos usuários do sistema;
+1. Remover a pasta de instalação do GLPI;
+1. Adicionar o Timezone no banco de dados;
+
+Está ação gera um erro de compatibilidade nas tabelas, para realizar a correação é necessário utilizar esse codigo 
+
+
+# Plugins 
+
+Para o melhor aproveitamento das capacidades e estende-las o GLPI tem acesso a vários plugins, a partir da versão 9.5.0 trazendo a marktplacem mas ainda tem a possibilidade da instalação manual. 
+
+Para realizar a instalação de forma manual é necessário realizar do download do arquivos compactado e extrai-los na pasta de plugins do GLPI, em distribuições Linux com o web server **Apache** fica localizado em ``/var/www/html/glpi/plugins/`` e ajustar as permissões para usar o Servidor Web. Depois desse processo deve-se acessar o GLPI na aba **Configurações** escolher o item **Plugins**, então instalar ele, está operação cria as tabelas e prepara os arquivos do plugins (dependendo do plugin essa ação pode demorar um pouco) e ativa-lo para poder usar os novos recursos. 
+
+Dentre os plugins posso citar estes
+1. **FusionInventory - Inventario automático;**
+2. DataInjection;
+3. Fields (Campos Adicionais)
+4. PrinterCounters (Contador das impressoras)
+
+
+## FusionInventory - Inventario automático
+
+ uma dos mais importantes se trata do FusionInventory. Este tem a função de realizar o inventario de forma automática da rede usando o protocolo **SNMP**.
+
+## Download
+
 sudo wget https://github.com/fusioninventory/fusioninventory-for-glpi/releases/download/glpi9.5.0%2B1.0/fusioninventory-9.5.0+1.0.tar.bz2
+
+
+## Configurando o *cron*
 
 /usr/bin/php7.2 /var/www/html/glpi/front/cron.php &>/dev/null
 
-# Cron
 ~~~~shell
 # sudo crontab -e
 ~~~~

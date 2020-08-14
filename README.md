@@ -7,6 +7,7 @@ As pastas simbolizam o ambiente, o servidor ou instancia
 Os arquivos são as confiurações e documentação basica
 
 ## Índice dos projetos
+---
 1. Central da TI
 * [Administração Remota](Central_de_TI/adm_linux.md)
 
@@ -14,7 +15,18 @@ Os arquivos são as confiurações e documentação basica
 
 * [GLPI (Inventario)](Central_de_TI/glpi.md)
 
+-----
+2. Controladores de Domino
+
+* Zentyal - AdServer
+
+* Zentyal - Ad2Server
 ----
+3. Cluster de Virtualização
+
+* ProxMox
+
+    * Containers
 
 ## Dicas Extras
 
