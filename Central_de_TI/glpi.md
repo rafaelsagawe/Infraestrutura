@@ -73,6 +73,8 @@ Tela Inicial do GLPI 9.5 recém instalado
 
 Está ação gera um erro de compatibilidade nas tabelas, para realizar a correação é necessário utilizar esse codigo 
 
+**verificar no site do fala TI**
+
 
 # Plugins 
 
