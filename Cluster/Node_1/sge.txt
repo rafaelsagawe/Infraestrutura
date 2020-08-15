@@ -1,0 +1,115 @@
+i-educar
+
+Instalação em servidor
+O i-Educar possui um instalador que pode te auxiliar no processo de instalação em um servidor para produção.
+
+Antes de tudo faça download (wget https://github.com/portabilis/i-educar/releases/download/2.1.0/ieducar-2.1.0.tar.gz && tar zxvf ieducar-2.1.0.tar.gz) da versão mais recente do i-Educar e extraia o conteúdo do release em uma pasta no seu servidor. O instalador está disponível desde a versão 2.1.0.
+
+Requerimentos
+Para executar o i-Educar em um servidor você precisa dos seguintes programas:
+
+Nginx
+apt install nginx
+
+PHP versão 7.1.3 ou maior
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:ondrej/php
+sudo apt-get update
+apt-get install php7.2
+
+bcmath curl dom fileinfo json libxml mbstring openssl PDO pgsql Phar SimpleXML tokenizer xml xmlwriter zip pcre
+
+Postgres versão 9.5 ou superior
+apt install postgresql postgresql-contrib
+
+
+O instalador do i-Educar te avisa caso alguma extensão esteja faltando então não se preocupe em instalar tudo agora.
+
+Configurando o servidor
+O Nginx precisa estar devidamente configurado para rodar o i-Educar e permitir acesso ao instalador. Você encontra um exemplo de configuração aqui.
+
+
+
+
+
+Em sistemas Ubuntu, por exemplo, você colocaria este arquivo na pasta /etc/nginx/sites-available e criaria um symlink para ele na pasta /etc/nginx/sites-enabled.
+
+Não esqueça de adequar a configuração de acordo com a realidade do seu servidor principalmente as seguintes diretivas:
+
+root
+fastcgi_pass
+Depois de tudo pronto basta reiniciar o processo do nginx para que as configurações novas entrem em vigor.
+
+Executando o instalador
+Agora que o Nginx está configurado você pode acessar o instalador em:
+
+http://www.example.com/install.php
+Substitua "www.example.com" pelo seu domínio ou endereço de IP. A partir daqui o instalador deverá te dar todas as instruções necessárias para realizar a instalação com sucesso. Todo exemplo de comando ou código que possa vir a aparecer no processo de instalação leva em consideração o seu ambiente, ou seja, fique à vontade para copiar e colar os comandos que eles deverão funcionar corretamente.
+
+Quando tudo estiver ok você poderá definir uma senha para o usuário admin e iniciar o processo de instalação. Se tudo correr bem você poderá acessar o i-Educar normalmente.
+
+Em caso de erros no processo de instalação verifique os logs do sistema que se encontram em storage/logs para determinar suas causas. Não hesite em entrar em contato caso enfrente dificuldades!
+
+i-diario
+
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
+sudo apt-get update
+sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev nodejs yarn
+
+cd
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+exec $SHELL
+
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+exec $SHELL
+
+rbenv install 2.2.6
+rbenv global 2.2.6
+ruby -v
+
+
+i-Diário
+Portal do professor integrado com o software livre i-Educar
+
+Instalação
+
+Instalar o Ruby 2.2.6 (Recomendamos uso de um gerenciador de versões como Rbenv ou Rvm)
+Instalar a gem Bundler:
+$ gem install bundler
+Baixar o i-Diário:
+$ git clone https://github.com/portabilis/i-diario.git
+Instalar as gems:
+$ cd i-diario
+$ bundle install
+Copiar o exemplo de configurações de banco de dados e configurar:
+$  cp config/database.sample.yml config/database.yml
+Criar e configurar o arquivo config/secrets.yml conforme o exemplo:
+development:
+  secret_key_base: CHAVE_SECRETA_AQUI # Você pode gerar uma chave usando o comando "bundle exec rake secret"
+Criar o banco de dados:
+$ bundle exec rake db:create
+$ bundle exec rake db:migrate
+Criar uma entidade:
+$ bundle exec rake entity:setup NAME=prefeitura DOMAIN=localhost DATABASE=prefeitura_diario
+Criar um usuário administrador:
+$ bundle exec rails console
+Entity.last.using_connection { User.create!(email: 'admin@domain.com.br', password: '123456789', password_confirmation: '123456789', status: 'actived', kind: 'employee', admin:  true) }
+Iniciar o servidor e acessar http://localhost:3000 para acessar o sistema:
+$ bundle exec rails server
+Sincronização com i-Educar
+Acessar Configurações > Api de Integraçao e configurar os dados do sincronismo
+Acessar Configurações > Unidades e clicar em Sincronizar
+Acessar Calendário letivo, clicar em Sincronizar e configurar os calendários
+Acessar Configurações > Api de Integração e clicar no botão de sincronizar
+Nota: Após esses primeiros passos, recomendamos que a sincronização rode pelo menos diariamente para manter o i-Diário atualizado com o i-Educar
+
+Rodar os testes
+$ RAILS_ENV=test bundle exec rake db:create
+$ RAILS_ENV=test bundle exec rake db:migrate
+$ bin/rspec spec

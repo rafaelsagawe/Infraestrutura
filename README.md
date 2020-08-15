@@ -18,15 +18,15 @@ Os arquivos são as confiurações e documentação basica
 -----
 2. Controladores de Domino
 
-* Zentyal - AdServer
-
-* Zentyal - Ad2Server
+* Zentyal - AdServer e Ad2Server
 ----
 3. Cluster de Virtualização
 
 * ProxMox
 
     * Containers
+
+        * [Grafana](Cluster/Node_2/Grafana/grafana.md)
 
 ## Dicas Extras
 

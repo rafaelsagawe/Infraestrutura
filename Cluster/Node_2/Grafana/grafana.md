@@ -6,3 +6,5 @@ Para facilitar a visualização dos gráficos, é possível criar dashboards din
 # Por que utilizar Grafana na sua empresa?
 Com o Grafana, a empresa pode acompanhar todas as informações importantes vindas de diversas fontes — como bancos de dados e outras ferramentas — por meio de uma única interface intuitiva e completa. Isso facilita a gestão de indicadores e o monitoramento de dados em tempo real, o que torna a tomada de decisões na empresa mais rápida e eficiente.
 
+# Referencias
+[https://www.opservices.com.br/grafana/]
