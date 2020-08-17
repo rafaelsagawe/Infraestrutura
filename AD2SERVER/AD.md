@@ -26,18 +26,34 @@ Foi realizado esta rotina
 # sudo chmod +x importacao
 ~~~~
 
-Comandos do domínio 
-    • Checagem do banco de dados do Samba em busca de erros: $ sudo samba-tool dbcheck;
-    • Resetar as permissões do sysvol: $ sudo samba-tool ntacl sysvolreset;
-    • Lista das GPOs do domínio: $ sudo samba-tool gpo listall;
-    • Lista grupos: $ sudo samba-tool group list;
-    • Lista usuários: $ sudo samba-tool user list;
-    • Verifica o status da replicação do domínio os servidores secundários: $ sudo samba-tool drs showrepl;
-    • Nível da funcional e da floresta: $ sudo samba-tool domain level show;
-    • Informações do domínio: $ sudo samba-tool domain info 172.15.0.3;
-    • Verifica os controladores via TCP e UDP: 
-        ◦ $ host -t SRV _ldap._tcp.semed-ni.intra;
-        ◦ $ host -t SRV _kerberos._udp.semed-ni.intra.
+## Comandos do domínio 
+
+* Checagem do banco de dados do Samba em busca de erros: 
+``$ sudo samba-tool dbcheck;``
+
+* Resetar as permissões do sysvol: 
+``$ sudo samba-tool ntacl sysvolreset``;
+
+* Lista das GPOs do domínio: 
+``$ sudo samba-tool gpo listall``;
+
+* Lista grupos: 
+``$ sudo samba-tool group list``;
+
+* Lista usuários: 
+``$ sudo samba-tool user list``;
+
+* Verifica o status da replicação do domínio os servidores secundários: 
+``$ sudo samba-tool drs showrepl``;
+
+* Nível da funcional e da floresta: 
+``$ sudo samba-tool domain level show``;
+
+Informações do domínio: 
+``$ sudo samba-tool domain info 172.15.0.3``;
+Verifica os controladores via TCP e UDP: 
+        ◦ ``$ host -t SRV _ldap._tcp.semed-ni.intra``;
+        ◦ ``$ host -t SRV _kerberos._udp.semed-ni.intra``.
 
 Obs:
 1. O parâmetro **–must-change-at-next-login** serve para o usuário altera a senha no próximo logon;

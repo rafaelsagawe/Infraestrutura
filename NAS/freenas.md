@@ -1,37 +1,53 @@
-Storage – FreeNAS
-Uma unidade NAS é essencialmente um servidor conectado a rede, com a funcionalidade única de promover serviços de armazenamento de dados para outros dispositivos da rede. Estas unidades não são desenvolvidas para tarefas computacionais em geral, apesar de tecnicamente ser possível executar outros softwares nelas. Geralmente, as unidades não possuem teclado ou monitor, e são configuradas pela rede, normalmente através de um browser.
-Sistemas NAS podem conter mais de um HD, podendo também contar com a tecnologia RAID, centralizando a responsabilidade de servir os arquivos em uma rede e deste modo liberando recursos de outros servidores desta rede. Os protocolos utilizados pelo NAS são:
-    • AFP, Compartilhamento para equipamentos Apple; 
-    • NFS, usado por sistemas Unix;
-    • SMB/CIFS, usado em ambientes Microsoft Windows;
-    • Webdav, para acessar arquivos via HTTP.
-FreeNAS é NAS, suportando: CIFS (Samba), FTP, NFS, rsync, protocolo AFP, iSCSI, S.M.A.R.T., autenticação local de usuários e em Domínio, e RAID (0,1,5) via software, com uma configuração baseada em internet. Instalado em HD ou pen-drive USB para o OS e outros para a criação dos volumes1.
+# Storage – NAS
+
+Uma unidade NAS é essencialmente um servidor conectado a rede, com a funcionalidade única de promover serviços de armazenamento de dados para outros dispositivos da rede. Estas unidades não são desenvolvidas para tarefas computacionais em geral, apesar de tecnicamente ser possível executar outros softwares nelas. 
+
+Geralmente, as unidades não possuem teclado ou monitor, e são configuradas pela rede, normalmente através de um browser.
+
+Sistemas NAS podem conter mais de um HD, podendo também contar com a tecnologia RAID, centralizando a responsabilidade de servir os arquivos em uma rede e deste modo liberando recursos de outros servidores desta rede. 
+
+Os protocolos utilizados pelo NAS são:
+* **AFP** - Compartilhamento para equipamentos Apple; 
+* **NFS** - usado por sistemas Unix;
+* **SMB/CIFS** - usado em ambientes Microsoft Windows;
+* **Webdav** - para acessar arquivos via HTTP.
+
+# NAS da SEMED
+Para a criação do Servidor NAS da SEMED, foi escolhido o FreeNAS, não apenas por ser um Sistema NAS altamente utilizado, mas sim pelas suas ferramentas, em especial os snapshots do *ZFS* e a deduplicação de arquivos. Ele tem suporte suporte aos principais protocolos: **CIFS (Samba)**, FTP, NFS, rsync, protocolo AFP, iSCSI, *S.M.A.R.T.*, autenticação local de usuários e em **Domínio**, e RAID (0,1,5) via software, com uma configuração baseada em internet. Instalado em HD ou pen-drive USB para o OS e outros para a criação dos *volumes*.
+
+### Criando o Volume
 Fui utilizado como padrão a nova interface do FreeNAS-11.2-U4.1.
-Criando o Volume (Pool)
-Para criar os compartilhamentos torna-se necessário a criação do Volume (Pool), possibilitando a implantação de RAID através de software. 
+
+#### Criando o Volume (Pool)
+
+Para criar os compartilhamentos torna-se necessário a criação do Volume (Pool), possibilitando a implantação de RAID através de software.
+
 Em Storage => Pools => ADD, escolha os discos.
-    • Name: Nome do Volume criado, este item não e possível ser trocado;
-    • Comments: Comentário;
-    • Compression Level: Nível de compressão de dados do volume, assim gerando maior espaço em disco;
-    • Share Type: Tipo de compartilhamento:
-        ◦ Unix, redes Linux;
-        ◦ Windows, sendo o padrão para rede com computadores windows;
-        ◦ Mac, redes com equipamentos Apple;
-    • ZFS Deduplication: Função para a realização da deduplicação dos arquivos, mantendo um arquivo e ciando atalhos para esse arquivo mantido, assim reduzindo o quantitativo real de arquivos assim liberando espaço no Volume;
-    • Snapshot directory: permite a visualização das pastas dos Snapshots;
-        ◦  Invisible: não visualiza a pasta;
-        ◦ Visible: visualiza a pasta.
-Criando pasta de compartilhamento
+
+* Name: Nome do Volume criado, este item não e possível ser trocado;
+* Comments: Comentário;
+* Compression Level: Nível de compressão de dados do volume, assim gerando maior espaço em disco;
+* Share Type: Tipo de compartilhamento:
+    * Unix, redes Linux;
+    * Windows, sendo o padrão para rede com computadores windows;
+    * Mac, redes com equipamentos Apple;
+
+* ZFS Deduplication: Função para a realização da deduplicação dos arquivos, mantendo um arquivo e ciando atalhos para esse arquivo mantido, assim reduzindo o quantitativo real de arquivos assim liberando espaço no Volume;
+* Snapshot directory: permite a visualização das pastas dos Snapshots;
+    * Invisible: não visualiza a pasta;
+    * Visible: visualiza a pasta.
+
+### Criando pasta de compartilhamento
 Para acessar o Volume recém-ciado torna-se necessário a criação dos compartilhamentos, em Sharing => Windows (SMB) Shares.
-    • Path: Caminho da Pasta compartilhada, tendo sido usado diretamente a raiz do Volume, por padrão sendo montando em mnt (/mnt/SEMED);
-    •  Name: Nome do compartilhamento que será visível para os usuários;
+Path: Caminho da Pasta compartilhada, tendo sido usado diretamente a raiz do Volume, por padrão sendo montando em mnt (/mnt/SEMED);
+ Name: Nome do compartilhamento que será visível para os usuários;
         ◦ Browsable to Network Clients:
         ◦ Export Recycle Bin:
         ◦ Allow Guest Access:
         ◦ Only Allow Guest Access:
-    • VFS Objects:
-    • Periodic Snapshot Task:
-    • Auxiliary Parameters:
+VFS Objects:
+Periodic Snapshot Task:
+Auxiliary Parameters:
 
 Integrando no Domínio 
 Hostname e NetBios devem ser iguais.
@@ -40,35 +56,36 @@ Ajustar o NTP
 
 
 ---------
+## Comandos para testar integração
+* wbinfo -t 
+* wbinfo -v
+* wbinfo -u
+* wbinfo -g
+* getent passwd
+* getent group
 
-Comandos para testar integração
-    • wbinfo -t 
-    • wbinfo -v
-    • wbinfo -u
-    • wbinfo -g
-    • getent passwd
-    • getent group
-Ajuste de permissões
+### Ajuste de permissões
 Para tornar acessível os arquivos dos setores no compartilhamento do NAS e necessário ajustar as permissões dos arquivos e pastar.
-    I. Ajustar no NAS, estes procedimentos iram restar as configurações de permissões dos arquivos para o padrão;
-        1. Em Storage => Pools (Local dos Volumes);
-        2. Nas configurações em Edit Dataset; 
-            A. Share Type = Windows;
-        3. Nas configurações em Edit Permissions, 
-            A. ACL Type = Windows;
-            B. User = nobody;
-            C. Group = SEMED-NI\domain users;
-            D. Apply permissions recursively;
-    II. Ajustes no Windows, esses passos ajustaram para as configurações de grupos do domínio;
-        1. Nas propriedades da pasta aba Segurança => Avançadas => Alterar Permissões;
+
+Ajustar no NAS, estes procedimentos iram restar as configurações de permissões dos arquivos para o padrão;
+
+* Em Storage => Pools (Local dos Volumes);
+
+* Nas configurações em Edit Dataset; 
+   * Share Type = Windows;
+       * Nas configurações em Edit Permissions, 
+           * ACL Type = Windows;
+           * **User = nobody;**
+           * Group = SEMED-NI\domain users;
+           * Apply permissions recursively;
+
+Ajustes no **Windows**, esses passos ajustaram para as configurações de grupos do domínio;
+Nas propriedades da pasta aba Segurança => Avançadas => Alterar Permissões;
             A. Desmarque o item Incluir permissões herdáveis…;
             B. Adicionar os Grupos que acessarão a pasta;
 
-
-
 ----
-
-Administrando o FreeNAS Autenticado 
+## Administrando o FreeNAS Autenticado 
 Criação de Usuários 
 A criação dos usuários é feita pelo Controlador do Domínio, a regra de acesso funciona através dos Grupos que o usuário faz parte. 
 Criação de pastas e regra de acesso
@@ -110,30 +127,29 @@ Para as realizações periódicas dos servidores de arquivos torna-se necessári
 Exemplo: scp -r Internet/ root@nas2:/mnt/Usuarios/TI
 
 Incluindo o FreeNAS no Inventario do GLPI
-    • Via SSH editar o arquivo do repositório;
+Via SSH editar o arquivo do repositório;
  nano /usr/local/etc/pkg/repos/local.conf
 	local: {
 	    url: "file:///usr/ports/packages",
 	    enabled: yes
 		}
-    • De enabled: yes para enabled: false;
-    • nano /usr/local/etc/pkg/repos/FreeBSD.conf
+De enabled: yes para enabled: false;
+nano /usr/local/etc/pkg/repos/FreeBSD.conf
       FreeBSD: {
  enabled: no
 }
-    • Para enabled: no para enabled: yes
-    • Buscar atualizações
+Para enabled: no para enabled: yes
+Buscar atualizações
 pkg update
-    • Buscar os programas do FusionInventory
+Buscar os programas do FusionInventory
 pkg search fusioninventory
-    • Instalação do agente
+Instalação do agente
 pkg install p5-FusionInventory-Agent 
-    • Copiar o arquivo de modelo de configuração
+Copiar o arquivo de modelo de configuração
 cp /usr/local/etc/fusioninventory/agent.cfg.sample /usr/local/etc/fusioninventory/agent.cfg
-    • Ajustando o endereço do fusioninventory
+Ajustando o endereço do fusioninventory
 nano /usr/local/etc/fusioninventory/agent.cfg
 Programas Extras
 A instalação de programas são bloqueadas por padrão no FreeNAS, mas como esse bloqueio foi burlado para a instalação do fusioninventory podemos instalar outros recursos para facilirar a adminitração, como:
-    • grp – cores Geniricas, trazendo cores para o comando tail, # pkg install grc;
-    • glances – Visualização detalhada dos recursos consumidos, # pkg install py36-glances-3.1.0;
-    • 
+grp – cores Geniricas, trazendo cores para o comando tail, # pkg install grc;
+glances – Visualização detalhada dos recursos consumidos, # pkg install py36-glances-3.1.0;
