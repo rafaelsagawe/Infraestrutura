@@ -1,37 +1,24 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+Zentyal Server
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>AD</title>
-</head>
-<link rel="stylesheet" href="../index.css">
+  O Zentyal Server é um aplicativo open source de web decorrente da evolução da plataforma eBox, que começou a ser utilizada em 2004. Atualmente seu código base pertence à eBox Technologies, e o código fonte está disponível de acordo com os
+    termos da licença pública geral GNU.
 
-<body>
+  Com foco na usabilidade, seu grande objetivo é a administração de redes de pequenas e médias empresas que buscam uma solução alternativa aos tradicionais produtos com estrutura da Microsoft.
 
-<h1>Zentyal Server</h1>
+  Utilizando uma interface amigável, busca reunir em um único local diversos serviços de uma empresa, como acesso à internet, segurança de rede, compartilhamento de arquivos, infraestrutura de redes e comunicação.
 
-  <p>O Zentyal Server é um aplicativo open source de web decorrente da evolução da plataforma eBox, que começou a ser utilizada em 2004. Atualmente seu código base pertence à eBox Technologies, e o código fonte está disponível de acordo com os
-    termos da licença pública geral GNU.</p>
-
-  <p>Com foco na usabilidade, seu grande objetivo é a administração de redes de pequenas e médias empresas que buscam uma solução alternativa aos tradicionais produtos com estrutura da Microsoft.</p>
-
-  <p>Utilizando uma interface amigável, busca reunir em um único local diversos serviços de uma empresa, como acesso à internet, segurança de rede, compartilhamento de arquivos, infraestrutura de redes e comunicação.</p>
-
-  <h2>Ferramentas e serviços do Zentyal server</h2>
+  amentas e serviços do Zentyal server
 
   As funcionalidades do Zentyal podem ser agrupadas. Vejamos quais são estes grupos e algumas dessas funcionalidades.<br>
   <!--Inicio de lista -->
   <ul>
     <li> Mail: permite a interação com o Microsoft Outlook e possui compatibilidade com o Microsoft Active Directory (integração com Samba4.1). Controla o sistema de e-mails, calendários, contatos e webmail. Também é capaz de sincronizar
-      dispositivos móveis com segurança, pois possui antivírus e AntiSpam.
+   dispositivos móveis com segurança, pois possui antivírus e AntiSpam.
     </li>
     <br>
-    <li>
+  li>
       Domínios e diretórios: Tem um gerenciamento central de grupos usuários e equipes em forma de árvore. Lida com autenticações, permissões e compartilhamentos de arquivos com o sistema operacional Windows. Também agrega Single Sign-On, unidades
-      organizacionais múltiplas e gerenciamento de impressoras.
+   organizacionais múltiplas e gerenciamento de impressoras.
     </li>
     <br>
     <li>
@@ -44,7 +31,7 @@
   </ul>
   <!-- Final de lista -->
 
-  <h2>Controlador de Dominio</h2>
+  rolador de Dominio
   <!-- Inicio de tabela-->
   <table border="1">
     <tr>
@@ -68,7 +55,7 @@
     </tr>
   </table>
   <!-- Final de tabela-->
-  <h2>Justificativa</h2>
+  ificativa
   Para proporcionar um ambiente com maior segurança e flexibilidade nos computadores, torna-se necessário a implantação do Sistema de Autenticação de Usuários, para tanto é preciso a realização ações previas, como:
   <!-- Inicio de lista ordenada -->
   <ol>
@@ -83,11 +70,11 @@
   </ol>
   <!-- Final de lista ordenada -->
 
-  <p>Nos computadores implementado qualquer funcionário cadastrado poderá utilizar com o seu usuário tendo acesso à pasta compartilhada e a impressora do setor.</p>
-  <p>Em caso do funcionário trocar de setor será necessário a alteração do seu perfil, ela equipe da TI, para que este tenha acesso aos recursos do novo setor.</p>
-  <p>Vale ressaltar que o Setor de TI não tem acesso as senhas uma vez esta alterada, caso seja necessário trocar a senha será colocada a inicial para ser trocada novamente.</p>
+  Nos computadores implementado qualquer funcionário cadastrado poderá utilizar com o seu usuário tendo acesso à pasta compartilhada e a impressora do setor.
+  Em caso do funcionário trocar de setor será necessário a alteração do seu perfil, ela equipe da TI, para que este tenha acesso aos recursos do novo setor.
+  Vale ressaltar que o Setor de TI não tem acesso as senhas uma vez esta alterada, caso seja necessário trocar a senha será colocada a inicial para ser trocada novamente.
 
-<h2>Serviços Integrados</h2>
+iços Integrados
 <ol>
 <li>Estação de Trabalho;</li>
   <li>Servidor de Arquivos;</li>
@@ -96,16 +83,16 @@
   <br>
 <table border="2" >
 <tr>
-  <td colspan="2">Usuario Administrador</td>
-</tr>
-  <td>ADM: administrator</td> <td>  PSSWD: ********</td>
+   colspan="2">Usuario Administrador</td>
+</
+  >ADM: administrator</td> <td>  PSSWD: ********</td>
 </table>
 
 
-  <h2>Comando para busca de usuarios <br></h2>
+  ndo para busca de usuarios <br>
   ldapsearch -b DC=semed-ni,DC=intra -H ldap://172.15.0.3 -D administrator@SEMED-NI.intra -w '********' '(&(sAMAccountName=nextcloud))' <br>
 
-  <h2>Adição de usuarios em lote</h2> <br>
+  ão de usuarios em lote
 
   <a href="http://blog.astreinamentos.com.br/2016/02/como-criar-varios-usuarios-em-massa-no-samba-4.html"> Link da Materia </a> <br>
   apt install gawk <br>
