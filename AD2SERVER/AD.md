@@ -26,6 +26,19 @@ Foi realizado esta rotina
 # sudo chmod +x importacao
 ~~~~
 
+Comandos do domínio 
+    • Checagem do banco de dados do Samba em busca de erros: $ sudo samba-tool dbcheck;
+    • Resetar as permissões do sysvol: $ sudo samba-tool ntacl sysvolreset;
+    • Lista das GPOs do domínio: $ sudo samba-tool gpo listall;
+    • Lista grupos: $ sudo samba-tool group list;
+    • Lista usuários: $ sudo samba-tool user list;
+    • Verifica o status da replicação do domínio os servidores secundários: $ sudo samba-tool drs showrepl;
+    • Nível da funcional e da floresta: $ sudo samba-tool domain level show;
+    • Informações do domínio: $ sudo samba-tool domain info 172.15.0.3;
+    • Verifica os controladores via TCP e UDP: 
+        ◦ $ host -t SRV _ldap._tcp.semed-ni.intra;
+        ◦ $ host -t SRV _kerberos._udp.semed-ni.intra.
+
 Obs:
 1. O parâmetro **–must-change-at-next-login** serve para o usuário altera a senha no próximo logon;
 2. O local do samba-tool pode variar. 
@@ -36,3 +49,9 @@ Obs:
 2. Regras de Acesso no servidor;
 3. Usuários para sistemas usados internamente;
 4. Acesso aos computadores.
+
+## Administração Remota do Domínio – RSAT
+O RSAT é um conjunto de ferramentas que inclui o Gerenciador do Servidor, snap-ins do MMC (Microsoft Management Console), os consoles, os provedores e os cmdlets do Windows PowerShell, além de ferramentas da linha de comando para o gerenciamento de funções e recursos executados no Windows Server.
+
+## Objetos de Politicas de Grupos – GPO
+Diretiva de Grupo, ou Group Policy (GPO), é uma funcionalidade da família de sistemas operacionais Microsoft Windows NT. É um conjunto de regras que controlam o ambiente de trabalho de contas de usuário e contas de computador. Ela fornece o gerenciamento e configuração centralizados de sistemas operacionais, aplicativos e configurações dos usuários em um ambiente Active Directory. Em outras palavras, a Diretiva de Grupo controla em parte o que os usuários podem ou não fazer em um sistema de computador. 
