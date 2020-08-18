@@ -15,6 +15,87 @@ Os protocolos utilizados pelo NAS são:
 
 ------
 
+# Como escolher os HDs para suar no Samba 4
+
+Há 2 formas de instalação
+
+ 
+
+Para te ajudar a fazer uma escolha acertada nesse item temos que levar em consideração alguns fatores que influenciarão na escolha.
+
+ 
+
+ 
+
+Os fatores que devemos levar em conta é o tamanho do projeto , a verba do projeto o tanto de espaço que precisamos e o local de armazenamento dos dados .
+
+ 
+
+ 
+
+Projeto Pequeno
+
+ 
+
+ 
+
+Levando a consideração a verba do projeto e se essa verba for baixa opte então por HD que possa te dar espaço e que o desempenho não seja a principal prioridade e nesse caso HDs SATAs será a melhor escolha.
+
+A única optimização que você pode fazer nesse caso é separar os dados da empresa em um HD separado , evite usar HD único para instalação e armazenamento de dados
+
+ 
+
+.
+
+Projeto Médio
+
+ 
+
+ 
+
+Quando você tem uma verba maios generosa mas que ainda não te possibilita fazer um investimento muito alto , opte por HDs SAS de 10 K pois é um Disco rígido corporativos de alto desempenho e capacidade, Assim se seu projeto é pequeno mas evoluindo para médio porte, você estará contando com o melhor dos dois mundos capacidade e desempenho .
+
+A optimização que você pode fazer aqui é colocar o sistema em HD SATA e os dados no HD SAS de 10k pois você terá melhor desempenho de leitura e escrita nesse tipo de HD.
+
+ 
+
+ 
+
+Projeto Grande
+
+ 
+
+ 
+
+Classifique os dados de acordo com a frequência de acesso, esta técnica é chamada de Tierização onde podemos separar de forma automática os dados que frequentemente são acessados em HDs mais rápidos , dados que são acessados de vez em quando em HDs de velocidade media e dados que quase nunca são acessados em HDs de velocidade mais baixa e ou até mesmo em fitas para um arquivo morto . No meu curso eu ensino como usar essa técnica em um servidor Samba .
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+Dica de Especialista
+
+Não use HDs em seu servidor sem antes fazer um teste Burn-in em todos os quais for usar .
+
+
+O que é teste Burn-in ? Como testar seu HD ?
+
+
+É um teste que se faz em equipamentos e ou peças de eletrônicos para aplicar um stress ,para identificar problemas. A teoria é que alguns componentes já apresentam problemas nas primeiras horas ou dias de uso. O teste Burn-in pode ajudar a identificá-los. Tem vários softwares para isso.
+
+
+Alguns fabricantes já fazem os seus testes Burn-in nos seus equipamentos, mas alguns fazem apenas por amostragem , ou seja, nem todos os equipamentos são testados, apenas alguns lotes e por isso HDs defeituosos ou mais frágeis podem chegar até você.
+
+
+
+
+------
+
 Como escolher o Sistema de Arquivos para o Samba 4
 
 São várias opções interessantes.
