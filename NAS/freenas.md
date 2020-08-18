@@ -12,6 +12,93 @@ Os protocolos utilizados pelo NAS são:
 * **SMB/CIFS** - usado em ambientes Microsoft Windows;
 * **Webdav** - para acessar arquivos via HTTP.
 
+
+------
+
+Como escolher o Sistema de Arquivos para o Samba 4
+
+São várias opções interessantes.
+
+ 
+
+ 
+
+No item sistema de arquivos, para fazer uma boa escolha, não se esqueça de que é importante que ele contenha as features necessárias à administração e ao tamanho de arquivos do Samba, inclusive no que se refere ao espaço total de armazenamento.
+
+ 
+
+ 
+
+Leve em consideração o quadro abaixo :
+
+ 
+
+ 
+
+Segundo o quadro acima de acordo com o sistema de arquivos que você escolher, poderá usar ou não as features abaixo :
+
+ 
+
+ 
+
+Posfix ACL
+
+No mundo Linux as permissões nos arquivos e diretórios são configuradas de forma diferente como é no Windows e quando trabalhamos em um ambiente misto Windows e Linux, precisamos que o nosso servidor de arquivos Samba seja capaz de mapear as permissões como são no Windows e é isso que essa feature permite. 
+Vantagem : Permissões iguais a do Windows 
+ 
+ 
+Cotas de Disco
+
+Essa feature permite limitar por usuário ou grupo o espaço usado por estes , possibilitando assim o controle do quanto cada um pode armazenar no servidor .
+Vantagem : Usuários que realmente precisam de espaço, não são prejudicados por usuários que não precisam tanto.
+ 
+Filesystem Shrink
+
+Essa feature se resume na capacidade que o sistema de arquivos tem de permitir o redimensionamento sem perda de dados .
+
+Vantagem : Redimensionamento de discos sem perda de dados.
+
+ 
+
+
+Compressão de dados.
+O sistema de arquivos fará a compressão dos dados fazendo uma melhor distribuição dos dados e economizando espaço .
+Vantagem : Economia de espaço em Discos.
+
+ 
+
+Deduplicação ou Desduplicação
+
+Esta fature é importante em servidores onde a preocupação com dados duplicados é real , pois ao perceber que o dado já existe não é criado um outro endereçamento de dado no sistema de arquivos, possibilitando manter os dados sem ocupar o mesmo espaço, gerando economia de armazenamento. 
+Vantagem: Não haverá multiplicação de uso de espaço em disco por arquivos duplicados .
+
+ 
+
+ 
+
+Snapshots
+
+O sistema de arquivos será capaz de criar subvolumes e congelar-se tirando uma “foto”, possibilitando que, se houver alguma alteração mal sucedida, possamos revertê-la voltando o sistema para o estado anterior. 
+Vantagem: Podemos recuperar um sistema de arquivos defeituoso apenas voltando o snapshot.
+ 
+Redundância
+
+Com esta feature no seu sistema de arquivos será possível ter redundância de dados sem recorrer à implementação de RAID.
+Vantagem : Redundância de dados sem uso de RAID
+ 
+Sistema de Arquivos distribuídos
+
+Aqui os dados são distribuídos entre servidores possibilitando a recuperação se um dos servidores falhar , fazendo o failover, pois os dados não são armazenados em uma matriz única e sim em vários servidores de forma consistente e dinâmica.
+Vantagem : Dados distribuídos em vários servidores , possibilitando a continuidade de acesso aos dados mesmo que um dos servidores esteja off-line.
+
+ 
+
+
+
+------
+
+
+
 # NAS da SEMED
 Para a criação do Servidor NAS da SEMED, foi escolhido o FreeNAS, não apenas por ser um Sistema NAS altamente utilizado, mas sim pelas suas ferramentas, em especial os snapshots do *ZFS* e a deduplicação de arquivos. Ele tem suporte suporte aos principais protocolos: **CIFS (Samba)**, FTP, NFS, rsync, protocolo AFP, iSCSI, *S.M.A.R.T.*, autenticação local de usuários e em **Domínio**, e RAID (0,1,5) via software, com uma configuração baseada em internet. Instalado em HD ou pen-drive USB para o OS e outros para a criação dos *volumes*.
 
