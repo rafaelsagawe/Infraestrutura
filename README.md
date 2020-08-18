@@ -18,7 +18,7 @@ Os arquivos são as confiurações e documentação basica
 -----
 2. Controladores de Domino
 
-* Zentyal - AdServer e Ad2Server
+* [Zentyal - AdServer e Ad2Server](adserver/ad.md)
 ----
 3. Cluster de Virtualização
 

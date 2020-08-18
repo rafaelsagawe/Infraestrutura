@@ -47,7 +47,7 @@ A única optimização que você pode fazer nesse caso é separar os dados da em
 
 .
 
-Projeto Médio
+## Projeto Médio
 
  
 
@@ -61,7 +61,7 @@ A optimização que você pode fazer aqui é colocar o sistema em HD SATA e os d
 
  
 
-Projeto Grande
+## Projeto Grande
 
  
 
@@ -78,7 +78,7 @@ Classifique os dados de acordo com a frequência de acesso, esta técnica é cha
  
 
 
-Dica de Especialista
+# Dica de Especialista
 
 Não use HDs em seu servidor sem antes fazer um teste Burn-in em todos os quais for usar .
 
@@ -96,7 +96,7 @@ Alguns fabricantes já fazem os seus testes Burn-in nos seus equipamentos, mas a
 
 ------
 
-Como escolher o Sistema de Arquivos para o Samba 4
+# Como escolher o Sistema de Arquivos para o Samba 4
 
 São várias opções interessantes.
 
