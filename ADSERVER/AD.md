@@ -26,6 +26,15 @@ Foi realizado esta rotina
 # sudo chmod +x importacao
 ~~~~
 
+### Encontrando a Senha do MySql
+
+Durante a instalação do Zentyal é criado de forma aleatoria a senha do Mysql
+
+~~~~shell
+$ echo $(sudo cat /var/lib/zentyal/conf/zentyal-mysql.passwd)
+XFrY7jw0
+~~~~
+
 ## Comandos do domínio 
 
 * Checagem do banco de dados do Samba em busca de erros no Domínio: 

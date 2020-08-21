@@ -91,6 +91,12 @@ Dentre os plugins posso citar estes
 
 ## FusionInventory - Inventario automático
 
+O Fusion Inventory é a solução que realiza o inventário automático e preenche a base de dados do CMDB do GLPI (ativos). Através de agentes, o Fusion é capaz de coletar informações como: número de série, softwares instalados, monitores, impressoras, processador, HD, RAM, Placas, usuário e muito mais. Ou seja, não é preciso cadastrar tudo manualmente, pois o Fusion coleta dados de uma grande variedade de equipamentos, desde que respondam via rede. Além do inventário, o Fusion também possui recursos como:
+
+* Implantação de pacotes pela rede;
+* Wake on lan;
+* Descoberta SNMP...
+
  uma dos mais importantes se trata do FusionInventory. Este tem a função de realizar o inventario de forma automática da rede usando o protocolo **SNMP**.
 
 ## Download

@@ -12,3 +12,12 @@ Devido a um erro na geração dos **caches** de icones, a area de trabalho e a b
 ``;
 
 5. No gerenciador de tarefas inicie novamente o Explorer é os icones devem está normais.
+
+# Controlar varios PCs com um mouse e teclado
+
+E possivel controlar varios computadores com o mesmo kit de mouse e teclado. Para realizar está tarefa e usado o synergy (Windowns) e o quicksynergy (Linux), o equipamento com o kit será o servidor enquanto os outros são os clientes.
+
+Instalação no linux
+~~~~shell
+$ sudo apt install quicksynergy
+~~~~
