@@ -1,4 +1,4 @@
-# comparativo de comandos Win <=> Linux
+# comparativo de comandos Win <=> Distribuição Linux base *.DEB*
 
 Win | Linux| Função
 ----|------|------

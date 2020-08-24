@@ -28,7 +28,7 @@ E possivel controlar varios computadores com o mesmo kit de mouse e teclado. Par
 
 ![Tela de localização dos Clientes](synergy/synergy-config-02.png)
 
-Instalação no linux
+Instalação no LinuxLite e outros base DEB
 
 ~~~~shell
 $ sudo apt install quicksynergy
