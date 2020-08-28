@@ -37,3 +37,6 @@ deb http://deb.debian.org/debian stretch-updates main contrib non-free
 deb-src http://deb.debian.org/debian stretch-updates main contrib non-free
 apt update
 apt-get install snmp-mibs-downloader
+
+# Local das ISO's
+/var/lib/vz/template/iso/
