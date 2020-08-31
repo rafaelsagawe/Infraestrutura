@@ -157,3 +157,15 @@ Liberação das portas
 Pronto, se tudo tiver dado certo logo o Zabbix ira receber as informações do Zentyal.
 
 ----
+## Notas 
+* Falha na criação de usuário (no criação do informava que já existia)
+sudo samba-tool dbcheck
+sudo samba-tool dbcheck --fix --yes
+
+* Erro no DNS
+https://forum.zentyal.org/index.php?topic=33117.0
+https://forum.zentyal.org/index.php?topic=30747.15
+
+* Servidor de Impressão 
+sudo apt-get install cups
+cupsctl --remote-admin --remote-any --share-printers
