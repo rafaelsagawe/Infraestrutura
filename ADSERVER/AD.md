@@ -1,4 +1,4 @@
-# Zentyal
+# Sobre o Zentyal
 
 O Zentyal Server é um aplicativo open source de web decorrente da evolução da plataforma eBox, que começou a ser utilizada em 2004. Atualmente seu código base pertence à eBox Technologies, e o código fonte está disponível de acordo com os termos da licença pública geral GNU. Com foco na usabilidade, seu grande objetivo é a administração de redes de pequenas e médias empresas que buscam uma solução alternativa aos tradicionais produtos com estrutura da Microsoft. Utilizando uma interface amigável, busca reunir em um único local diversos serviços de uma empresa, como acesso à internet, segurança de rede, compartilhamento de arquivos, infraestrutura de redes e comunicação. amentas e serviços do Zentyal server As funcionalidades do Zentyal podem ser agrupadas. 
 
@@ -111,15 +111,15 @@ Obs:
 4. Contreole de acesso de usuários a Wi-Fi;
 4. Acesso aos computadores.
 
-## Administração Remota do Domínio – RSAT
+### Administração Remota do Domínio – RSAT
 O RSAT é um conjunto de ferramentas que inclui o Gerenciador do Servidor, snap-ins do MMC (Microsoft Management Console), os consoles, os provedores e os cmdlets do Windows PowerShell, além de ferramentas da linha de comando para o gerenciamento de funções e recursos executados no Windows Server.
 
-## Objetos de Politicas de Grupos – GPO
+### Objetos de Politicas de Grupos – GPO
 Diretiva de Grupo, ou Group Policy (GPO), é uma funcionalidade da família de sistemas operacionais Microsoft Windows NT. É um conjunto de regras que controlam o ambiente de trabalho de contas de usuário e contas de computador. Ela fornece o gerenciamento e configuração centralizados de sistemas operacionais, aplicativos e configurações dos usuários em um ambiente Active Directory. Em outras palavras, a Diretiva de Grupo controla em parte o que os usuários podem ou não fazer em um sistema de computador. 
 
 -----
 
-# Instalando o Zabbix-agent
+## Instalando o Zabbix-agent
 
 Para monitorar os equipamentos foi implementado o Zabbix, nos Controladores de Domínio foram feitos alguns processos adcionais devido aos seus miveis de segurança.
 
@@ -143,7 +143,7 @@ Tela de configurações do firewall
 Tela das regras do firewall
 
 ![Port_zabbix_03](port/zabbix-03.png)
-Configuração da regra e necessario a criação do serviço
+Configuração da regra e necessário a criação do serviço
 
 ![Port_zabbix_04](port/zabbix-04.png)
 Lista de serviços liberados
@@ -157,15 +157,28 @@ Liberação das portas
 Pronto, se tudo tiver dado certo logo o Zabbix ira receber as informações do Zentyal.
 
 ----
+# Migração do Zentyal
+Com o tempo pode ser necessário a troca da maquina do servidor, ou migra-lo para uma instancia virtual.
+
+O **ad2server** estáva em uma *maquina física*, mas estou realizando a migração dos servidores para a virtualização, quando possível, mas por boas praticas de rede é recomendado a existência de dois servidores de autenticação, o **adserver** já estava virtualizado no mesmo Hypervisor do pfSense, o VMware que está voltado para a "infraestrutura básica", então o **ad2server** foi migrado no ProxMox assim continuam em hardware distintos. O processo de migração seguiu os seguintes passos:
+
+1. [Criação da VM](ad2-migracao\1-VM\vm.md);
+2. Instalação do Zentyal;
+3. Primeira Inicialização;
+4. Migração das configurações.
+
+----
 ## Notas 
 * Falha na criação de usuário (no criação do informava que já existia)
 sudo samba-tool dbcheck
 sudo samba-tool dbcheck --fix --yes
 
-* Erro no DNS
+## Erro no DNS
+
 https://forum.zentyal.org/index.php?topic=33117.0
+
 https://forum.zentyal.org/index.php?topic=30747.15
 
-* Servidor de Impressão 
+## Servidor de Impressão 
 sudo apt-get install cups
 cupsctl --remote-admin --remote-any --share-printers

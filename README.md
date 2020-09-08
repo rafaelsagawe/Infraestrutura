@@ -32,3 +32,8 @@ Os arquivos são as confiurações e documentação basica
 
 [MySQL](Extras/mysql.md)
 
+[Windowns](Extras/win.md)
+
+[Linux](Extras/sistema.md)
+
+[Comparativo de comandos](Extras/comandos.md)
