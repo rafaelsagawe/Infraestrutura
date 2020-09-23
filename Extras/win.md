@@ -4,9 +4,9 @@
 
     chkdsk
 
-# Recuperar icones não identificados
+# Recuperar ícones não identificados
 
-Devido a um erro na geração dos **caches** de icones, a area de trabalho e a barra de tarefas ficam com icones não identificados, para recupera-los foi necessário seguir alguns passos:
+Devido a um erro na geração dos **caches** de ícones, a area de trabalho e a barra de tarefas ficam com ícones não identificados, para recupera-los foi necessário seguir alguns passos:
 
 1. Acessar a pasta dos arquivos de **cache**, no windowns 10 fica em ``C:\Users\Nome_do_Usuário\AppData\Local\Microsoft\Windows\Explorer``;
 
@@ -16,11 +16,11 @@ Devido a um erro na geração dos **caches** de icones, a area de trabalho e a b
 
 4. Remova os arquivos de **cache** usando o comando ``del iconcache*``;
 
-5. No gerenciador de tarefas inicie novamente o Explorer é os icones devem está normais.
+5. No gerenciador de tarefas inicie novamente o Explorer é os ícones devem está normais.
 
 # Controlar varios PCs com um mouse e teclado
 
-E possivel controlar varios computadores com o mesmo kit de mouse e teclado. Para realizar está tarefa e usado o synergy (Windowns) e o quicksynergy (Linux), o equipamento com o kit será o servidor enquanto os outros são os clientes.
+E possível controlar varios computadores com o mesmo kit de mouse e teclado. Para realizar está tarefa e usado o synergy (Windowns) e o quicksynergy (Linux), o equipamento com o kit será o servidor enquanto os outros são os clientes.
 
 ## configuração no Windowns
 
@@ -33,3 +33,9 @@ Instalação no LinuxLite e outros base DEB
 ~~~~shell
 $ sudo apt install quicksynergy
 ~~~~
+Para iniciar o synergy no inicio da sessão, sem a necessidade de intervenção
+
+
+~~~~shell
+ /usr/bin/synergyc 172.15.10.44
+ ~~~~
