@@ -1,3 +1,6 @@
+ sudo sync && sudo sysctl vm.drop_caches=3
+https://www.youtube.com/watch?v=kWle-_zMGGY
+
 # Otimização do Servidor
 
 A otimização do servidor começa antes da sua instalação.
@@ -40,10 +43,14 @@ Depois de terminar a instalação continua a otimização do sistema, atualizand
 * lscpu -> gera um relatório dos recursos do processador;
 
 ### Atualização
-~~~~shell
-$ sudo apt update
-$ sudo apt upgrade -y
-~~~~
+
+DEB | YUM
+-----|-------
+sudo apt update | yum update
+sudo apt upgrade | yum upgrade
+
+
+
 
 ### Remoção de recursos não utilizados
 
@@ -71,7 +78,7 @@ Pode ser também necessário ativar no boot um serviço
 
 ```$ systemctl enable nome_do_serviço ```
 
-verifica se esta ativo no booot
+verifica se esta ativo no boot
 
 ```$ sistemctl is-enable nome_do_serviço ```
 

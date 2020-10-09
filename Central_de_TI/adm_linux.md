@@ -33,3 +33,6 @@ Tela de Usuário
 
 ![tela 03](img-webmin/mysql_webmin_03.png)
 Tela de Criação de Usuário
+
+# historico do mysql
+cat ~/.mysql_history > MySQL-historico.txt
