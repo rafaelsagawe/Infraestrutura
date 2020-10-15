@@ -1,13 +1,15 @@
-# Infraestrutura logica da SEMED
-Arquivos de configuração, guias de instalções e utilizações dos sitemas da SEMED nos anos de 2017/2018/2019/2020
+# Infraestrutura lógica da SEMED
+Arquivos de configuração, guias de instalações e utilizações dos sistemas da SEMED nos anos de 2017/2018/2019/2020
 
-Usarei esse repositorio apenas para documentar o ambiente de servidores
+Usarei esse repositório apenas para documentar o ambiente de servidores
 
-As pastas simbolizam o ambiente, o servidor ou instancia
-Os arquivos são as confiurações e documentação basica
+Estrutura do repositório:
+* As pastas simbolizam o ambiente, o servidor ou instância
+* Os arquivos são as configurações e documentação básica
 
 ## Índice dos projetos
 ---
+
 1. Central da TI
 * [Administração Remota](Central_de_TI/adm_linux.md)
 
