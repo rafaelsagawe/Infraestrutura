@@ -552,21 +552,78 @@ URL da Aplicação (http://glpiv95.glpibrasil.com.br)
 
 ------------
 # Zabbix
+Instalação foi feita seguindo os passos do site do Zabbix:
+
+~~~~shell
+# rpm -Uvh https://repo.zabbix.com/zabbix/5.0/rhel/7/x86_64/zabbix-release-5.0-1.el7.noarch.rpm
+# yum clean all
+# yum install zabbix-server-pgsql zabbix-agent
+# yum install centos-release-scl
+~~~~
+
+habilitar o repositorio do frontend
+~~~~shell
+# nano /etc/yum.repos.d/zabbix.repo
+
+    [zabbix-frontend]
+
+    enabled=1
+
+~~~~
+
+Instalação dos pacotes do frontend
+~~~~shell 
+# yum install zabbix-web-pgsql-scl zabbix-apache-conf-scl
+~~~~
+
+Criação inicial do banco de dados
+~~~~shell
+# sudo -u postgres createuser --pwprompt zabbix
+# sudo -u postgres createdb -O zabbix zabbix
+~~~~
+
+Importando o schema e dados do zabbix
+~~~~shell
+# zcat /usr/share/doc/zabbix-server-pgsql*/create.sql.gz | sudo -u zabbix psql zabbix
+~~~~
+
+Configurando o acesso ao banco de dados
+~~~~shell
+# nano /etc/zabbix/zabbix_server.conf
+
+    DBPassword=password
+~~~~
+
+Configurando o timezone
+~~~~shell
+nano  /etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf
+    php_value[date.timezone] = America/Sao_Paulo
+~~~~
+
+Iniciando e colocando no Boot os serviços do server, agent apache e PHP
+~~~~shell
+# systemctl restart zabbix-server zabbix-agent httpd rh-php72-php-fpm
+# systemctl enable zabbix-server zabbix-agent httpd rh-php72-php-fpm
+~~~~
+
+O restante é pelo navegador.
 
 ## Correção de alertas do Zabbix
 
 ### Zabbix icmp pinger processes more than 75% busy
-
-nano /etc/zabbix/zabbix_server.conf
-StartPingers=10
-
+~~~~shell
+# nano /etc/zabbix/zabbix_server.conf
+    StartPingers=10
+~~~~
 ## Aumentado o poder do Zabbix
-    # yum install zabbix-get
-    # yum install jq
+
+~~~~shell
+# yum install zabbix-get
+# yum install jq
+~~~~
 
 ### Usando chaves vfs.fs.get
 https://www.youtube.com/watch?v=UT1FM0CUgPE
-
 
 
     # zabbix_agentd -t vfs.fs.discovery
@@ -583,6 +640,25 @@ Criação do modelo
 * Key = vfs.fs.get
 * Applications = Sistema de Arquivos
 
+### Espaço total do NAS
+Não havia este item no para o compartilamento /mnt/SEMED.
+1. Usuei o comando snmpwalk para verificar se o tamanho total do estava sendo listado;
+2. Clonei o item *Storage discovery: /mnt/SEMED: Used space* e alterei os itens:
+    * Key: *vfs.fs.used[hrStorageSize.37]*
+    * SNMP OID: *.1.3.6.1.2.1.25.2.3.1.5.37*
+
+Ambos localizados usando o snmpwalk
+
+### Calculando espaço livre no NAS
+Foi criado um novo item chamado:
+
+* Name: Espaço livre no NAS;
+* Type: Calculated;
+* Key: FreeSpace, mas não precisava ser este;
+* Formula: last("vfs.fs.used[hrStorageSize.37]")-last("vfs.fs.used[hrStorageUsed.37]")
+* Units: B
+
+A formula usa as **Keys** do item */mnt/SEMED: Size space* e */mnt/SEMED: Size space*
 
 
 
