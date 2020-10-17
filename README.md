@@ -11,16 +11,17 @@ Estrutura do repositório:
 ---
 
 1. Central da TI
-* [Administração Remota](Central_de_TI/adm_linux.md)
+* [Administração Remota](Central_de_TI(Athena)/adm_linux.md)
 
-* [Zabbix (Monitoramennto)](Central_de_TI/zabbix.md)
+* [Zabbix (Monitoramennto)](Central_de_TI(Athena)/zabbix.md)
 
-* [GLPI (Inventario)](Central_de_TI/glpi.md)
+* [GLPI (Inventario)](Central_de_TI(Athena)/glpi.md)
 
 -----
 2. Controladores de Domino
 
 * [Zentyal - AdServer e Ad2Server](ADSERVER/AD.md)
+
 ----
 3. Cluster de Virtualização
 
