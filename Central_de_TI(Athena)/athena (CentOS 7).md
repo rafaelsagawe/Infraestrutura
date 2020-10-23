@@ -63,7 +63,7 @@ Informações do Processador: ``# lscpu``
 
 ## Alteração de arquivos
 
-Remoção dos recursos de IPv6
+Remoção dos recursos de IPv6, visto que a rede interna funciona toda com IPv6.
 
 cat /etc/sysconfig/network-scripts/ifcfg-enp0s25
 ~~~~
@@ -231,7 +231,7 @@ Tempo | Processo| Função
 5ms |initrd-udevadm-cleanup-db.service
 3ms |sys-kernel-config.mount
 
-## Sem proteção de tela
+## Sem proteção de tela (extra)
 O terminal do servidor depois de uns minitos fica com a tela desligada como estava em processo de montagem desativei está função, para o usuário root.
 ~~~~shell
 nano ~/.bashrc
@@ -252,9 +252,6 @@ Com a tradução das mibs
     SNMPv2-MIB::sysContact.0 = STRING: semed.ni.ti@gmail.com
     SNMPv2-MIB::sysName.0 = STRING: nas.semed-ni.intra
     SNMPv2-MIB::sysLocation.0 = STRING: Setor de TI
-    SNMPv2-MIB::sysServices.0 = INTEGER: 72
-    SNMPv2-MIB::sysORLastChange.0 = Timeticks: (4) 0:00:00.04
-    SNMPv2-MIB::sysORID.1 = OID: SNMP-MPD-MIB::snmpMPDCompliance
     ....
 ~~~~
 
@@ -268,19 +265,7 @@ Sem a tradução das mibs
     .1.3.6.1.2.1.1.4.0 = STRING: semed.ni.ti@gmail.com
     .1.3.6.1.2.1.1.5.0 = STRING: nas.semed-ni.intra
     .1.3.6.1.2.1.1.6.0 = STRING: Setor de TI
-    .1.3.6.1.2.1.1.7.0 = INTEGER: 72
-    .1.3.6.1.2.1.1.8.0 = Timeticks: (4) 0:00:00.04
-    .1.3.6.1.2.1.1.9.1.2.1 = OID: .1.3.6.1.6.3.11.3.1.1
-    .1.3.6.1.2.1.1.9.1.2.2 = OID: .1.3.6.1.6.3.15.2.1.1
-    .1.3.6.1.2.1.1.9.1.2.3 = OID: .1.3.6.1.6.3.10.3.1.1
-    .1.3.6.1.2.1.1.9.1.2.4 = OID: .1.3.6.1.6.3.1
-    .1.3.6.1.2.1.1.9.1.2.5 = OID: .1.3.6.1.6.3.16.2.2.1
-    .1.3.6.1.2.1.1.9.1.2.6 = OID: .1.3.6.1.2.1.49
-    .1.3.6.1.2.1.1.9.1.2.7 = OID: .1.3.6.1.2.1.4
-    .1.3.6.1.2.1.1.9.1.2.8 = OID: .1.3.6.1.2.1.50
-    .1.3.6.1.2.1.1.9.1.2.9 = OID: .1.3.6.1.6.3.13.3.1.3
-    .1.3.6.1.2.1.1.9.1.2.10 = OID: .1.3.6.1.2.1.92
-
+    ....
 ~~~~
 
 # Administração remota - Webmin
