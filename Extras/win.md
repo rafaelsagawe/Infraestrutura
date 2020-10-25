@@ -39,3 +39,8 @@ Para iniciar o synergy no inicio da sessão, sem a necessidade de intervenção
 ~~~~shell
  /usr/bin/synergyc 172.15.10.44
  ~~~~
+
+## libera espaço e desativa a hibernação
+ ~~~~cmd
+ > powercfg.exe /hibernate off
+ ~~~~

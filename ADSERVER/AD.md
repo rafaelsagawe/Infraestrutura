@@ -169,7 +169,7 @@ O **ad2server** estáva em uma *maquina física*, mas estou realizando a migraç
 
 ----
 ## Notas 
-* Falha na criação de usuário (no criação do informava que já existia)
+* Falha na criação de usuário (na criação do informava que já existia)
 sudo samba-tool dbcheck
 sudo samba-tool dbcheck --fix --yes
 
@@ -182,3 +182,7 @@ https://forum.zentyal.org/index.php?topic=30747.15
 ## Servidor de Impressão 
 sudo apt-get install cups
 cupsctl --remote-admin --remote-any --share-printers
+
+## Montagem do servidor de arquivos (externo)
+
+sudo mount -t cifs -o username=USUÁRIO@semed-ni.intra,password=SENHA_DO_USUÁRIO //172.15.0.6/Semanal /home/samba/shares/SEMED/

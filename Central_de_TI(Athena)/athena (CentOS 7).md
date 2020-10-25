@@ -4,7 +4,7 @@ O intuito deste servidor é centralizar as informações do Setor de TI em um ú
 
 ## Servidor Athena 
 O servidor se chamara Athena devido a deusa Grega da sabedoria, guerra e justiça, o servidor terá: 
-* GLPI para saber quais equipamentos possuimos;
+* GLPI para saber quais equipamentos possuímos;
 * Zabbix para saber o que estamos enfrentando;
 * LogAnalizer para auditar os logs dos equipamentos usados na Sede
 
@@ -61,28 +61,9 @@ Informações da placa mãe: ``# lshw``
 
 Informações do Processador: ``# lscpu``
 
-### Administração remota - Webmin
-Instalação via repositorio e liberação da porta
-
-~~~~shell
-# nano  /etc/yum.repos.d/webmin.repo
-
-        [Webmin]
-        name=Webmin Distribution Neutral
-        #baseurl=https://download.webmin.com/download/yum
-        mirrorlist=https://download.webmin.com/download/yum/mirrorlist
-        enabled=1
-
-# wget https://download.webmin.com/jcameron-key.asc
-# rpm --import jcameron-key.asc
-
-# firewall-cmd --zone=public --add-port=10000/tcp --permanent
-
-# yum install webmin
-~~~~
 ## Alteração de arquivos
 
-Remoção dos recursos de IPv6
+Remoção dos recursos de IPv6, visto que a rede interna funciona toda com IPv6.
 
 cat /etc/sysconfig/network-scripts/ifcfg-enp0s25
 ~~~~
@@ -143,9 +124,6 @@ Evitar ataques de Spoof ``net.ipv4.tcp_syncookies=1``
 
 # service sshd.service restart
 ~~~~
-
-## Configuração de rede
-A principio foi usado para configurar a rede o ustilitario **nmtui**, com a instalação do **webmin** a configuração foi refeita e criada uma interface virtual.
 
 ## Otimização da inicialização 
 
@@ -253,18 +231,76 @@ Tempo | Processo| Função
 5ms |initrd-udevadm-cleanup-db.service
 3ms |sys-kernel-config.mount
 
-## Sem proteção de tela
+## Sem proteção de tela (extra)
 O terminal do servidor depois de uns minitos fica com a tela desligada como estava em processo de montagem desativei está função, para o usuário root.
 ~~~~shell
 nano ~/.bashrc
     setterm -blank 0
 ~~~~
 
+## SNMP
 
+Este servidor será utulizado com recursos do snmp, então pode ser utilizado o snmpwalk
 
+Com a tradução das mibs
+~~~~shell
+# snmpwalk -v 2c -c public nas
 
+    SNMPv2-MIB::sysDescr.0 = STRING: FreeNAS-11.2-U4.1 (e33ce960b8). Hardware: amd64 Intel(R) Xeon(R) CPU           E5506  @ 2.13GHz running at 2132. Software: FreeBSD 11.2-STABLE (revision 199506)
+    SNMPv2-MIB::sysObjectID.0 = OID: NET-SNMP-MIB::netSnmpAgentOIDs.8
+    DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (553659986) 64 days, 1:56:39.86
+    SNMPv2-MIB::sysContact.0 = STRING: semed.ni.ti@gmail.com
+    SNMPv2-MIB::sysName.0 = STRING: nas.semed-ni.intra
+    SNMPv2-MIB::sysLocation.0 = STRING: Setor de TI
+    ....
+~~~~
 
+Sem a tradução das mibs
+~~~~shell
+# snmpwalk -v 2c -On -c public nas
 
+    .1.3.6.1.2.1.1.1.0 = STRING: FreeNAS-11.2-U4.1 (e33ce960b8). Hardware: amd64 Intel(R) Xeon(R) CPU           E5506  @ 2.13GHz running at 2132. Software: FreeBSD 11.2-STABLE (revision 199506)
+    .1.3.6.1.2.1.1.2.0 = OID: .1.3.6.1.4.1.8072.3.2.8
+    .1.3.6.1.2.1.1.3.0 = Timeticks: (553675819) 64 days, 1:59:18.19
+    .1.3.6.1.2.1.1.4.0 = STRING: semed.ni.ti@gmail.com
+    .1.3.6.1.2.1.1.5.0 = STRING: nas.semed-ni.intra
+    .1.3.6.1.2.1.1.6.0 = STRING: Setor de TI
+    ....
+~~~~
+
+# Administração remota - Webmin
+
+O Webmin é de longe a mais antiga e completa ferramenta livre, web-based, para gerenciamento de servidores Linux em atividade. Desenvolvido quase que integralmente em Perl, baseada no paradigma da programação em camadas, com suporte multi-idiomas e distribuído sob a licença BSD-like, atualmente (neste exato momento em que escrevo) o Webmin está na sua versão 1.479 e possui versões tanto para Linux, quanto Solaris, HP/UX, Apple MacOS X e alguns outros ports como para FreeBSD e até mesmo Windows. Todas as versões podem ser obtidas através da página oficial de downloads do projeto. Aproveitando-se do conceito de desenvolvimento em camadas (modular) e do fato de ser um software livre, é possível também se obter os módulos individualmente, bem como, desenvolver módulos adicionais sob demanda.
+
+O Webmin roda sob o protocolo SSL (HTTPS) e portanto, caso você ainda não possua os pacotes mínimos necessários, vai precisar instalá-los:
+
+Instalação via repositorio e liberação da porta
+
+~~~~shell
+# nano  /etc/yum.repos.d/webmin.repo
+
+        [Webmin]
+        name=Webmin Distribution Neutral
+        #baseurl=https://download.webmin.com/download/yum
+        mirrorlist=https://download.webmin.com/download/yum/mirrorlist
+        enabled=1
+
+# wget https://download.webmin.com/jcameron-key.asc
+# rpm --import jcameron-key.asc
+
+# yum install webmin
+
+# firewall-cmd --zone=public --add-port=10000/tcp --permanent
+~~~~
+
+## Configuração de rede
+A principio foi usado para configurar a rede o utilitário **nmtui**, com a instalação do **webmin** a configuração foi refeita e criada uma interface virtual.
+
+Interface | IP
+----|---
+ Física |172.15.0.1
+Virtual|172.15.0.2
+Virtual para o switch |192.168.0.11
 
 
 
@@ -506,23 +542,166 @@ Modelo para a transferência (Complete)
 URL da Aplicação (http://glpiv95.glpibrasil.com.br)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ------------
 # Zabbix
+Zabbix é uma ferramenta de software de monitoramento de código aberto para diversos componentes de TI, incluindo redes, servidores, máquinas virtuais e serviços em nuvem. O Zabbix fornece métricas de monitoramento, entre outras, utilização da rede, carga da CPU e consumo de espaço em disco. Wikipedia 
+
+Instalação foi feita seguindo os passos do site do Zabbix:
+
+~~~~shell
+# rpm -Uvh https://repo.zabbix.com/zabbix/5.0/rhel/7/x86_64/zabbix-release-5.0-1.el7.noarch.rpm
+# yum clean all
+# yum install zabbix-server-pgsql zabbix-agent
+# yum install centos-release-scl
+~~~~
+
+habilitar o repositorio do frontend
+
+~~~~shell
+# nano /etc/yum.repos.d/zabbix.repo
+
+    [zabbix-frontend]
+
+    enabled=1
+~~~~
+
+Instalação dos pacotes do frontend
+
+~~~~shell 
+# yum install zabbix-web-pgsql-scl zabbix-apache-conf-scl
+~~~~
+
+Criação inicial do banco de dados
+
+~~~~shell
+# sudo -u postgres createuser --pwprompt zabbix
+# sudo -u postgres createdb -O zabbix zabbix
+~~~~
+
+Importando o schema e dados do zabbix
+
+~~~~shell
+# zcat /usr/share/doc/zabbix-server-pgsql*/create.sql.gz | sudo -u zabbix psql zabbix
+~~~~
+
+Configurando o acesso ao banco de dados
+
+~~~~shell
+# nano /etc/zabbix/zabbix_server.conf
+
+    DBPassword=password
+~~~~
+
+Configurando o timezone
+
+~~~~shell
+nano  /etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf
+    php_value[date.timezone] = America/Sao_Paulo
+~~~~
+
+Iniciando e colocando no Boot os serviços do server, agent apache e PHP
+
+~~~~shell
+# systemctl restart zabbix-server zabbix-agent httpd rh-php72-php-fpm
+# systemctl enable zabbix-server zabbix-agent httpd rh-php72-php-fpm
+~~~~
+
+### Finalização da instalação no frontend
+![tela 01](img-zabbix/1.png)
+Confirmação das dependências
+![tela 02](img-zabbix/2.png)
+Configurações do acesso ao banco de dados
+![tela 03](img-zabbix/3.png)
+Detalhes do servidor, host, porta, hostname
+![tela 04](img-zabbix/4.png)
+Sumário da Pre-instalação
+![tela 05](img-zabbix/5.png)
+Finalização da instalação
+![tela 06](img-zabbix/6.png)
+Tela login
+![tela 07](img-zabbix/7.png)
+Dashboard inicial
+![tela 08](img-zabbix/8.png)
+Tela de configuração do perfil administrador 
+![tela 09](img-zabbix/9.png)
 
 ## Correção de alertas do Zabbix
 
-### Zabbix icmp pinger processes more than 75% busy
+Para resolver algumas mensagens de erro do Zabbix e preciso realizar otimizações nas configurações do arquivo zabbix_server.conf, até o momento os erros que tem aparecido são: 
 
-nano /etc/zabbix/zabbix_server.conf
-StartPingers=10
+* Zabbix icmp pinger processes more than 75% busy;
+* Zabbix unreachable poller processes more than 75% busy;
+* Zabbix housekeeper processes more than 75% busy;
+
+Para soluciona-los foi alterado os valores
+*  StartPingers;
+*  StartPollers.
+
+~~~~shell
+# nano /etc/zabbix/zabbix_server.conf
+   ......
+   StartPingers=10
+   ......
+   StartPollers=20
+   ......
+   StartDiscoverers=5
+   ......
+   HousekeepingFrequency=20
+   ......
+   MaxHousekeeperDelete=0
+   ......
+
+# service zabbix-server status
+~~~~
 
 ## Aumentado o poder do Zabbix
-    # yum install zabbix-get
-    # yum install jq
+
+Para o Zabbix desempenhar sua função da melhor forma possível é utilizado algumas outra aplicações.
+
+### zabbix_get
+
+O Zabbix Get é um utilitário de linha de comando que pode ser utilizado para se comunicar com o agente de monitoração do Zabbix e requisitar um dado do agente.
+
+~~~~shell
+# zabbix_get -s 172.15.0.3 -p 10050 -k system.hostname
+    adserver
+~~~~
+
+~~~~shell
+# yum install zabbix-get
+# yum install jq
+~~~~
 
 ### Usando chaves vfs.fs.get
 https://www.youtube.com/watch?v=UT1FM0CUgPE
-
 
 
     # zabbix_agentd -t vfs.fs.discovery
@@ -539,16 +718,73 @@ Criação do modelo
 * Key = vfs.fs.get
 * Applications = Sistema de Arquivos
 
+### Espaço total do NAS
+Não havia este item no para o compartilamento /mnt/SEMED.
+1. Usuei o comando snmpwalk para verificar se o tamanho total do estava sendo listado;
+2. Clonei o item *Storage discovery: /mnt/SEMED: Used space* e alterei os itens:
+    * Key: *vfs.fs.used[hrStorageSize.37]*
+    * SNMP OID: *.1.3.6.1.2.1.25.2.3.1.5.37*
+
+Ambos localizados usando o snmpwalk
+
+### Calculando espaço livre no NAS
+Foi criado um novo item chamado:
+
+* Name: Espaço livre no NAS;
+* Type: Calculated;
+* Key: FreeSpace, mas não precisava ser este;
+* Formula: last("vfs.fs.used[hrStorageSize.37]")-last("vfs.fs.used[hrStorageUsed.37]")
+* Units: B
+
+A formula usa as **Keys** do item */mnt/SEMED: Size space* e */mnt/SEMED: Size space*
+
+--------
+        ### Instalando o Agent no NAS processo abortado 
+        https://lucasatrindade.wordpress.com/2018/06/07/instalando-o-agente-do-zabbix-no-freenas-versao-11/
+
+        Vamos hoje realizar a instalação do agente do zabbix do FreeNAS que é um storage opensource baseado no FreeBSD, sem comentários, não vem instalado por padrão e vamos aqui realizar tanto a instalação quanto a configuração.
 
 
+        #### WebInterface
+        1. Crie um usuário no freenas chamado zabbix, com estas caracteristicas:
+        ~~~~
+            Home Directory: /nonexistant
+            Shell: nologin
+            Disable password login: checked
+        ~~~~~
+
+        2. Crie um datashet no freenas com o nome zabbix
+
+        #### No terminal
+
+        3. Remonte a raiz # mount -uw /
+        4. wget https://www.zabbix.com/downloads/5.0.4/zabbix_agent-5.0.4-freebsd-11.2-amd64-gnutls.tar.gz
+        5. tar xcvf zabbix_agent-5.0.4-freebsd-11.2-amd64-gnutls.tar.gz
+        6. mv zabbix_agent-5.0.4-freebsd-11.2-amd64-gnutls.tar.gz /mnt/SEMED/zabbix/
+        7. cd cd /mnt/SEMED/zabbix/
+        8. tar zxvf zabbix_agent-5.0.4-freebsd-11.2-amd64-gnutls.tar.gz
+
+            Descompacte e copie os arquivos para /mnt/SEMED/zabbix
+            Copie o arquivo binário e configuração
+            
+            Copiando o arquivo binário: cp usr/local/sbin/zabbix_agetend /usr/local/sbin/zabbix_agentd
+            
+            Copiando o arquivo de configuração: cp usr/local/etc/zabbix_agentd.conf /usr/local/etc/
+            Edite o arquivo de configuração conforme sua necessidade.
+            Após a cópia é provável que não inicie, para isto basta seguir os passos abaixo:
+            ln -s /lib/libkvm.so.7 /lib/libkvm.so.5
+            ln -s /usr/local/lib/libiconv.so.2 /usr/local/lib/libiconv.so.3
+
+        https://www.zabbix.com/downloads/5.0.4/zabbix_agent-5.0.4-freebsd-11.2-amd64-gnutls.tar.gz
+--------
 
 ---------
 # Sistema de Logs
 
 O sistema de log conta com o rsyslog para coletar os logs (NAS, dos ramais, das impressoras, dos servidores e etc) que receber e enviar para a Base de dados, de front-end é utilizado o LogAnalyzer.
 
-
 Liberação da porta no firewall para receber os Log's do equipamentos
+
 ~~~~shell
 # firewall-cmd --add-port=514/{tcp,udp} --permanent
 # firewall-cmd --reload
@@ -568,24 +804,7 @@ Liberação da porta no firewall para receber os Log's do equipamentos
     global(net.enableDNS="off")
 ~~~~
 
-### logs em SGBD
-
-Os log's são armazenados por padrão em arquivos no /var/log/, mas para realiar consultas nos arquivos torna-se muito complexo e demorado então optei por usar em banco de dados, **a ideia era era usar o postgres, mas ainda não consequi realizar a configuração**
-
-~~~~shell
-# yum install rsyslog-mysql
-# mysql -u root -p < /usr/share/doc/rsyslog-8.24.0/mysql-createDB.sql
-~~~~
-Criando o usuário do a concexao do rsyslog com o mysql
-~~~~sql
-# mysql -uroot -p 
-
-   > GRANT ALL ON Syslog.* TO 'rsyslog'@'localhost' IDENTIFIED BY 'P4ssw0rd';
-   > FLUSH PRIVILEGES;
-   > exit
-~~~~
-
-### Logs do NAS
+## Logs do NAS - FreeNAS
 
 Services -> SMB -> Auxiliary Parameters
 
@@ -636,7 +855,29 @@ link |
 mknod |
 realpath | caminho absoluto do arquivo
 
+### logs em SGBD
+
+Os log's são armazenados por padrão em arquivos no /var/log/, mas para realiar consultas nos arquivos torna-se muito complexo e demorado então optei por usar em banco de dados, **a ideia era era usar o postgres, mas ainda não consequi realizar a configuração**
+
+~~~~shell
+# yum install rsyslog-mysql
+# mysql -u root -p < /usr/share/doc/rsyslog-8.24.0/mysql-createDB.sql
+~~~~
+
+Criando o usuário do a concexao do rsyslog com o mysql
+~~~~sql
+# mysql -uroot -p 
+
+   > GRANT ALL ON Syslog.* TO 'rsyslog'@'localhost' IDENTIFIED BY 'P4ssw0rd';
+   > FLUSH PRIVILEGES;
+   > exit
+~~~~
+
+
+
 ## Instalação do LogAnalyzer
+
+O projeto LogAnalyzer já é antigo, não tem um interface muito bonita mas fornece um frontend fácil de usar e poderoso, permite pesquisar, revisar e analisar dados de eventos de rede, incluindo syslog. É um aplicativo gratuito de código aberto GPL escrito principalmente em php. Os dados podem ser obtidos de bancos de dados, mas também de arquivos de texto simples, por exemplo, aqueles que são escritos pelo rsyslog.
 
 ~~~~shell
 # cd /tmp

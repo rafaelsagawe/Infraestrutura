@@ -61,7 +61,7 @@ Create Zabbix database on PostgreSQL with the following commands:
  # sudo -u postgres createdb -O zabbix zabbix
 ~~~~
 
-Infortação dos schema e data inicial:
+Informação dos schema e data inicial:
 
 ~~~~shell
 # zcat /usr/share/doc/zabbix-server-pgsql*/create.sql.gz | sudo -u zabbix psql zabbix
@@ -72,12 +72,10 @@ Edit server host, name, user and password in zabbix_server.conf as follows, repl
 
 ~~~~shell
 # sudo nano /etc/zabbix/zabbix_server.conf
-~~~~
-~~~~
-DBName=zabbix
-DBUser=zabbix
-DBPassword=<username_password>
-DBPort=5432
+    DBName=zabbix
+    DBUser=zabbix
+    DBPassword=<username_password>
+    DBPort=5432
 ~~~~
 5. Configurar o PHP do Zabbix frontend
 
@@ -85,9 +83,7 @@ Edit file /etc/zabbix/apache.conf, uncomment and set the right timezone for you.
 
 ~~~~shell
 # sudo nano  /etc/zabbix/apache.conf
-~~~~
-~~~~
-php_value date.timezone America/Sao_Paulo
+    php_value date.timezone America/Sao_Paulo
 ~~~~
 
 6. Iniciar o Zabbix server e agent no boot da hardware
