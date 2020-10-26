@@ -1,69 +1,126 @@
-Openfire é um servidor que utiliza o protocolo Jabber (XMPP) para oferecer serviços de mensagens instantâneas aos usuários.
+# Openfire
+
+É um servidor que utiliza o protocolo Jabber (XMPP) para oferecer serviços de mensagens instantâneas aos usuários.
 O software é gratuito e, além da simples troca de mensagens de texto, permite conversas por voz, conferências, envio de arquivos e até a troca de screenshots (imagens da área de trabalho) - tirados em tempo real - entre os participantes das sessões.
 
+Para que o sistema realmente funcione, alem do servidor (openfire)  e necessário o cliente que pode ser qualquer software com suporte ao **XMPP**, usarei o spark e outros programas como estudos.
+
+----------
+### Não chegou a ser implementado, mas será documentado
 Plataforma de chat entre escolas e SEMED;
 * Acesso em computador e dispositivos moveis;
 * Envio de arquivos;
 * Função de conferência;
+-----------
+
+## Recursos de hardware
+Recurso | quantidade
+--|--
+Memoria | 1024mb
+Swap | 512mb
+Cores | 1
+Root Disk | 8GB (noatime)
+net0 | 
+Start boot | yes
 
 ## Procedimentos da instalação
 
 1. Atualizar o sistema
 ~~~~shell
-apt update
+# apt update
+# apt upgrade
 ~~~~
 
-2. Instalar os pacotes do java
+2. Realizar o download do Openfire
 ~~~~shell
-apt install default-jre
+wget https://www.igniterealtime.org/downloadServlet?filename=openfire/openfire_4.6.0_all.deb
 ~~~~
 
-3. Verificar o Java instalado
-
+3. Renomear o arquivo que foi feito o download
 ~~~~shell
-java  -version
-           openjdk version "11.0.2" 2019-01-15
-           OpenJDK Runtime Environment (build 11.0.2+9-Ubuntu-3ubuntu118.04.3)
-           OpenJDK 64-Bit Server VM (build 11.0.2+9-Ubuntu-3ubuntu118.04.3, mixed mode, sharing)
-~~~~
-
-4. Realizar o download do Openfire
-~~~~shell
-wget https://www.igniterealtime.org/downloadServlet?filename=openfire/openfire_4.3.2_all.deb
-~~~~
-
-5. Renomear o arquivo que foi feito o download
 mv downloadServlet\?filename\=openfire%2Fopenfire_4.3.2_all.deb openfire.deb
-6. Realizar instalação forçada do servidor
-dpkg -i --force-all openfire.deb
-7. Verifica a ausência de componentes ou bibliotecas no sistema  
-apt install -f
-8. Obtendo o IP do container para acessar via porta 9090
-ip addr
+~~~~
+
+4. Realizar instalação forçada do servidor
+~~~~shell
+# dpkg -i --force-all openfire.deb
+~~~~
+
+5. Verifica a ausência de componentes ou bibliotecas no sistema  
+~~~~shell
+# apt install -f
+~~~~
+
+6. Obtendo o IP do container para acessar via porta 9090
+~~~~shell
+# ip addr
+~~~~
 
 ### Configurações via web interface
+
 1. Language Selection: Português Brasileiro (pt_BR);
-2. Configurações do Servidor:
-        a) Domínio:	chat.semed-ni.intra;
-        b) Setup Host Settings FQDN: chat.semed-ni.intra;
+
+![Tela de Idiomas](web_install/01.png)
+
+2. Configurações do Servidor, esses itens são ligados ao hostname:
+* Domínio:	openfire.semed-ni.intra;
+* Setup Host Settings FQDN: openfire.semed-ni.intra;
+
+![Configurações do DNS](web_install/02.png)
+
 3. Configurações do Banco de Dados: Banco de Dados Interno;
-4. Configurações de Perfis: Servidor de Diretórios (LDAP);
+
+![Configuração do banco de dados](web_install/03.png)
+
+4. Configurações de Perfis: Servidor de Diretórios (LDAP), assim todos os usuários cadastrados no AD serão importados para o openfire;
+
+![Configuração do AD](web_install/04.png)
+
 
 a) Configurações de Conexão:
-~~~~
+
+
         Tipo de servidor: Active Directory;
         Host: 172.15.0.3;
         DN Base: DC=semed-ni,DC=intra;
-        DN Administrador: CN=Admin AD,CN=Users,DC=semed-ni,DC=intra;
-        Senha: ********
-        Testar configurações
-        Salvar & configurar
+        DN Administrador: openfire@semed-ni.intra;
+        Senha: openfire
+        Testar configurações -> Salvar & continuar
+![Configuração do AD-1](web_install/05.png)
+
+       
                 b) Mapeamento de Usuário:
-        Testar configurações
-        Salvar & configurar
+        Testar configurações -> Salvar & continuar
+
+![Configuração do AD-2](web_install/06.png)
+
+
                 c) Mapeamento de Grupo:
-        Testar configurações
-        Salvar & configurar
-~~~~
+
+        Testar configurações -> Salvar & continuar
+
+![Configuração do AD-3](web_install/07.png)
+
 5. Conta do Administrador:
+
         a) Adicionar Administrador: administrator;
+
+![Configuração do administrador](web_install/08.png)
+
+Acessando a dashboard de administração e finalizando a instalação
+![Configuração do administrador](web_install/09.png)
+
+## Acessando a dashboard
+
+Usando o usuário **administrator** do AD para acessar a dashboard de configurações do openfire
+
+![Tela de login](dashboard/00.png)
+
+A seguir as telas inicias da plataforma
+![](dashboard/01.png)
+![](dashboard/02.png)
+![](dashboard/03.png)
+![](dashboard/04.png)
+![](dashboard/05.png)
+![](dashboard/05-2.png)
+
