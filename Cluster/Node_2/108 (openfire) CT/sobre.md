@@ -124,7 +124,15 @@ A seguir as telas inicias da plataforma
 ![](dashboard/05.png)
 ![](dashboard/05-2.png)
 
-## Usando o Thunderbird para o chat
+## Ajustes para melhor usabilidade do recurso
+
+### Configurações dos grupos
+
+Ao se logar é interessante já estar com os usuários e grupos disponíveis, assim não será necessário a configuração manual.
+
+Para isso foi criado um grupo chat no AD, no openfire na aba *Usuários/Grupos -> Grupos* escolher os grupo chat, **Ativar o compartilhamento de lista de contatos de grupo** da um nome ao grupo de contatos e compartilhar grupo com todos os usuários, assim todos os usuários desse grupo podem interagir, também sendo possível usar os grupos já criados no AD, mas assim os usuários não tem interação direta com os usuários de outros grupos.
+
+### Usando o Thunderbird para o chat
 
 Nas configurações padrão do servidor o Thunderbird não consegue se conectar ao Openfire, devido a requisição de certificados, para contornar esté problema foi só desativar o recurso **STARTTLS policy**, que fica em *Servidor -> Configurações do Servidor -> Client Connections -> Configurações Avançadas...*
 
