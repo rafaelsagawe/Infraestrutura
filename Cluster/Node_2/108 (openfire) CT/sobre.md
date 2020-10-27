@@ -124,3 +124,12 @@ A seguir as telas inicias da plataforma
 ![](dashboard/05.png)
 ![](dashboard/05-2.png)
 
+## Usando o Thunderbird para o chat
+
+Nas configurações padrão do servidor o Thunderbird não consegue se conectar ao Openfire, devido a requisição de certificados, para contornar esté problema foi só desativar o recurso **STARTTLS policy**, que fica em *Servidor -> Configurações do Servidor -> Client Connections -> Configurações Avançadas...*
+
+![Configuração padrão](ajustes/01.png)
+STARTTLS policy **Ativo**
+
+![Configuração padrão](ajustes/01-2.png)
+STARTTLS policy **Desativado**
