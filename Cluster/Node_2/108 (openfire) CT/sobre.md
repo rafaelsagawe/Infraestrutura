@@ -77,8 +77,7 @@ mv downloadServlet\?filename\=openfire%2Fopenfire_4.3.2_all.deb openfire.deb
 ![Configuração do AD](web_install/04.png)
 
 
-a) Configurações de Conexão:
-
+                a) Configurações de Conexão:
 
         Tipo de servidor: Active Directory;
         Host: 172.15.0.3;
@@ -86,6 +85,7 @@ a) Configurações de Conexão:
         DN Administrador: openfire@semed-ni.intra;
         Senha: openfire
         Testar configurações -> Salvar & continuar
+
 ![Configuração do AD-1](web_install/05.png)
 
        

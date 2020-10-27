@@ -238,6 +238,12 @@ nano ~/.bashrc
     setterm -blank 0
 ~~~~
 
+## SeLinux
+
+~~~~shell
+#  yum install setools setroubleshoot
+~~~~
+
 ## SNMP
 
 Este servidor será utulizado com recursos do snmp, então pode ser utilizado o snmpwalk
