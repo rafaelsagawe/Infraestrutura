@@ -23,9 +23,11 @@ https://forum.proxmox.com/threads/how-to-migrate-a-virtual-machine-image-into-lo
 https://pve.proxmox.com/wiki/Root_Password_Reset#Resetting_the_root_account_password_in_a_Container
 
 
-## Ativando SMNP
-O Proxmox por ser tratar de uma distribuição baseada no Debian tem sua ativação realizada através  da instalação dos pacotes “.deb” pelo comando, “apt install snmpd lm-sensors snmptrapd” tendo o pacote instalado e necessário a configuração o arquivo “smnpd.conf”:
-1. Criar o backup do arquivo smnpd.conf, mv /etc/snmp/snmpd.conf /etc/snmp/snmpd.conf.ori;
+## Ativando SMNP´
+
+O Proxmox por ser tratar de uma distribuição baseada no Debian tem sua ativação realizada através  da instalação dos pacotes “.deb” pelo comando, ``apt install snmpd lm-sensors snmptrapd`` tendo o pacote instalado e necessário a configuração o arquivo “smnpd.conf”:
+
+1. Criar o backup do arquivo smnpd.conf, ``mv /etc/snmp/snmpd.conf /etc/snmp/snmpd.conf.ori``;
 
 2. Criar um arquivo smnpd.conf, nano smnpd.conf;
 ~~~~shell
@@ -47,9 +49,9 @@ O Proxmox por ser tratar de uma distribuição baseada no Debian tem sua ativaç
 
 ~~~~
        
-3. Ativar exceção no firewall, iptables -A INPUT -s 172.15.0.0/16 -p udp --dport 161 -j ACCEPT;
-4. Reiniciar o  daemon do SMNP, service snmpd restart;
-5. Tornar o protocolo ativo por padrão, update-rc.d snmpd enable.
+3. Ativar exceção no firewall, ``iptables -A INPUT -s 172.15.0.0/16 -p udp --dport 161 -j ACCEPT``;
+4. Reiniciar o  daemon do SMNP, ``service snmpd restart``;
+5. Tornar o protocolo ativo por padrão, ``update-rc.d snmpd enable``.
 
 
 nano /etc/apt/sources.list
