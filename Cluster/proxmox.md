@@ -53,18 +53,21 @@ O Proxmox por ser tratar de uma distribuição baseada no Debian tem sua ativaç
 4. Reiniciar o  daemon do SMNP, ``service snmpd restart``;
 5. Tornar o protocolo ativo por padrão, ``update-rc.d snmpd enable``.
 
+~~~~shell
+# nano /etc/apt/sources.list
+    deb http://deb.debian.org/debian stretch main contrib non-free
+    deb-src http://deb.debian.org/debian stretch main contrib non-free
 
-nano /etc/apt/sources.list
-deb http://deb.debian.org/debian stretch main contrib non-free
-deb-src http://deb.debian.org/debian stretch main contrib non-free
+    deb http://security.debian.org/debian-security/ stretch/updates main contrib non-free
+    deb-src http://security.debian.org/debian-security/ stretch/updates main contrib non-free
 
-deb http://security.debian.org/debian-security/ stretch/updates main contrib non-free
-deb-src http://security.debian.org/debian-security/ stretch/updates main contrib non-free
+    deb http://deb.debian.org/debian stretch-updates main contrib non-free
+    deb-src http://deb.debian.org/debian stretch-updates main contrib non-free
 
-deb http://deb.debian.org/debian stretch-updates main contrib non-free
-deb-src http://deb.debian.org/debian stretch-updates main contrib non-free
-apt update
-apt-get install snmp-mibs-downloader
+# apt update
+
+# apt-get install snmp-mibs-downloader
+~~~~
 
 ## Local das ISO's
 /var/lib/vz/template/iso/
