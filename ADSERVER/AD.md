@@ -22,7 +22,7 @@ Foi realizado esta rotina
 ~~~~shell
 # sudo apt-get install gawk
 # nano importacao 
-      gawk -F ":" '{ print $2,$3 }' usuario.txt | while read LISTA; do $(echo "/usr/bin/samba-tool user add $LISTA --must-change-at-next-login --use-username-as-cn"); done;
+      gawk -F ":" '{ print $2,$3 }' usuário.txt | while read LISTA; do $(echo "/usr/bin/samba-tool user add $LISTA --must-change-at-next-login --use-username-as-cn"); done;
 # sudo chmod +x importacao
 ~~~~
 
@@ -108,7 +108,7 @@ Obs:
 1. Controle de acesso ao servidor de acesso;
 2. Regras de Acesso no servidor;
 3. Usuários para sistemas usados internamente;
-4. Contreole de acesso de usuários a Wi-Fi;
+4. Controle de acesso de usuários a Wi-Fi;
 4. Acesso aos computadores.
 
 ### Administração Remota do Domínio – RSAT
@@ -121,7 +121,7 @@ Diretiva de Grupo, ou Group Policy (GPO), é uma funcionalidade da família de s
 
 ## Instalando o Zabbix-agent
 
-Para monitorar os equipamentos foi implementado o Zabbix, nos Controladores de Domínio foram feitos alguns processos adcionais devido aos seus miveis de segurança.
+Para monitorar os equipamentos foi implementado o Zabbix, nos Controladores de Domínio foram feitos alguns processos adicionais devido aos seus níveis de segurança.
 
 ~~~~shell
 $ sudo apt update
@@ -158,7 +158,7 @@ Pronto, se tudo tiver dado certo logo o Zabbix ira receber as informações do Z
 
 ----
 # Migração do Zentyal
-Com o tempo pode ser necessário a troca da maquina do servidor, ou migra-lo para uma instancia virtual.
+Com o tempo pode ser necessário a troca da maquina do servidor, ou migra-lo para uma instância virtual.
 
 O **ad2server** estáva em uma *maquina física*, mas estou realizando a migração dos servidores para a virtualização, quando possível, mas por boas praticas de rede é recomendado a existência de dois servidores de autenticação, o **adserver** já estava virtualizado no mesmo Hypervisor do pfSense, o VMware que está voltado para a "infraestrutura básica", então o **ad2server** foi migrado no ProxMox assim continuam em hardware distintos. O processo de migração seguiu os seguintes passos:
 

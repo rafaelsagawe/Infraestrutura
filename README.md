@@ -13,7 +13,7 @@ Estrutura do repositório:
 1. Central da TI
 * [Administração Remota](Central_de_TI(Athena)/adm_linux.md)
 
-* [Zabbix (Monitoramennto)](Central_de_TI(Athena)/zabbix.md)
+* [Zabbix (Monitoramento)](Central_de_TI(Athena)/zabbix.md)
 
 * [GLPI (Inventario)](Central_de_TI(Athena)/glpi.md)
 
@@ -35,7 +35,7 @@ Estrutura do repositório:
 
 [MySQL](Extras/mysql.md)
 
-[Windowns](Extras/win.md)
+[Windows](Extras/win.md)
 
 [Linux](Extras/sistema.md)
 
