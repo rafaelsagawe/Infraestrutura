@@ -1,13 +1,13 @@
 ## Hardware dos Nodes
 
-Item | Node - 1 | node - 2
------|-------|----
-placa-mãe | DL380 G7 | S1200RP_SE
-CPU | Intel(R) Xeon(R) CPU E5506 @ 2.13GHz |Intel(R) Xeon(R) CPU E3-1231 v3 @ 3.40GHz
-Memorias **ECC** | 24GiB - 6 pentes -> 4GiB DIMM DDR3 Synchronous 1333 MHz | 8GB - 1 pente -> DIMM DDR3 Synchronous 1600 MHz
-Placa de Rede| 4 - NetXtreme II BCM5709 Gigabit Ethernet + 2 Offboard | 2 onboard - I210 Gigabit Network Connection
-Armazenamento |LVM (S.O.) 278.86GiB + ZFS (VM's e CT) |
-HD's | 4 SAS de 300GB | ST1000DM003-1ER1 (1TB) + ST3120026AS (120GB) + WDC WD2500AAKX-7 (250GB) +  WDC WD2500AAKX-7 (250GB) + WDC WD2500AAKX-7 (250GB) + WDC WD2500AAKX-7 (250GB) +
+Item | Node -0 | Node - 1 | node - 2
+----|-|-------|----
+placa-mãe | | DL380 G7 | S1200RP_SE
+CPU | | Intel(R) Xeon(R) CPU E5506 @ 2.13GHz |Intel(R) Xeon(R) CPU E3-1231 v3 @ 3.40GHz
+Memorias  **ECC** | | 24GiB - 6 pentes -> 4GiB DIMM DDR3 Synchronous 1333 MHz | 8GB - 1 pente -> DIMM DDR3 Synchronous 1600 MHz
+Placa de Rede | | 4 - NetXtreme II BCM5709 Gigabit Ethernet + 2 Offboard | 2 onboard - I210 Gigabit Network Connection
+Armazenamento | |LVM (S.O.) 278.86GiB + ZFS (VM's e CT) |
+HD's | | 4 SAS de 300GB | ST1000DM003-1ER1 (1TB) + ST3120026AS (120GB) + WDC WD2500AAKX-7 (250GB) +  WDC WD2500AAKX-7 (250GB) + WDC WD2500AAKX-7 (250GB) + WDC WD2500AAKX-7 (250GB) +
 
 ### Restart webinterface
 service pveproxy status 
@@ -72,7 +72,34 @@ O Proxmox por ser tratar de uma distribuição baseada no Debian tem sua ativaç
 ## Local das ISO's
 /var/lib/vz/template/iso/
 
-## instalação do Certificado
+## Storage Externo
+
+Para adicionar armazenamento externo é preciso acessar no *Datacenter -> Storage -> Add* e escolher o tipo de armazenamento.
+
+### CIFS
+Nesse exemplo vou utilizar outra maquina, usando o LinuxLite com o Samba, para hospedar os backups.
+
+![config CIFs](img/storage_cifs.png)
+
++ ID -> Nome do instância do compartilhamento, pode ser qualquer um;
+
++ Server -> Endereço do servidor, usei o IP, com o DNS configurado no servidor poderia ser usado o nome;
+
++ Username e Password -> caso o compartilhamento sejá por autenticação;
+
++ Share -> pasta compartilhada;
+
++ Nodes-> Para criação de restrição de uso no storage por determinado *node*;
+
++ Enable -> habilitado;
+
++ Max Backups -> quantidade de Backups que serão armazenados no servidor;
+
++ Content -> são os itens que serão armazenados nos servidor, nesse caso *VZDump backup file* e *Container template*;
+
++ Domain -> ???????
+
+## Instalação do Certificado
 
 Para aparecer mais a tela de erro de certificado no navegador é preciso instalar o certificado ssl do servidor PVE
 

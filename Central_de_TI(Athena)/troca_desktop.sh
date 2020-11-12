@@ -4,10 +4,13 @@
 # Criar alternanceia para possibilitar a exibição dos monitoramentos no servidor de apoio-01
 export DISPLAY=":0.0"
 while true; do
-/usr/bin/wmctrl -s1 # Área de trabalho 1
-/bin/sleep 10
-/usr/bin/wmctrl -s2 # Área de trabalho 2
-/bin/sleep 10 # 10 segundos
-/usr/bin/wmctrl -s0 # Área de trabalho 0
-/bin/sleep 40 # 40 segundos 
+    # Área de trabalho 1
+    /usr/bin/wmctrl -s1 
+    /bin/sleep 10
+    # Área de trabalho 2
+    /usr/bin/wmctrl -s2
+    /bin/sleep 10 # 10 segundos
+    # Área de trabalho 0
+    /usr/bin/wmctrl -s0
+    /bin/sleep 40 # 40 segundos 
 done
