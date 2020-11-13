@@ -63,7 +63,7 @@ Informações do Processador: ``# lscpu``
 
 ## Alteração de arquivos
 
-Remoção dos recursos de IPv6, visto que a rede interna funciona toda com IPv6.
+Remoção dos recursos de IPv6, visto que a rede interna funciona toda com IPv4.
 
 cat /etc/sysconfig/network-scripts/ifcfg-enp0s25
 ~~~~
@@ -86,6 +86,7 @@ Explicações (site Natan Felles)
 
 **vfs_cache_pressure**: Controla a tendência do kernel para recuperar a memória que é usada no cache do sistema virtual de arquivos. O valor 50 é o ideal, valores mais altos podem deixar o sistema lento e muito baixos reduzem o uso do cache.
 
+### Redução do uso das agulhas do HD
 
 Diminuir as gravações em disco, geradas pela gravação de acesso, por padrão todo acesso ao arquivo e gravado, assim gera mais esforço de gravação do sistema e dos HD's, para retirarmos esta função usamos o parametro **noatime** no arquivo fstab.
 
@@ -103,7 +104,7 @@ Diminuir as gravações em disco, geradas pela gravação de acesso, por padrão
     /dev/mapper/centos-swap swapswap    defaults        0 0
 ~~~~
 
-## Ajustes na segurança
+### Ajustes na segurança
 
 Evitar ataques de Spoof ``net.ipv4.tcp_syncookies=1``
 ~~~~shell
@@ -114,8 +115,8 @@ Evitar ataques de Spoof ``net.ipv4.tcp_syncookies=1``
 ~~~~
 
 ### Proteção do SSH
-1. Não permitir que o usuário root sejá acessado via ssh;
-2. Alterar a porta de acesso;
+- [x] Não permitir que o usuário root sejá acessado via ssh;
+- [ ] Alterar a porta de acesso;
 
 ~~~~shell
 # nano /etc/ssh/sshd_config
