@@ -114,18 +114,6 @@ Evitar ataques de Spoof ``net.ipv4.tcp_syncookies=1``
     net.ipv4.tcp_syncookies=1
 ~~~~
 
-### Proteção do SSH
-- [x] Não permitir que o usuário root sejá acessado via ssh;
-- [ ] Alterar a porta de acesso;
-
-~~~~shell
-# nano /etc/ssh/sshd_config
-
-    PermitRootLogin no
-
-# service sshd.service restart
-~~~~
-
 ## Otimização da inicialização 
 
 Para otimizar a inicialização do sistema foi usado o systemd-analyze e o webmin, removendo os serviços que não serão usados para as operações do servidor.
@@ -231,6 +219,21 @@ Tempo | Processo| Função
 7ms |systemd-update-utmp-runlevel.service
 5ms |initrd-udevadm-cleanup-db.service
 3ms |sys-kernel-config.mount
+
+### SSH
+- [x] Não permitir que o usuário root sejá acessado via ssh;
+- [ ] Alterar a porta de acesso;
+- [ ] Liberar o acesso sem senha para estação de apoio;
+
+#### Bloquear acesso ao remoto ao root
+
+~~~~shell
+# nano /etc/ssh/sshd_config
+
+    PermitRootLogin no
+
+# service sshd.service restart
+~~~~
 
 ## Sem proteção de tela (extra)
 O terminal do servidor depois de uns minitos fica com a tela desligada como estava em processo de montagem desativei está função, para o usuário root.
