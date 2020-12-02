@@ -1,17 +1,17 @@
 i-educar
 
-Instalação em servidor
-O i-Educar possui um instalador que pode te auxiliar no processo de instalação em um servidor para produção.
+Instalaï¿½ï¿½o em servidor
+O i-Educar possui um instalador que pode te auxiliar no processo de instalaï¿½ï¿½o em um servidor para produï¿½ï¿½o.
 
-Antes de tudo faça download (wget https://github.com/portabilis/i-educar/releases/download/2.1.0/ieducar-2.1.0.tar.gz && tar zxvf ieducar-2.1.0.tar.gz) da versão mais recente do i-Educar e extraia o conteúdo do release em uma pasta no seu servidor. O instalador está disponível desde a versão 2.1.0.
+Antes de tudo faï¿½a download (wget https://github.com/portabilis/i-educar/releases/download/2.1.0/ieducar-2.1.0.tar.gz && tar zxvf ieducar-2.1.0.tar.gz) da versï¿½o mais recente do i-Educar e extraia o conteï¿½do do release em uma pasta no seu servidor. O instalador estï¿½ disponï¿½vel desde a versï¿½o 2.1.0.
 
 Requerimentos
-Para executar o i-Educar em um servidor você precisa dos seguintes programas:
+Para executar o i-Educar em um servidor vocï¿½ precisa dos seguintes programas:
 
 Nginx
 apt install nginx
 
-PHP versão 7.1.3 ou maior
+PHP versï¿½o 7.1.3 ou maior
 sudo apt-get install software-properties-common
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update
@@ -19,36 +19,36 @@ apt-get install php7.2
 
 bcmath curl dom fileinfo json libxml mbstring openssl PDO pgsql Phar SimpleXML tokenizer xml xmlwriter zip pcre
 
-Postgres versão 9.5 ou superior
+Postgres versï¿½o 9.5 ou superior
 apt install postgresql postgresql-contrib
 
 
-O instalador do i-Educar te avisa caso alguma extensão esteja faltando então não se preocupe em instalar tudo agora.
+O instalador do i-Educar te avisa caso alguma extensï¿½o esteja faltando entï¿½o nï¿½o se preocupe em instalar tudo agora.
 
 Configurando o servidor
-O Nginx precisa estar devidamente configurado para rodar o i-Educar e permitir acesso ao instalador. Você encontra um exemplo de configuração aqui.
+O Nginx precisa estar devidamente configurado para rodar o i-Educar e permitir acesso ao instalador. Vocï¿½ encontra um exemplo de configuraï¿½ï¿½o aqui.
 
 
 
 
 
-Em sistemas Ubuntu, por exemplo, você colocaria este arquivo na pasta /etc/nginx/sites-available e criaria um symlink para ele na pasta /etc/nginx/sites-enabled.
+Em sistemas Ubuntu, por exemplo, vocï¿½ colocaria este arquivo na pasta /etc/nginx/sites-available e criaria um symlink para ele na pasta /etc/nginx/sites-enabled.
 
-Não esqueça de adequar a configuração de acordo com a realidade do seu servidor principalmente as seguintes diretivas:
+Nï¿½o esqueï¿½a de adequar a configuraï¿½ï¿½o de acordo com a realidade do seu servidor principalmente as seguintes diretivas:
 
 root
 fastcgi_pass
-Depois de tudo pronto basta reiniciar o processo do nginx para que as configurações novas entrem em vigor.
+Depois de tudo pronto basta reiniciar o processo do nginx para que as configuraï¿½ï¿½es novas entrem em vigor.
 
 Executando o instalador
-Agora que o Nginx está configurado você pode acessar o instalador em:
+Agora que o Nginx estï¿½ configurado vocï¿½ pode acessar o instalador em:
 
 http://www.example.com/install.php
-Substitua "www.example.com" pelo seu domínio ou endereço de IP. A partir daqui o instalador deverá te dar todas as instruções necessárias para realizar a instalação com sucesso. Todo exemplo de comando ou código que possa vir a aparecer no processo de instalação leva em consideração o seu ambiente, ou seja, fique à vontade para copiar e colar os comandos que eles deverão funcionar corretamente.
+Substitua "www.example.com" pelo seu domï¿½nio ou endereï¿½o de IP. A partir daqui o instalador deverï¿½ te dar todas as instruï¿½ï¿½es necessï¿½rias para realizar a instalaï¿½ï¿½o com sucesso. Todo exemplo de comando ou cï¿½digo que possa vir a aparecer no processo de instalaï¿½ï¿½o leva em consideraï¿½ï¿½o o seu ambiente, ou seja, fique ï¿½ vontade para copiar e colar os comandos que eles deverï¿½o funcionar corretamente.
 
-Quando tudo estiver ok você poderá definir uma senha para o usuário admin e iniciar o processo de instalação. Se tudo correr bem você poderá acessar o i-Educar normalmente.
+Quando tudo estiver ok vocï¿½ poderï¿½ definir uma senha para o usuï¿½rio admin e iniciar o processo de instalaï¿½ï¿½o. Se tudo correr bem vocï¿½ poderï¿½ acessar o i-Educar normalmente.
 
-Em caso de erros no processo de instalação verifique os logs do sistema que se encontram em storage/logs para determinar suas causas. Não hesite em entrar em contato caso enfrente dificuldades!
+Em caso de erros no processo de instalaï¿½ï¿½o verifique os logs do sistema que se encontram em storage/logs para determinar suas causas. Nï¿½o hesite em entrar em contato caso enfrente dificuldades!
 
 i-diario
 
@@ -74,42 +74,87 @@ rbenv global 2.2.6
 ruby -v
 
 
-i-Diário
+i-Diï¿½rio
 Portal do professor integrado com o software livre i-Educar
 
-Instalação
+Instalaï¿½ï¿½o
 
-Instalar o Ruby 2.2.6 (Recomendamos uso de um gerenciador de versões como Rbenv ou Rvm)
+Instalar o Ruby 2.2.6 (Recomendamos uso de um gerenciador de versï¿½es como Rbenv ou Rvm)
 Instalar a gem Bundler:
 $ gem install bundler
-Baixar o i-Diário:
+Baixar o i-Diï¿½rio:
 $ git clone https://github.com/portabilis/i-diario.git
 Instalar as gems:
 $ cd i-diario
 $ bundle install
-Copiar o exemplo de configurações de banco de dados e configurar:
+Copiar o exemplo de configuraï¿½ï¿½es de banco de dados e configurar:
 $  cp config/database.sample.yml config/database.yml
 Criar e configurar o arquivo config/secrets.yml conforme o exemplo:
 development:
-  secret_key_base: CHAVE_SECRETA_AQUI # Você pode gerar uma chave usando o comando "bundle exec rake secret"
+  secret_key_base: CHAVE_SECRETA_AQUI # Vocï¿½ pode gerar uma chave usando o comando "bundle exec rake secret"
 Criar o banco de dados:
 $ bundle exec rake db:create
 $ bundle exec rake db:migrate
 Criar uma entidade:
 $ bundle exec rake entity:setup NAME=prefeitura DOMAIN=localhost DATABASE=prefeitura_diario
-Criar um usuário administrador:
+Criar um usuï¿½rio administrador:
 $ bundle exec rails console
 Entity.last.using_connection { User.create!(email: 'admin@domain.com.br', password: '123456789', password_confirmation: '123456789', status: 'actived', kind: 'employee', admin:  true) }
 Iniciar o servidor e acessar http://localhost:3000 para acessar o sistema:
 $ bundle exec rails server
-Sincronização com i-Educar
-Acessar Configurações > Api de Integraçao e configurar os dados do sincronismo
-Acessar Configurações > Unidades e clicar em Sincronizar
-Acessar Calendário letivo, clicar em Sincronizar e configurar os calendários
-Acessar Configurações > Api de Integração e clicar no botão de sincronizar
-Nota: Após esses primeiros passos, recomendamos que a sincronização rode pelo menos diariamente para manter o i-Diário atualizado com o i-Educar
+Sincronizaï¿½ï¿½o com i-Educar
+Acessar Configuraï¿½ï¿½es > Api de Integraï¿½ao e configurar os dados do sincronismo
+Acessar Configuraï¿½ï¿½es > Unidades e clicar em Sincronizar
+Acessar Calendï¿½rio letivo, clicar em Sincronizar e configurar os calendï¿½rios
+Acessar Configuraï¿½ï¿½es > Api de Integraï¿½ï¿½o e clicar no botï¿½o de sincronizar
+Nota: Apï¿½s esses primeiros passos, recomendamos que a sincronizaï¿½ï¿½o rode pelo menos diariamente para manter o i-Diï¿½rio atualizado com o i-Educar
 
 Rodar os testes
 $ RAILS_ENV=test bundle exec rake db:create
 $ RAILS_ENV=test bundle exec rake db:migrate
 $ bin/rspec spec
+
+## Liberar acesso remoto (SSH)
+~~~~shell
+nano /etc/ssh/sshd_config
+
+  PermitRootLogin yes
+
+service ssh restart
+~~~~
+
+## Liberar acesso remoto (postgres)
+~~~~shell
+# cd /etc/postgresql/10/main/
+
+# nano postgresql.conf
+
+  listen_addresses = "*" # what IP address(es) to listen on
+
+# nano pg_hba.conf
+
+  #host    all             all             127.0.0.1/32            md5
+  host    all             all             0.0.0.0/0               md5
+
+# service postgresql restart
+~~~~
+
+#### Criando o usuÃ¡rio para o Grafana
+
+~~~~shell
+ # su postgres
+
+   # psql
+
+     # \l
+
+      CREATE USER grafana  WITH ENCRYPTED PASSWORD 'grafana';
+      GRANT USAGE ON SCHEMA public to grafana;
+      ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO grafana;
+      GRANT CONNECT ON DATABASE ieducar to grafana;
+      -- o codigo abaixo concede o privilegio em novas tabelas geradas no banco "ieducar"
+      ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO grafana;
+      GRANT USAGE ON SCHEMA public to grafana;
+      GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO grafana;
+      GRANT SELECT ON ALL TABLES IN SCHEMA public TO grafana;
+~~~~

@@ -99,6 +99,10 @@ Nesse exemplo vou utilizar outra maquina, usando o LinuxLite com o Samba, para h
 
 + Domain -> ???????
 
+### NFS
+
+![config CIFs](img/storage_nfs.png)
+
 ## Instalação do Certificado
 
 Para aparecer mais a tela de erro de certificado no navegador é preciso instalar o certificado ssl do servidor PVE
