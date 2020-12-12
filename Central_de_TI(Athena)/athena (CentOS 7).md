@@ -786,6 +786,8 @@ A formula usa as **Keys** do item */mnt/SEMED: Size space* e */mnt/SEMED: Size s
             ln -s /usr/local/lib/libiconv.so.2 /usr/local/lib/libiconv.so.3
 
         https://www.zabbix.com/downloads/5.0.4/zabbix_agent-5.0.4-freebsd-11.2-amd64-gnutls.tar.gz
+
+### Graficos/Metricas - Grafana
 --------
 
 ---------
