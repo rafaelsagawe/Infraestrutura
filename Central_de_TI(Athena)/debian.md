@@ -28,7 +28,14 @@ No Linux a interface gráfica é completamente separada do núcleo do sistema op
 
 ![](img-linux/gui.png)
 
-Entretando o foco desta documentação e a utilização do sistema em servidor, devido a isso ele não contara com Ambiente Grafico.
+Entretando o foco desta documentação e a utilização do sistema em servidor, devido a isso ele não contara com Ambiente Grafico, a principio a "SHELL" usada será o SHELL.
+
+## Shell 
+
+O shell é um programa que permite o uso do sistema através de uma interface em linha de comandos. Existem diversos estilos de shell, sendo os mais comuns o Bourne Shell (sh) e o C-Shell (csh). Esse shell foi escolhido por alias simplicidade e facilidade de uso com uma grande versatilidade.
+
+Apesar da interface em linha de comandos ser um conceito considerado antiquado, o shell oferece mecanismos para tornar a vida do usuário muito simples e produtiva. Além disso, é uma ferramenta de valor inestimável para operações em máquinas remotas.
+
 
 ## Estrutura de arquivos hierárquico
 
