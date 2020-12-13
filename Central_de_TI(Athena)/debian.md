@@ -1,6 +1,12 @@
-# Unix
+# Conceitual
 
-O uso de UNIX se baseia na noção de sessão de trabalho. Cada usuário é designado por um nome de login, ou simplesmente login, com uma senha secreta associada. Uma sessão de trabalho típica consiste das seguintes etapas:
+---
+
+# Sobre o Linux
+
+
+## Sessão
+O uso de Linux se baseia na noção de sessão de trabalho. Cada usuário é designado por um nome de login, ou simplesmente login, com uma senha secreta associada. Uma sessão de trabalho típica consiste das seguintes etapas:
 
 * O usuário identifica-se, fornecendo seu nome de login e sua senha ao sistema.
 
@@ -10,11 +16,11 @@ O uso de UNIX se baseia na noção de sessão de trabalho. Cada usuário é desi
 
 * Fim da sessão (operação de logout ou logoff).
 
-O UNIX pode gerenciar diversas sessões simultâneas de usuários distintos na mesma máquina. Cada um terá uma visão independente e transparente dos recursos disponíveis, sem conflitos ou interferências.
+O Linux pode gerenciar diversas sessões simultâneas de usuários distintos na mesma máquina. Cada um terá uma visão independente e transparente dos recursos disponíveis, sem conflitos ou interferências.
 
-## Conceito de Interface Grafica
+## Conceito de Interface Gráfica
 
-No UNIX a interface gráfica é completamente separada do núcleo do sistema operacional. Isso permite uma grande versatilidade em relação aos ambientes gráficos disponíveis. A interface gráfica é construída em dois níveis:
+No Linux a interface gráfica é completamente separada do núcleo do sistema operacional. Isso permite uma grande versatilidade em relação aos ambientes gráficos disponíveis. A interface gráfica é construída em dois níveis:
 
 * O servidor gráfico X-Window, que oferece as funcionalidades gráficas básicas, gerência entidades básicas como regiões de tela e trata eventos relacionados à interface (como operações de mouse e teclado).
 
@@ -24,11 +30,15 @@ No UNIX a interface gráfica é completamente separada do núcleo do sistema ope
 
 Entretando o foco desta documentação e a utilização do sistema em servidor, devido a isso ele não contara com Ambiente Grafico.
 
-# Sobre o Linux
+## Estrutura de arquivos hierárquico
 
-## Sistemas de arquivos
+O **Filesystem Hierarchy Standard** (padrão para sistema de arquivos hierárquico), ou FHS, define os principais diretórios, e o seu conteúdo, em um sistema operacional Linux ou do tipo Linux. A versão atual é a 3.0, anunciada em 3 de junho de 2015.
 
-O sistema de arquivos do UNIX possui as seguintes características fundamentais:
+No início do ano de 1996, surgiu um movimento, com o apoio da comunidade de desenvolvedores do BSD, que visava o desenvolvimento de versões do FSSTND para outros sistemas do tipo Linux, além do Linux. A partir desta iniciativa foi realizado um esforço para determinar os problemas comuns aos sistemas do tipo Linux. Como resultado da ampliação do escopo do problema, o nome do padrão foi alterado para Filesystem Hierarchy Standard (FHS) (padrão para sistemas de arquivo hierárquicos).
+
+O FHS é mantido pela Linux Foundation, uma organização sem fins lucrativos formada por importantes empresas de hardware e software, como HP, Red Hat, IBM e Dell. Ainda hoje, algumas maiorias das distribuições Linux, incluindo membros da Linux Foundation, não adotam o padrão proposto. Em particular, diretórios (paths) criados pelo FHS, como o /srv/, não foram adotados em grande escala. Alguns sistemas Linux e Linux rompem com o padrão FHS, como o GoboLinux. O Mac OS X utiliza uma estrutura com nomes legíveis por seres humanos em conjunto com um sistema baseado no FHS.
+
+O sistema de arquivos do Linux possui as seguintes características fundamentais:
 
 * É estruturado na forma de uma árvore única, iniciando pelo diretório “/”, que é chamado de “raiz”.
 
@@ -44,16 +54,9 @@ O sistema de arquivos do UNIX possui as seguintes características fundamentais:
 
 * Os arquivos e diretórios possuem permissões de acesso controláveis por seus proprietários.
 
-
-O **Filesystem Hierarchy Standard** (padrão para sistema de arquivos hierárquico), ou FHS, define os principais diretórios, e o seu conteúdo, em um sistema operacional Linux ou do tipo Unix. A versão atual é a 3.0, anunciada em 3 de junho de 2015.
-
-No início do ano de 1996, surgiu um movimento, com o apoio da comunidade de desenvolvedores do BSD, que visava o desenvolvimento de versões do FSSTND para outros sistemas do tipo Unix, além do Linux. A partir desta iniciativa foi realizado um esforço para determinar os problemas comuns aos sistemas do tipo Unix. Como resultado da ampliação do escopo do problema, o nome do padrão foi alterado para Filesystem Hierarchy Standard (FHS) (padrão para sistemas de arquivo hierárquicos).
-
-O FHS é mantido pela Linux Foundation, uma organização sem fins lucrativos formada por importantes empresas de hardware e software, como HP, Red Hat, IBM e Dell. Ainda hoje, algumas maiorias das distribuições Linux, incluindo membros da Linux Foundation, não adotam o padrão proposto. Em particular, diretórios (paths) criados pelo FHS, como o /srv/, não foram adotados em grande escala. Alguns sistemas Unix e Linux rompem com o padrão FHS, como o GoboLinux. O Mac OS X utiliza uma estrutura com nomes legíveis por seres humanos em conjunto com um sistema baseado no FHS.
-
 ## Principais diretórios
 
-Os diretórios de um sistema de arquivos UNIX têm uma estrutura pré-definida, com poucas variações, alguns podem ser configurados durante a instalação para terem pontos de montagem separado do restante do sistema, conforme lista abaixo.
+Os diretórios de um sistema de arquivos Linux têm uma estrutura pré-definida, com poucas variações, alguns podem ser configurados durante a instalação para terem pontos de montagem separado do restante do sistema, conforme lista abaixo.
 
 Partição | Descrição
 --|--
@@ -75,13 +78,13 @@ Partição | Descrição
 
 É um mapeador de dispositivos que fornece gerenciamento de volume lógico para o kernel do Linux, tem como função gerar camadas de volume lógico entre sistema operacional e disco rígido, as quais se comportam como partições. A maioria das distribuições Linux modernas dão suporte ao LVM ao ponto de serem capazes de possuir seus sistemas de arquivo raízes em um volume lógico. Trata-se de um método de alocação de espaço. 
 
-O programa cria um bloco que tem a função de disco rígido (mais próximo de um disco dinâmico), o qual armazena grupos de volumes cuja capacidade é configurada pelo usuário.
+O LVM cria um bloco que tem a função de disco rígido (mais próximo de um disco dinâmico), o qual armazena grupos de volumes cuja capacidade é configurada pelo usuário.
 
 Por fim, volumes lógicos são acrescentados aos grupos para que eles armazenem dados.
 
 ![Modelo de LVM](img-linux/img-lvm.png)
 
-#### Principais vantagens do LVM
+### Principais vantagens do LVM
 Quando se tem um conjunto de volumes lógicos para manipular o espaço de disco, é certo que diversas vantagens ficam à disposição do usuário — vejamos três delas.
 
 1. Redimensionamento de partições – diferentemente de uma partição convencional, um volume criado com o LVM pode ser redimensionado a qualquer momento usando apenas uma linha de comando. Isso traz uma enorme flexibilidade para gerenciar o seu disco.
@@ -105,12 +108,27 @@ Para compreendermos como funciona o LVM primeiro precisamos conhecer a sua estru
 
 ![](https://i0.wp.com/www.linuxnaweb.com/wp-content/uploads/2019/03/linuxnaweb_lvm_esquema.png?resize=740%2C486&ssl=1)
 
-* **Inicialização (BIOS ou UEFI)**
+# Sistemas de arquivos
+~~~~
+EXT4 ->
+
+BTRF ->
+
+ZFS (apenas BSD) ->
+
+XFS ->
+~~~~
+
+# Inicialização (BIOS ou UEFI)
 ~~~~
     BIOS - > grava diretamente no disco, não e necessario a criação de partição exclusiva;
     
     UEFI -> necessita de uma partição para inicia o sistema operacional +/- de 1GB, localizado no inicio do disco;
 ~~~~
+
+---
+ 
+# Hora da Pratica
 
 # Instalação 
 
@@ -139,7 +157,7 @@ As partições variam de acordo com a função do servidor.
 
 **5.1** - Salvar como: **Sistema de arquivos**
 
-Todos sistemas Unix tem: 
+Todos sistemas Linux tem: 
 Item | Caracteristicas 
 ----|--
 Tabela de Inodos| Tabela de incides de arquivos, contem: dono, grupo, permissões, atributos, datas e bloco que está locado.
