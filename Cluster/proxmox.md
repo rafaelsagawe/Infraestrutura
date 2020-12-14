@@ -108,3 +108,18 @@ Nesse exemplo vou utilizar outra maquina, usando o LinuxLite com o Samba, para h
 Para aparecer mais a tela de erro de certificado no navegador é preciso instalar o certificado ssl do servidor PVE
 
 Com o FileZilla copiei o arquivo /etc/pve/pve-root-ca.pem
+
+
+
+---
+## removendo CT com replcation travado
+
+pvesr list -> Lista as tarefas de replicação
+
+pvesr delete 116-0 --force -> remove o job da reclicação
+
+pct destroy 116 -> destroi o CT
+
+##  storage 'ad2server' does not exists
+
+rm /etc/pve/lxc/109.conf
