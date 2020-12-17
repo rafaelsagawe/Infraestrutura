@@ -299,3 +299,28 @@ alterar alguns parametros,como:
 
 # Comandos
 
+# Usuários e permissões
+
+## Arquivo passwd
+Arquivo com as contas dos usuários do sistema, **lido por todos**, tendo a seguinte estrutura:
+
+
+## Arquivo shadown
+Arquivo com as senhas dos usuários contidos no passwd, **lido apenas pelos usuários com UID 0, o root**,com as seguinte estrutura:
+
+**(As datas são com base na data da criação do Unix e contado em dias)**
+
+​salto diferentes se for debian 8 caracteres, se for RedHat 16 caracteres no salto
+
+## Arquivo group
+Os grupos dõa direito ao usuário a terem acesso a recursos.
+
+#### Comandos 
+~~~~shell 
+# useradd -m -s /bin/bash -d /home/suporte -g users -G games,audio,cdrom teste01
+~~~~
+-m cria a home
+-s shell
+-d localização da home
+-g -G grupo primário (grupo que será dono dos arquivos) secundário
+
