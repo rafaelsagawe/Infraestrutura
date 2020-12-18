@@ -324,3 +324,7 @@ Os grupos dõa direito ao usuário a terem acesso a recursos.
 -d localização da home
 -g -G grupo primário (grupo que será dono dos arquivos) secundário
 
+~~~~shell
+# passwd teste01
+~~~~
+Cria a senha do usuário teste01 na pas shadown
