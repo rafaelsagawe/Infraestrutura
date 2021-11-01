@@ -1,5 +1,7 @@
-mkdir bkp-desktop bkp-documentos
+mkdir \\172.15.0.6\Desktop\Usuarios\%username%\bkp-desktop
 
-xcopy %userprofile%\Desktop\*.* bkp-desktop /w /s /y
+mkdir \\172.15.0.6\Desktop\Usuarios\%username%\bkp-documentos
 
-xcopy %userprofile%\Documents\*.* bkp-documentos /s /y
+xcopy %userprofile%\Desktop\*.* \\172.15.0.6\Desktop\Usuarios\%username%\bkp-desktop /s /y
+
+xcopy %userprofile%\Documents\*.* \\172.15.0.6\Desktop\Usuarios\%username%\bkp-documentos /s /y
