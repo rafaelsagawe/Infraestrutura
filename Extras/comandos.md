@@ -8,8 +8,10 @@ ping|ping| Usado para teste de conectividade entre hosts
 
 Pode ser preciso copiar arquivos entre PCs com Linux, uma das forma mais simples é utilizar o SSH. 
 ~~~~shell
-$ scp user.txt  semed@172.15.0.3:/home/semed
+$ scp -r *  semed@172.15.0.3:/home/semed
 ~~~~
+scp é um protocolo de rede para transferências de arquivos. Com ele, você pode transferir arquivos de forma fácil e segura entre um local remoto e um host ou entre dois locais remotos. A opção -r server para copiar pastas.
+
 
 ## Salvar e Enviar resultados de comando
 
