@@ -12,6 +12,17 @@ $ scp -r *  semed@172.15.0.3:/home/semed
 ~~~~
 scp é um protocolo de rede para transferências de arquivos. Com ele, você pode transferir arquivos de forma fácil e segura entre um local remoto e um host ou entre dois locais remotos. A opção -r server para copiar pastas.
 
+## Alterando o dono e grupo do arquivo/pasta
+
+Depois de copiar arquivos/pastas pode ser necessário a atualização das credencias de acesso.
+
+~~~~shall
+chown -R nobody:share *
+~~~~
+
+-R -> recursivo;
+* -> todos
+
 
 ## Salvar e Enviar resultados de comando
 
