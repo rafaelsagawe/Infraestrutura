@@ -13,3 +13,10 @@ CPU| So
 Memoria|
 Disco|
 
+# Checagens
+
+## samba-tools
+
+~~~ shell
+samba-tool computer list
+~~~
