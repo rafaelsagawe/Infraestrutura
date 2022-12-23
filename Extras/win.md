@@ -41,6 +41,28 @@ Para iniciar o synergy no inicio da sessão, sem a necessidade de intervenção
  ~~~~
 
 ## libera espaço e desativa a hibernação
- ~~~~cmd
+ ~~~~shell
  > powercfg.exe /hibernate off
+ ~~~~
+
+# winget 
+Recurso similar ao apt install das distros like-Debian.
+
+## Instalando 
+
+## Usando o recurso
+
+### Atuluzando individualmente
+~~~~shell
+> winget upgrade nome_da_aplicação
+~~~~
+
+### Atulizando todos os pendentes
+~~~~shell
+> winget upgrade --all
+~~~~
+
+### Busca
+ ~~~~shell
+ > winget search firefox
  ~~~~
