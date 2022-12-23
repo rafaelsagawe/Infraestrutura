@@ -123,3 +123,9 @@ pct destroy 116 -> destroi o CT
 ##  storage 'ad2server' does not exists
 
 rm /etc/pve/lxc/109.conf
+
+## Adicionado novo HD
+https://www.hostfav.com/blog/index.php/2017/02/01/add-a-new-physical-hard-drive-to-proxmox-ve-4x-5x/
+
+## Alterando ip do storage
+https://forum.proxmox.com/threads/nfs-shared-storage-ip-changed-what-configs-to-change-to-access-vms.9829/

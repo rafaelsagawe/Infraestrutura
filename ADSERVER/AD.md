@@ -185,4 +185,4 @@ cupsctl --remote-admin --remote-any --share-printers
 
 ## Montagem do servidor de arquivos (externo)
 
-sudo mount -t cifs -o username=USUÁRIO@semed-ni.intra,password=SENHA_DO_USUÁRIO //172.15.0.6/Semanal /home/samba/shares/SEMED/
+sudo mount -t cifs -o username=nextcloud@semed-ni.intra,password=@nextcloud#,sec=ntlm //172.15.252.252/arquivos /var/backups/

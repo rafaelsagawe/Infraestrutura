@@ -1,0 +1,2 @@
+NET USE S: \\172.15.0.10\semed /PERSISTENT:yes
+

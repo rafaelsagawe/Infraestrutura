@@ -40,3 +40,5 @@ htop        >   /dev/tty2   &
 
 (Comando enviar arquivo)
 ls          >   pastas.txt
+
+tail -f /var/log/messages > /dev/ttyv3
