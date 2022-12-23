@@ -1,3 +1,5 @@
+O Servidor de Domínio da SEMED foi reestruturado para melhor se adequar a dinamica da secretaria, então o Zentyal foi subistituido pelo Univention Core, gerando assim maior estabilidade, facilidade na manutenção e flexibilidade
+
 # Sobre o Zentyal
 
 O Zentyal Server é um aplicativo open source de web decorrente da evolução da plataforma eBox, que começou a ser utilizada em 2004. Atualmente seu código base pertence à eBox Technologies, e o código fonte está disponível de acordo com os termos da licença pública geral GNU. Com foco na usabilidade, seu grande objetivo é a administração de redes de pequenas e médias empresas que buscam uma solução alternativa aos tradicionais produtos com estrutura da Microsoft. Utilizando uma interface amigável, busca reunir em um único local diversos serviços de uma empresa, como acesso à internet, segurança de rede, compartilhamento de arquivos, infraestrutura de redes e comunicação. amentas e serviços do Zentyal server As funcionalidades do Zentyal podem ser agrupadas. 
