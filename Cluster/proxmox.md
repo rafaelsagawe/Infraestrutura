@@ -1,16 +1,18 @@
 ## Hardware dos Nodes
 
-Item | Node -0 | Node - 1 | node - 2
-----|-|-------|----
-placa-mãe | | DL380 G7 | S1200RP_SE
-CPU | | Intel(R) Xeon(R) CPU E5506 @ 2.13GHz |Intel(R) Xeon(R) CPU E3-1231 v3 @ 3.40GHz
-Memorias  **ECC** | | 24GiB - 6 pentes -> 4GiB DIMM DDR3 Synchronous 1333 MHz | 8GB - 1 pente -> DIMM DDR3 Synchronous 1600 MHz
-Placa de Rede | | 4 - NetXtreme II BCM5709 Gigabit Ethernet + 2 Offboard | 2 onboard - I210 Gigabit Network Connection
-Armazenamento | |LVM (S.O.) 278.86GiB + ZFS (VM's e CT) |
-HD's | | 4 SAS de 300GB | ST1000DM003-1ER1 (1TB) + ST3120026AS (120GB) + WDC WD2500AAKX-7 (250GB) +  WDC WD2500AAKX-7 (250GB) + WDC WD2500AAKX-7 (250GB) + WDC WD2500AAKX-7 (250GB) +
+Item |  Node - 1 | node - 2
+----|-------|----
+placa-mãe | DL380 G7 | S1200RP_SE
+CPU | Intel(R) Xeon(R) CPU E5506 @ 2.13GHz |Intel(R) Xeon(R) CPU E3-1231 v3 @ 3.40GHz
+Memorias  **ECC** | 24GiB - 6 pentes -> 4GiB DIMM DDR3 Synchronous 1333 MHz | 8GB - 1 pente -> DIMM DDR3 Synchronous 1600 MHz
+Placa de Rede  | 4 - NetXtreme II BCM5709 Gigabit Ethernet + 2 Offboard | 2 onboard - I210 Gigabit Network Connection
+Armazenamento  |LVM 278.86GiB |
+HD's  | 4 SAS de 300GB | ST1000DM003-1ER1 (1TB) + ST3120026AS (120GB) + WDC WD2500AAKX-7 (250GB) +  WDC WD2500AAKX-7 (250GB) + WDC WD2500AAKX-7 (250GB) + WDC WD2500AAKX-7 (250GB) +
 
 ### Restart webinterface
-service pveproxy status 
+~~~~shell
+# service pveproxy status 
+~~~~
 
 # processo de recuperação de queima de HD 25/10/2020
 https://lucatnt.com/2019/11/moving-proxmox-zfs-boot-drive-to-a-new-disk/
@@ -31,7 +33,6 @@ O Proxmox por ser tratar de uma distribuição baseada no Debian tem sua ativaç
 
 2. Criar um arquivo smnpd.conf, nano smnpd.conf;
 ~~~~shell
-
     # this create a  SNMPv1/SNMPv2c community named "my_servers"
     # and restricts access to LAN adresses 192.168.0.0/16 (last two 0's are ranges)
     rocommunity public 172.15.0.0/16
@@ -46,7 +47,6 @@ O Proxmox por ser tratar de uma distribuição baseada no Debian tem sua ativaç
     dontLogTCPWrappersConnects yes
     # fix for disks larger then 2TB
     realStorageUnits 0
-
 ~~~~
        
 3. Ativar exceção no firewall, ``iptables -A INPUT -s 172.15.0.0/16 -p udp --dport 161 -j ACCEPT``;
@@ -70,7 +70,15 @@ O Proxmox por ser tratar de uma distribuição baseada no Debian tem sua ativaç
 ~~~~
 
 ## Local das ISO's
-/var/lib/vz/template/iso/
+No proprio ProxMox
+
+~~~~shell
+# /var/lib/vz/template/iso/
+~~~~
+
+No compartilhamento usando Windows
+
+``D:\PVE\template\iso``
 
 ## Storage Externo
 
@@ -112,11 +120,11 @@ Com o FileZilla copiei o arquivo /etc/pve/pve-root-ca.pem
 
 
 ---
-## removendo CT com replcation travado
+## removendo CT com replicação travada
 
 pvesr list -> Lista as tarefas de replicação
 
-pvesr delete 116-0 --force -> remove o job da reclicação
+pvesr delete 116-0 --force -> remove o job da replicação
 
 pct destroy 116 -> destroi o CT
 
