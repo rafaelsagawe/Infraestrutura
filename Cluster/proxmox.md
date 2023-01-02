@@ -14,18 +14,76 @@ HD's  | 4 SAS de 300GB | ST1000DM003-1ER1 (1TB) + ST3120026AS (120GB) + WDC WD25
 # service pveproxy status 
 ~~~~
 
-# processo de recuperação de queima de HD 25/10/2020
-https://lucatnt.com/2019/11/moving-proxmox-zfs-boot-drive-to-a-new-disk/
+# Atualização do PVE6-to-7
 
-para tentar recuperar a plataforma 
-https://forum.proxmox.com/threads/how-to-restore-a-container-when-the-container-conf-is-lost.66002/
+Os servidores Servidor HP Dl380 G7 apresentaram erro durante a instalação da versão 7 referente a resolução da tela, para contonar esse problema foi instalado a versão 6 e depois atualizar para a vesão corrente.
 
-https://forum.proxmox.com/threads/how-to-migrate-a-virtual-machine-image-into-local-lvm.28751/
+~~~~shell
+# nano  /etc/apt/sources.list
+    #deb http://ftp.br.debian.org/debian buster main contrib
 
-https://pve.proxmox.com/wiki/Root_Password_Reset#Resetting_the_root_account_password_in_a_Container
+    #deb http://ftp.br.debian.org/debian buster-updates main contrib
+
+    # security updates
+    # deb http://security.debian.org buster/updates main contrib
+    #deb http://security.debian.org/debian-security bullseye-security main contrib
 
 
-## Ativando SMNP´
+    deb http://ftp.us.debian.org/debian bullseye main contrib
+    deb http://ftp.us.debian.org/debian bullseye-updates main contrib
+    # security updates
+    #deb http://security.debian.org bullseye-security main contrib
+    deb http://security.debian.org/debian-security bullseye-security main contrib
+
+    # PVE pve-no-subscription repository provided by proxmox.com,
+    # NOT recommended for production use
+    deb http://download.proxmox.com/debian/pve bullseye pve-no-subscription
+
+# apt update
+
+# reboot
+~~~~
+# Monitoramento
+
+Os servidores PVE são monitorados via Zabbix (usando o agente) e via protocolo SNMP.
+
+## Instalando o agente do Zabbix
+~~~~shell
+# apt update
+
+# apt install zabbix-agent
+
+# service zabbix-agent stop
+
+# nano /etc/zabbix/zabbix_agentd.conf
+    Server=172.15.0.102
+    ServerActive=172.15.0.102
+    Hostname=Nome_da_maquina_no_zabix
+
+# service zabbix-agent start
+
+# service zabbix-agent status
+        ● zabbix-agent.service - Zabbix Agent
+        Loaded: loaded (/lib/systemd/system/zabbix-agent.service; enabled; vendor preset: enabled)
+        Active: active (running) since Mon 2023-01-02 11:03:41 -03; 4s ago
+        Docs: man:zabbix_agentd
+        Main PID: 3746 (zabbix_agentd)
+        Tasks: 6 (limit: 4915)
+        Memory: 3.0M
+        CGroup: /system.slice/zabbix-agent.service
+                ├─3746 /usr/sbin/zabbix_agentd --foreground
+                ├─3752 /usr/sbin/zabbix_agentd: collector [idle 1 sec]
+                ├─3753 /usr/sbin/zabbix_agentd: listener #1 [waiting for connection]
+                ├─3754 /usr/sbin/zabbix_agentd: listener #2 [waiting for connection]
+                ├─3755 /usr/sbin/zabbix_agentd: listener #3 [waiting for connection]
+                └─3756 /usr/sbin/zabbix_agentd: active checks #1 [idle 1 sec]
+
+        Jan 02 11:03:41 pve-2 systemd[1]: Started Zabbix Agent.
+        Jan 02 11:03:41 pve-2 zabbix_agentd[3746]: Starting Zabbix Agent [pve-2]. Zabbix 4.0.4 (revision 89349).
+        Jan 02 11:03:41 pve-2 zabbix_agentd[3746]: Press Ctrl+C to exit.
+~~~~
+
+## Ativando SMNP
 
 O Proxmox por ser tratar de uma distribuição baseada no Debian tem sua ativação realizada através  da instalação dos pacotes “.deb” pelo comando, ``apt install snmpd lm-sensors snmptrapd`` tendo o pacote instalado e necessário a configuração o arquivo “smnpd.conf”:
 
@@ -36,15 +94,20 @@ O Proxmox por ser tratar de uma distribuição baseada no Debian tem sua ativaç
     # this create a  SNMPv1/SNMPv2c community named "my_servers"
     # and restricts access to LAN adresses 192.168.0.0/16 (last two 0's are ranges)
     rocommunity public 172.15.0.0/16
+
     # setup info
     syslocation  "CPD"
     syscontact  "semed.ni.ti@gmail.com"
+    
     # open up
     agentAddress  udp:161
+    
     # run as
     agentuser  root
+    
     # dont log connection from UDP:
     dontLogTCPWrappersConnects yes
+    
     # fix for disks larger then 2TB
     realStorageUnits 0
 ~~~~
@@ -117,8 +180,6 @@ Para aparecer mais a tela de erro de certificado no navegador é preciso instala
 
 Com o FileZilla copiei o arquivo /etc/pve/pve-root-ca.pem
 
-
-
 ---
 ## removendo CT com replicação travada
 
@@ -137,3 +198,13 @@ https://www.hostfav.com/blog/index.php/2017/02/01/add-a-new-physical-hard-drive-
 
 ## Alterando ip do storage
 https://forum.proxmox.com/threads/nfs-shared-storage-ip-changed-what-configs-to-change-to-access-vms.9829/
+
+# processo de recuperação de queima de HD 25/10/2020
+https://lucatnt.com/2019/11/moving-proxmox-zfs-boot-drive-to-a-new-disk/
+
+para tentar recuperar a plataforma 
+https://forum.proxmox.com/threads/how-to-restore-a-container-when-the-container-conf-is-lost.66002/
+
+https://forum.proxmox.com/threads/how-to-migrate-a-virtual-machine-image-into-local-lvm.28751/
+
+https://pve.proxmox.com/wiki/Root_Password_Reset#Resetting_the_root_account_password_in_a_Container
