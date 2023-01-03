@@ -2,12 +2,12 @@
 
 Item |  Node - 1 | node - 2
 ----|-------|----
-placa-mãe | DL380 G7 | S1200RP_SE
-CPU | Intel(R) Xeon(R) CPU E5506 @ 2.13GHz |Intel(R) Xeon(R) CPU E3-1231 v3 @ 3.40GHz
-Memorias  **ECC** | 24GiB - 6 pentes -> 4GiB DIMM DDR3 Synchronous 1333 MHz | 8GB - 1 pente -> DIMM DDR3 Synchronous 1600 MHz
-Placa de Rede  | 4 - NetXtreme II BCM5709 Gigabit Ethernet + 2 Offboard | 2 onboard - I210 Gigabit Network Connection
+placa-mãe | DL380 G7 |  DL380 G7
+CPU | Intel(R) Xeon(R) CPU E5506 @ 2.13GHz |Intel(R) Xeon(R) CPU E5506 @ 2.13GHz 
+Memorias  **ECC** | 32GB - 8 pentes -> 4GiB DIMM DDR3 Synchronous 1333 MHz | 32GB - 8 pentes -> 4GiB DIMM DDR3 Synchronous 1333 MHz
+Placa de Rede  | 4 - NetXtreme II BCM5709 Gigabit Ethernet + 2 Offboard | 4 - NetXtreme II BCM5709 Gigabit Ethernet
 Armazenamento  |LVM 278.86GiB |
-HD's  | 4 SAS de 300GB | ST1000DM003-1ER1 (1TB) + ST3120026AS (120GB) + WDC WD2500AAKX-7 (250GB) +  WDC WD2500AAKX-7 (250GB) + WDC WD2500AAKX-7 (250GB) + WDC WD2500AAKX-7 (250GB) +
+HD's  | 4 SAS de 300GB | 
 
 ### Restart webinterface
 ~~~~shell
@@ -27,7 +27,6 @@ Os servidores Servidor HP Dl380 G7 apresentaram erro durante a instalação da v
     # security updates
     # deb http://security.debian.org buster/updates main contrib
     #deb http://security.debian.org/debian-security bullseye-security main contrib
-
 
     deb http://ftp.us.debian.org/debian bullseye main contrib
     deb http://ftp.us.debian.org/debian bullseye-updates main contrib
@@ -112,7 +111,7 @@ O Proxmox por ser tratar de uma distribuição baseada no Debian tem sua ativaç
     realStorageUnits 0
 ~~~~
        
-3. Ativar exceção no firewall, ``iptables -A INPUT -s 172.15.0.0/16 -p udp --dport 161 -j ACCEPT``;
+3. ~~Ativar exceção no firewall, ``iptables -A INPUT -s 172.15.0.0/16 -p udp --dport 161 -j ACCEPT``~~;
 4. Reiniciar o  daemon do SMNP, ``service snmpd restart``;
 5. Tornar o protocolo ativo por padrão, ``update-rc.d snmpd enable``.
 
@@ -130,6 +129,40 @@ O Proxmox por ser tratar de uma distribuição baseada no Debian tem sua ativaç
 # apt update
 
 # apt-get install snmp-mibs-downloader
+~~~~
+
+# Alterando IP do ProxMox
+para alterar os IP foi preceso reconfigurar dois arquivos, interfaces e hosts
+
+~~~~shell
+# nano /etc/network/interfaces
+    auto lo
+    iface lo inet loopback
+
+    iface enp1s0 inet manual
+
+    auto vmbr0
+    iface vmbr0 inet static
+        address 172.15.XX.XX/16
+        gateway 172.15.0.33
+        bridge-ports enp1s0
+        bridge-stp off
+        bridge-fd 0
+
+# nano /etc/hosts
+    127.0.0.1 localhost.localdomain localhost
+    172.15.XX.XX pve.semed.pcni pve
+
+    # The following lines are desirable for IPv6 capable hosts
+
+    ::1     ip6-localhost ip6-loopback
+    fe00::0 ip6-localnet
+    ff00::0 ip6-mcastprefix
+    ff02::1 ip6-allnodes
+    ff02::2 ip6-allrouters
+    ff02::3 ip6-allhosts
+
+# reboot
 ~~~~
 
 ## Local das ISO's
