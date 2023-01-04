@@ -10,15 +10,21 @@ senha (padrão)
 
 # Servidor web
 
-apt update
-apt upgrade
-apt install apache2 apache2-utils php php-xml php-gd php-mbstring php-zip php-pclzip php-curl php-xmlrpc php-imagick php-redis php-memcached php-apcu php-gmp php-imap php-ldap php-intl php-pgsql
+~~~~shell
+# apt update
 
-a2enmod rewrite && a2enmod headers
+# apt upgrade
 
-/etc/init.d/apache2 restart
+# apt install apache2 apache2-utils php php-xml php-gd php-mbstring php-zip php-pclzip php-curl php-xmlrpc php-imagick php-redis php-memcached php-apcu php-gmp php-imap php-ldap php-intl php-pgsql
+
+# a2enmod rewrite && a2enmod headers
+
+# /etc/init.d/apache2 restart
+~~~~
 
 # Servidor de Banco de dados (Postgres)
+
+~~~~shell
 apt install postgresql libpq5 postgresql postgresql-client postgresql-client-common postgresql-contrib
 
 $ sudo postgres
@@ -28,44 +34,59 @@ $ psql
 # GRANT ALL ON DATABASE "nextcloud" TO root;
 # \q
 $ exit
+~~~~
 
 # Nextcloud
-cd /var/www/
-wget https://download.nextcloud.com/server/releases/nextcloud-14.0.0.zip
- mv /var/www/html /var/www/html_old
- mv nextcloud /var/www/html
+~~~~shell
+# cd /var/www/
+# wget https://download.nextcloud.com/server/releases/nextcloud-14.0.0.zip
+# mv /var/www/html /var/www/html_old
+# mv nextcloud /var/www/html
+~~~~
 
-## Ajuste
-     O PHP OPcache não está configurado corretamente.
-     nano /etc/php/7.0/apache2/php.ini
-         opcache.enable=1
-         opcache.enable_cli=1
-         opcache.interned_strings_buffer=8
-         opcache.max_accelerated_files=10000
-         opcache.memory_consumption=128
-         opcache.save_comments=1
-         opcache.revalidate_freq=1
-     service apache2 restart
+### Verifica integidade dos arquivos
 
-     Verifica integidade dos arquivos
-     sudo -u www-data php occ integrity:check-core
+~~~~shell
+# sudo -u www-data php occ integrity:check-core
+~~~~
 
-     Cota de usuario
-     Na pagina de criação de usuario, no canto inferior esquerdo engrenagem
+### Cota de usuario
+Na pagina de criação de usuario, no canto inferior esquerdo engrenagem
 
-     alterar o valor memory_limit para 512M
-     nano /etc/php/7.0/apache2/php.ini
+# Ajustes no Apache e PHP
 
-     Portugues como Idioma padão
-     Alterar o arquivo nano config/config.php
-        'default_language' => 'pt'
+O PHP OPcache não está configurado corretamente.
+~~~~shell
 
+# nano /etc/php/7.0/apache2/php.ini
+    opcache.enable=1
+    opcache.enable_cli=1
+    opcache.interned_strings_buffer=8
+    opcache.max_accelerated_files=10000
+    opcache.memory_consumption=128
+    opcache.save_comments=1
+    opcache.revalidate_freq=1
+
+# service apache2 restart
+~~~~
+
+### Alterar o valor memory_limit para 512M
+
+``#  nano /etc/php/7.0/apache2/php.ini``
+
+### Portugues como Idioma padão alterar o arquivo 
+
+~~~~shell
+nano config/config.php
+   'default_language' => 'pt'
+~~~~
 
     O cabeçalho HTTP "Referrer-Policy" não está definido como "no-referrer", "no-referrer-when-downgrade", "strict-origin" ou "strict-origin-when-cross-origin".
     Adicione as linhas no arquivo 000-default.conf
-    nano /etc/apache2/sites-enabled/000-default.conf
-              Header add Strict-Transport-Security: "max-age=15768000;includeSubdomains"
-              Header always set Referrer-Policy "strict-origin"
+
+nano /etc/apache2/sites-enabled/000-default.conf
+    Header add Strict-Transport-Security: "max-age=15768000;includeSubdomains"
+    Header always set Referrer-Policy "strict-origin"
 
     Nenhum cache de memória foi configurado. Para melhorar o desempenho, configure um memcache, se disponível.
     Adicione a linha "'memcache.local' => '\OC\Memcache\APCu',"  em nano /var/www/html/config/config.php
@@ -83,8 +104,7 @@ wget https://download.nextcloud.com/server/releases/nextcloud-14.0.0.zip
 * Full text search - Files
 * Flow Upload
 
-
-Integração LDAP / AD
+## Integração LDAP / AD
 
 Servidor
   ldap://172.15.0.1:389
@@ -96,8 +116,6 @@ usuarios (Editar consulta LDAP)
 Atributos de acesso (Editar consulta LDAP)
 (&(&(|(objectclass=person))(|(|(memberof=CN=Domain Users,CN=Users,DC=pcni,DC=local)(primaryGroupID=513))))(|(samaccountname=%uid)(|(sAMAccountName=%uid))))
 Grupos
-
-
 
 # HTTPS (EXTRA)
 
@@ -162,5 +180,10 @@ chmod 400 /app/onlyoffice/DocumentServer/data/certs/onlyoffice.key
 docker run -i -t -d -p 448:443 --restart always -v /app/onlyoffice/DocumentServer/data:/var/www/onlyoffice/Data onlyoffice/documentserver
 docker pull onlyoffice/documentserver
 
+desativar o ldap https://help.nextcloud.com/t/disable-a-specific-ldap-configuration/48443
+
+~~~~shell
+# sudo -u www-data php occ ldap:set-config s01 ldapConfigurationActive 0
+~~~~
 ## Fontes
 https://blog.remontti.com.br/1557
