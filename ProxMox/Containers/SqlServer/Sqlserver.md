@@ -13,13 +13,9 @@ sudo /opt/mssql/bin/mssql-conf setup
 ~~~~
 
 3 - Express
-~~~~
+~~~~shell
 systemctl status mssql-server --no-pager
-~~~~
 
-----------
-
-~~~~
 apt install curl
 
 curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
