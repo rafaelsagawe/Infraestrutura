@@ -112,7 +112,9 @@ O Proxmox por ser tratar de uma distribuição baseada no Debian tem sua ativaç
 ~~~~
        
 3. ~~Ativar exceção no firewall, ``iptables -A INPUT -s 172.15.0.0/16 -p udp --dport 161 -j ACCEPT``~~;
+
 4. Reiniciar o  daemon do SMNP, ``service snmpd restart``;
+
 5. Tornar o protocolo ativo por padrão, ``update-rc.d snmpd enable``.
 
 ~~~~shell
@@ -256,10 +258,6 @@ O docker tem tem funcionado na partição LVM, quando é usado ZFS ele não inic
 
 # sh get-docker.sh
 
-# curl -SL https://github.com/docker/compose/releases/download/v2.11.2/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
-
-# chmod +x /usr/local/bin/docker-compose
-
 # service docker status 
     * docker.service - Docker Application Container Engine
         Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
@@ -283,6 +281,10 @@ O docker tem tem funcionado na partição LVM, quando é usado ZFS ele não inic
     Jan 03 13:36:10 docker dockerd[6477]: time="2023-01-03T13:36:10.074487369Z" level=info msg="Daemon has completed initialization"
     Jan 03 13:36:10 docker systemd[1]: Started Docker Application Container Engine.
     Jan 03 13:36:10 docker dockerd[6477]: time="2023-01-03T13:36:10.780748397Z" level=info msg="API listen on /run/docker.sock"
+
+# curl -SL https://github.com/docker/compose/releases/download/v2.11.2/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+
+# chmod +x /usr/local/bin/docker-compose
 ~~~~
 
 ### Instalando o Portainer docker

@@ -8,13 +8,17 @@ senha (padrão)
 
 (Proxmox) apt install openssl ca-certificates
 
-# Servidor web
+``Template usado debian-11-turnkey-core_17.1-1``
 
 ~~~~shell
 # apt update
 
 # apt upgrade
+~~~~
 
+# Instalando servidor Web
+
+~~~~shell
 # apt install apache2 apache2-utils php php-xml php-gd php-mbstring php-zip php-pclzip php-curl php-xmlrpc php-imagick php-redis php-memcached php-apcu php-gmp php-imap php-ldap php-intl php-pgsql
 
 # a2enmod rewrite && a2enmod headers
@@ -24,26 +28,82 @@ senha (padrão)
 
 # Servidor de Banco de dados (Postgres)
 
+É necessario da instalação do Postgres, criação do usuário, criar o banco de dados e dar direitos de acesso do banco para o usuário.
+
 ~~~~shell
 apt install postgresql libpq5 postgresql postgresql-client postgresql-client-common postgresql-contrib
 
-$ sudo postgres
-$ psql
-# CREATE USER root WITH PASSWORD 'semed-ni';
-# CREATE DATABASE "nextcloud";
-# GRANT ALL ON DATABASE "nextcloud" TO root;
-# \q
-$ exit
+  # su postgres
+
+  $ psql
+    # CREATE USER nextcloud WITH PASSWORD 'nextcloud';
+
+    # CREATE DATABASE "nextcloud";
+
+    # GRANT ALL ON DATABASE "nextcloud" TO nextcloud;
+
+    # \q
+
+  $ exit
 ~~~~
 
-# Nextcloud
+# Instalando o Nextcloud
+
+No site do projeto esta disponivel a versão para download, é preciso extrair os arquivos e dar permissão de escrita para ele.
+
 ~~~~shell
 # cd /var/www/
-# wget https://download.nextcloud.com/server/releases/nextcloud-14.0.0.zip
-# mv /var/www/html /var/www/html_old
+
+# wget https://download.nextcloud.com/server/releases/latest.zip
+
+# unzip latest.zip
+
 # mv nextcloud /var/www/html
+
+# chown -R www-data:www-data html 
 ~~~~
 
+Agora acessar o IP da instancia pelo navegador.
+
+## Instalação da aplicação
+
+![Inicio da instalação](Imagens\Manual\01.png)
+
+Nome do usuário | rafael.sagawe
+--|--
+Senha| @Sagawe123
+Armazenamento | /var/www/html/html/data
+Usuário BD* | nextcloud 
+Senha BD* | nextcloud
+Nome BD* | nextcloud
+Host BD** | localhost
+
+``* foram usados na criação do banco de dados, usados para o exemplo``
+
+``** No exemplo foi instalado tanto a aplicação quanto o banco de dados na mesma instancia``
+
+### Instalando app do Onlyoffice
+
+~~~~shell
+# cd apps/
+
+# git clone https://github.com/ONLYOFFICE/onlyoffice-nextcloud.git onlyoffice
+
+# cd onlyoffice
+
+# git submodule update --init --recursive
+
+# cd ..
+
+# chown -R www-data:www-data onlyoffice
+~~~~
+
+No navegador em Aplicativos -> aplicativos desativados -> ative o OnlyOffice.
+
+Nas configurações de administração ira aparecer a categoria onlyOffice.
+
+
+# Documentação em atualização
 ### Verifica integidade dos arquivos
 
 ~~~~shell
@@ -157,16 +217,18 @@ git clone https://github.com/ONLYOFFICE/onlyoffice-owncloud.git onlyoffice
 chown  www-data. onlyoffice -R
 
 Docker se encontra nos repositório backports, caso você tenha instalado o letsencrypt (https) você ja fez este procedimento, pode pular para a instalacao do docker.io
-
+~~~~shell
 echo 'deb http://ftp.debian.org/debian jessie-backports main' >> /etc/apt/sources.list.d/backports.list
 apt update
 apt install docker.io
 systemctl enable docker
+~~~~
 
-________________________________
 Sem NÃO instalou os certificados https rode o comando abaixo.
-docker run -i -t -d -p 88:80 --restart always onlyoffice/documentserver
-________________________________
+
+``docker run -i -t -d -p 88:80 --restart always onlyoffice/documentserver``
+
+~~~~shell
 cd /tmp/
 openssl genrsa -out onlyoffice.key 2048
 openssl req -new -key onlyoffice.key -out onlyoffice.csr
@@ -179,7 +241,7 @@ cp dhparam.pem /app/onlyoffice/DocumentServer/data/certs/
 chmod 400 /app/onlyoffice/DocumentServer/data/certs/onlyoffice.key
 docker run -i -t -d -p 448:443 --restart always -v /app/onlyoffice/DocumentServer/data:/var/www/onlyoffice/Data onlyoffice/documentserver
 docker pull onlyoffice/documentserver
-
+~~~~
 desativar o ldap https://help.nextcloud.com/t/disable-a-specific-ldap-configuration/48443
 
 ~~~~shell
