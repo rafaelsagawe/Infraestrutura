@@ -11,9 +11,15 @@ Mem |1.00 GB
 Swap | 512mb
 HD |10 GB
 
-## 1. Banco de dados
+### Materiais usados como base 
 
-## 2. WEB
+https://github.com/raphaelrrl/scritps
+
+https://www.youtube.com/watch?v=Cb4D4WxeYN8
+
+## 1. Banco de dados (PostgreSQL)
+
+## 2. WEB (Nginx)
 
 ## 3. Aplicação
 
