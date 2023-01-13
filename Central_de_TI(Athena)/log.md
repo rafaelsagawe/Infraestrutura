@@ -3,14 +3,14 @@
 ## NAS
 Services -> SMB 
 Auxiliary Parameters
-
+~~~~
 vfs objects = full_audit
 full_audit:prefix = %u|%I|%m|%S
 full_audit:failure = connect
 full_audit:success = connect disconnect opendir mkdir rmdir closedir open close read pread write pwrite sendfile rename unlink chmod fchmod chown fchown chdir ftruncate lock symlink readlink link mknod realpath
 full_audit:facility = LOCAL5
 full_audit:priority = NOTICE
-
+~~~~
 
 ## LogAnalyzer - WebInferface
 https://blog.remontti.com.br/2687
