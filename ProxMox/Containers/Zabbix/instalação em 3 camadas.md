@@ -69,6 +69,8 @@ nano pg_hba.conf
 # sudo -u postgres createdb --template=template0  --encoding=UTF8 -O zabbix zabbix
 ~~~~
 
+Os parametros ``--template=template0`` e ``--encoding=UTF8`` foram adicionados devido a um erro que surgiu durante a instalação web.
+
 Verificando se tudo ocorreu como o esperado.
 
 ``Ate esse momento o usuário postgres não possui senha``
@@ -212,13 +214,43 @@ Iniciar o front junto com o sistema
 # systemctl enable zabbix-agent nginx php7.4-fpm
 ~~~~
 
+Acessando o Zabbix, 
+
+![](3-camadas/front-1.png)
+![](3-camadas/front-2.png)
+![](3-camadas/front-3-erro.png)
+
+Para contornar esse erro recriei o banco de dados, por isso esta diferente da documentação oficial.
+![](3-camadas/front-3.png)
+![](3-camadas/front-4.png)
+![](3-camadas/front-5.png)
+![](3-camadas/front-6.png)
+![](3-camadas/front-7.png)
+
 ## 4. Agent e criação dos hosts
 Um dos itens instalado era o agent do zabbix, agora será configurado.
 
-nano /etc/zabbix/zabbix_agentd.conf
+Para o zabbix começar a monitorar só é preciso configurar:
+* ``Server`` -> Usando o endereço do Servidor Zabbix, nesse laboratorio ``172.15.49.60``
+* ``Hostname`` -> já o hostname é o nome do equipamento que será manitorado, tendo que ser o mesmo na configuração na interface web.
 
-Server=172.15.49.60
+~~~~shell
+# nano /etc/zabbix/zabbix_agentd.conf
+    Server=172.15.49.60
+~~~~
 
 Hostname | PostgreSQL | ZabbixFront 
 
+~~~~shell
 service zabbix-agent restart
+~~~~
+
+![Adição do host](3-camadas/add-host.png)
+
+Item | Valor
+--|--
+Host name | Mesmo usado na configuração do agente
+Templates | Tipo de monitaramento da maquina (Linux, Windowns, Web, Ping)
+Groups | A qual grupo de equipamentos ele pertence
+Interfaces | Agent (nesse exemplo), SNMP ...
+IP address | IP do host onde o agente se encontra
