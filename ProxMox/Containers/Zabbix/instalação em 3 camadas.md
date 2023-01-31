@@ -254,3 +254,43 @@ Templates | Tipo de monitaramento da maquina (Linux, Windowns, Web, Ping)
 Groups | A qual grupo de equipamentos ele pertence
 Interfaces | Agent (nesse exemplo), SNMP ...
 IP address | IP do host onde o agente se encontra
+
+## 4.1. Monitorando nginx
+
+Para melhor monitorar o Servidor Web do zabbix, nesse caso o nginx, torna-se necessario a adição de seguintes parametros nas configurações do serviço.
+
+~~~~shell
+ # nano /etc/nginx/sites-enabled/default
+
+ location = /basic_status {
+    stub_status;
+    allow 127.0.0.1;
+    allow ::1;
+    deny all;
+}
+
+# nginx -t
+
+# curl localhost/basic_status
+    Active connections: 2
+    server accepts handled requests
+    4 4 5
+
+# service nginx restart
+~~~~
+
+Como template é utilizado o ``Nginx by Zabbix agent``.
+
+## 4.1. Monitorando nginx
+
+
+## 5 Consertando erros iniciais
+
+### 5.1 Zabbix server: Utilization of discoverer processes over 75%
+
+Descomentar a linha StartDiscoverers=1 e alterar para 5 o valor.
+~~~~shell 
+# nano /etc/zabbix/zabbix_server.conf
+    StartDiscoverers=5
+~~~~
+
