@@ -286,6 +286,8 @@ Como template é utilizado o ``Nginx by Zabbix agent``.
 
 ## 5 Consertando erros iniciais
 
+![Erros iniciais](3-camadas/erros_iniciais.png)
+
 ### 5.1 Zabbix server: Utilization of discoverer processes over 75%
 
 Descomentar a linha StartDiscoverers=1 e alterar para 5 o valor.
@@ -294,3 +296,37 @@ Descomentar a linha StartDiscoverers=1 e alterar para 5 o valor.
     StartDiscoverers=5
 ~~~~
 
+### 5.2 High memory utilization (>90% for 5m)
+Este erro é devido a leitura da memoria em containers LXC
+
+No container do PostgreSQL segui conforme o [tutorial](https://kvaps.medium.com/zabbix-solve-memory-monitoring-issue-inside-lxc-containers-98ddf191051c). Editei o arquivo zabbix_agentd.conf adicionando os 3 parametros, nos oustros dois apenas não realizei essa ação
+
+~~~~shell
+# /etc/zabbix/zabbix_agentd.conf
+    UserParameter=ct.memory.size[*],free -b | awk '$ 1 == "Mem:" {total=$ 2;  used=($ 3+$ 5); pused=(($ 3+$ 5)*100/$ 2); free=$ 4; pfree=($ 4*100/$  2); shared=$ 5; buffers=$ 6; cache=$ 6; available=($ 6+$ 7);  pavailable=(($ 6+$ 7)*100/$ 2); if("$1" == "") {printf("%.0f", total )}  else {printf("%.0f", $1 "" )} }'
+
+    UserParameter=ct.swap.size[*],free -b | awk '$ 1 == "Swap:" {total=$ 2;  used=$ 3; free=$ 4; pfree=($ 4*100/$ 2); pused=($ 3*100/$ 2); if("$1" ==  "") {printf("%.0f", free )} else {printf("%.0f", $1 "" )} }'
+
+    UserParameter=ct.cpu.load[*],uptime | awk -F'[, ]+' '{avg1=$(NF-2); avg5=$(NF-1); avg15=$(NF)}{print $2/'$(nproc)'}'
+~~~~
+
+Reinicar o serviço do zabbix agent
+
+~~~~shell
+# service zabbix-agent restart
+~~~~
+
+Para checar ser realmente funcionou a primeira parte no container do serviço do Zabbix user o zabbix get para verificar um dos paramentos, nesse caso memoria.
+
+~~~~shell
+# zabbix_get -s 172.15.49.59 -k ct.memory.size[available]
+~~~~
+
+Agora na interface web do zabbix crie uma copia completa do ``Template OS Linux`` e altere todos os valores:
+Original | Alterado
+--|--
+vm.memory.size | ct.memory.size
+system.swap.size | ct.swap.size
+system.cpu.load | ct.cpu.load
+
+Remova o template anterior e limpe, agora só associar o template criado ``Template Linux Container``
