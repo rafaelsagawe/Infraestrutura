@@ -4,7 +4,6 @@
 
 # Sobre o Linux
 
-
 ## Sessão
 O uso de Linux se baseia na noção de sessão de trabalho. Cada usuário é designado por um nome de login, ou simplesmente login, com uma senha secreta associada. Uma sessão de trabalho típica consiste das seguintes etapas:
 
@@ -109,7 +108,7 @@ Para compreendermos como funciona o LVM primeiro precisamos conhecer a sua estru
 
 • Volume Group (VG) – é a reunião dos HDs;
 
-• Physical Extent) (PE) - Quando um PV é inserido em um VG o LVM o divide em várias partes de tamanho igual e essas partes são associadas a uma LE (Logical Extent), o menor valor de alocação dentro de um VG (do ponto de vista do LVM);
+• Physical Extent (PE) - Quando um PV é inserido em um VG o LVM o divide em várias partes de tamanho igual e essas partes são associadas a uma LE (Logical Extent), o menor valor de alocação dentro de um VG (do ponto de vista do LVM);
 
 • Logical Volume (LV) – São volumes lógicos que você pode redimensionar a capacidade de forma dinâmica. Esse elemento é uma área de alocação das LE, na qual criamos o filesystem, que podemos manipular ou criar o sistema de arquivos, já criado ele nos atribuí um device para que possamos montar, e segue a seguinte lógica: /dev/nome-do-vg/nome-do-lv.
 

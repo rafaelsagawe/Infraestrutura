@@ -80,7 +80,7 @@ adicionar nas linhas finais /etc/sysctl.conf, altera o uso do swap usando seria 
     vm.vfs_cache_pressure = 50
 ~~~~
 
-Explicações (site Natan Felles)
+Explicações (site Natan Felles, [Link](https://natanfelles.github.io/blog/melhorar-desempenho-linux))
 
 **swappiness**: Controla como o kernel realiza as trocas de cache na RAM. Ao aumentar esse valor, aumentará a quantidade de trocas. O valor padrão é 60, colocando 10 significa que a Swap só será usada quando a RAM atingir 90%.
 
@@ -209,7 +209,7 @@ Tempo | Processo| Função
 34ms |systemd-logind.service
 33ms |systemd-tmpfiles-clean.service
 32ms |systemd-update-utmp.service
-22ms| plymouth-start.service
+22ms |plymouth-start.service
 21ms |plymouth-switch-root.service
 18ms |dracut-pre-mount.service
 18ms |initrd-cleanup.service
@@ -266,6 +266,7 @@ Com a tradução das mibs
 ~~~~
 
 Sem a tradução das mibs
+
 ~~~~shell
 # snmpwalk -v 2c -On -c public nas
 

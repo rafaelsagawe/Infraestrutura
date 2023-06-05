@@ -49,9 +49,6 @@ DEB | YUM
 sudo apt update | yum update
 sudo apt upgrade | yum upgrade
 
-
-
-
 ### Remoção de recursos não utilizados
 
 Muitos programas e serviços são instalado de forma automática para facilitar a utilização, entretanto consomem recursos é o servidor precisa ser rápido.
@@ -63,7 +60,6 @@ $ sudo rm -rf ~/snap
 $ sudo apt remove --purge apport-symptoms apport apport-gtk
 $ sudo apt autoremove
 ~~~~
-
 
 # Serviços do sistema
 Para verificar os serviços que estão iniciando com o sistema e seus tempos de carregamento.

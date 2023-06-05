@@ -114,10 +114,4 @@ sudo wget https://github.com/fusioninventory/fusioninventory-for-glpi/releases/d
 
     * * * * * /usr/bin/php7.2 /var/www/html/glpi/front/cron.php &>/dev/null
 
-
-
-
-
-
-
 fusioninventory-netinventory --host 172.15.0.10 \ --credentials version:2c,community:public

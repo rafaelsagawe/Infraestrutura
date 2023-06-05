@@ -43,7 +43,19 @@ Acessar o IP:3000
 
 # Monitoramento das impressoras
 
-![](moni_imp.png)
+Primeiro modelo de monitoramento
+![](moni_imp_A.png)
+
+Visão final do monitoramento
+![](moni_imp_B.png)
+
+#  Servidores
+
+## Monitaramento dos servidores
+![](Datacenter.png)
+
+## Monitaramento dos Storages
+![](Storages.png)
 
 # Referencias
 [https://www.opservices.com.br/grafana/]
