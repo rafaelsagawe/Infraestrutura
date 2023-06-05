@@ -107,7 +107,7 @@ $ psql
 
 ## 2. Aplicação (Zabbix Server)
 
-Instalando a 
+Instalando o servidor da aplicação do Zabbix no container
 
 ~~~~shell
 # cd /tmp/
@@ -141,7 +141,8 @@ DBPassword | Senha do banco (mesmo que o nome do usuário, para simplificar)
 Restartar a aplicação para verificar se está funcionando
 
 ~~~~shell
-# service zabbix-server restart 
+# service zabbix-server restart
+
 # service zabbix-server status  
     * zabbix-server.service - Zabbix Server
         Loaded: loaded (/lib/systemd/system/zabbix-server.service; disabled; vendor preset: enabled)
@@ -170,6 +171,8 @@ Restartar a aplicação para verificar se está funcionando
 ~~~~
 ## 3. Front (Nginx)
 
+Instalando o Frontend do zabbix, como servidor web escolhi do NGinx.
+
 ~~~~shell
 # cd /tmp/
 
@@ -187,7 +190,9 @@ Descomentar os parametros 'listen' e 'server_name'
 
 ~~~~shell
 # nano /etc/zabbix/nginx.conf
+
 # service nginx restart 
+
 # service nginx status  
     * nginx.service - A high performance web server and a reverse proxy server
         Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)

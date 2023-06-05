@@ -41,5 +41,9 @@ A instalação é feita atraves do arquivo ``deb``, instalar via ``dpkg``, inici
 
 Acessar o IP:3000
 
+# Monitoramento das impressoras
+
+![](moni_imp.png)
+
 # Referencias
 [https://www.opservices.com.br/grafana/]
