@@ -1,4 +1,4 @@
-# Infraestrutura lógica da SEMED
+# Infraestrutura 
 Arquivos de configuração, guias de instalações e utilizações dos sistemas da SEMED nos anos de 2017/2018/2019/2020
 
 Usarei esse repositório apenas para documentar o ambiente de servidores
