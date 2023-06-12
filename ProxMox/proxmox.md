@@ -1,4 +1,4 @@
-## Hardware dos Nodes
+## Hardware dos Nodes (Antigo)
 
 Item |  Node - 1 | node - 2
 ----|-------|----
@@ -9,7 +9,47 @@ Placa de Rede  | 4 - NetXtreme II BCM5709 Gigabit Ethernet + 2 Offboard | 4 - Ne
 Armazenamento  |LVM 278.86GiB |
 HD's  | 4 SAS de 300GB | 
 
-### Restart webinterface
+# Projeto de 2023
+Instalação limpa do Proxmox 7.4-3
+
+Atualizando o sistema
+~~~~shell
+# apt update && apt upgrade -y
+~~~~
+
+## Instalando Webmin
+Para melhor gerencia do hardware utilizo o webmin como interface de controle e ajustes finos no equipamento.
+
+~~~~shell
+# curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh
+# sh setup-repos.sh
+# apt install webmin
+~~~~
+[Link](https://webmin.com/download/)
+
+~~~~shell
+# service  webmin status
+
+● webmin.service - Webmin server daemon
+     Loaded: loaded (/lib/systemd/system/webmin.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2023-06-12 08:57:48 -03; 1min 49s ago
+    Process: 37236 ExecStart=/usr/share/webmin/miniserv.pl /etc/webmin/miniserv.conf (code=exited, status=0/SUCCESS)
+   Main PID: 37237 (miniserv.pl)
+      Tasks: 1 (limit: 38288)
+     Memory: 61.5M
+        CPU: 2.313s
+     CGroup: /system.slice/webmin.service
+             └─37237 /usr/bin/perl /usr/share/webmin/miniserv.pl /etc/webmin/miniserv.conf
+
+Jun 12 08:57:46 srv-dev systemd[1]: Starting Webmin server daemon...
+~~~~
+
+## Atualizando a lista de templates
+~~~~shell
+# pveam update
+~~~~
+
+### Restart webinterface do Proxmox
 ~~~~shell
 # service pveproxy status 
 ~~~~
@@ -247,7 +287,7 @@ $ systemctl status apache2.service
 
 ## Instalação do docker + docker-compose
 
-O docker tem tem funcionado na partição LVM, quando é usado ZFS ele não inicia.
+O docker está funcionado na partição LVM, **quando é usado ZFS ele não inicia**.
 
 1. Desmarcar Unprivileged Container;
 2. Container criado com debian-10-turnkey-core;
