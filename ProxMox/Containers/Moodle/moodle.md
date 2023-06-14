@@ -60,7 +60,7 @@ O Moodle apartir da versão 4, necessita do PHP8 e PostgreSQL13
 ~~~~shell
 # su - postgres
 $ psql
-    CREATE USER moodle WITH PASSWORD '#TIadm23#';
+    CREATE USER moodle WITH PASSWORD 'SenhaDB';
     CREATE DATABASE moodle ENCODING 'UTF8' TEMPLATE template0;
     GRANT ALL PRIVILEGES ON DATABASE moodle to moodle;
     \q
@@ -94,21 +94,4 @@ Local de instalação, /var/www/html/moodle/local
 
 https://www.howtoforge.com/how-to-install-moodle-on-ubuntu-20-04/
 
-
-Memoria= 1gb
-core= 2
-HD= 40gb
-IP= 192.168.31.197/24
-
-Sistema já com o Moodle instalado
-
-## para a criação com base postgres (não usado)
-DBuser: "moodle_ead" 
-DBpassword "semed-ead"
-
-~~~~shell
-# chown www-data:www-data -R /var/www/
-
-# service apache2 restart
-~~~~
 
