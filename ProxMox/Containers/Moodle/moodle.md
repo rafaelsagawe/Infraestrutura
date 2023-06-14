@@ -35,7 +35,6 @@ O Moodle apartir da versão 4, necessita do PHP8 e PostgreSQL13
     date.timezone = America/Sao_Paulo
 ~~~~
 
-
 ## Instalando o Moodle
 ~~~~Shell
 # cd /var/www/html/
@@ -60,6 +59,12 @@ O Moodle apartir da versão 4, necessita do PHP8 e PostgreSQL13
 
 ~~~~shell
 # su - postgres
+$ psql
+    CREATE USER moodle WITH PASSWORD '#TIadm23#';
+    CREATE DATABASE moodle ENCODING 'UTF8' TEMPLATE template0;
+    GRANT ALL PRIVILEGES ON DATABASE moodle to moodle;
+    \q
+$ exit
 ~~~~
 
 ## Envio de e-mail
