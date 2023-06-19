@@ -20,13 +20,13 @@ O Moodle apartir da versão 4, necessita do PHP8 e PostgreSQL13
 # grep -rhE ^deb /etc/apt/sources.list* | grep -i ondrej
 
 # apt update
-# apt install curl php8.1 php8.1-fpm php8.1-curl php8.1-xml php8.1-gd php8.1-xmlrpc php8.1-intl php8.1-zip php8.1-mbstring php8.1-soap php8.1-pgsql unzip
+# apt install apache2 curl php8.1 php8.1-fpm php8.1-curl php8.1-xml php8.1-gd php8.1-xmlrpc php8.1-intl php8.1-zip php8.1-mbstring php8.1-soap php8.1-pgsql unzip
 ~~~~
 
 ### Ajustes no PHP
 
 ~~~~shell
-# nano /etc/php/7.4/fpm/php.ini
+# nano /etc/php/8.1/fpm/php.ini
 
     memory_limit = 256M
     cgi.fix_pathinfo = 0
@@ -34,13 +34,14 @@ O Moodle apartir da versão 4, necessita do PHP8 e PostgreSQL13
     max_execution_time = 360
     date.timezone = America/Sao_Paulo
 ~~~~
-
+Ativando o PHP no Nginx 
+https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Nginx-PHP-FPM-config-example
 ## Instalando o Moodle
 ~~~~Shell
 # cd /var/www/html/
 # wget https://download.moodle.org/download.php/direct/stable402/moodle-4.2.1.zip
 # unzip moodle-4.2.1.zip 
-# mkdir moodledata
+# mkdir /var/www/moodledata
 # chown www-data:www-data /var/www/moodledata
 # chown www-data:www-data /var/www/html/moodle/
 ~~~~
@@ -60,7 +61,7 @@ O Moodle apartir da versão 4, necessita do PHP8 e PostgreSQL13
 ~~~~shell
 # su - postgres
 $ psql
-    CREATE USER moodle WITH PASSWORD 'SenhaDB';
+    CREATE USER moodle WITH PASSWORD '#TIadm23#';
     CREATE DATABASE moodle ENCODING 'UTF8' TEMPLATE template0;
     GRANT ALL PRIVILEGES ON DATABASE moodle to moodle;
     \q
