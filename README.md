@@ -1,11 +1,4 @@
-# Infraestrutura 
-Arquivos de configuração, guias de instalações e utilizações dos sistemas da SEMED nos anos de 2017/2018/2019/2020
-
-Usarei esse repositório apenas para documentar o ambiente de servidores
-
-Estrutura do repositório:
-* As pastas simbolizam o ambiente, o servidor ou instância
-* Os arquivos são as configurações e documentação básica
+Matérias e anotações de estudos de TI de forma geral.
 
 ## Índice dos projetos
 ---
