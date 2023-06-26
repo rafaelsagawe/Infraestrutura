@@ -21,6 +21,19 @@ O Rocky Linux é um sistema operacional empresarial de código aberto projetado 
 # sudo dnf install nano htop
 ~~~~
 
+### Erro de pacote
+
+
+Problem: cannot install the best update candidate for package python-unversioned-command-3.9.16-1.el9.noarch
+  - nothing provides python3 = 3.9.16-1.el9_2.1 needed by python-unversioned-command-3.9.16-1.el9_2.1.noarch
+(try to add '--skip-broken' to skip uninstallable packages or '--nobest' to use not only best candidate packages)
+
+~~~~shell
+# dnf clean all
+# yum install python-unversioned-command
+# yum update
+~~~~
+
 ## Ajustando o IP
 
 ~~~~shell
@@ -173,8 +186,7 @@ Podman é uma ferramenta multiplataforma de linha de comando, Open-Source, que p
 Cockpit um Dashboard web para gerenciar seu Servidores.
 
 ~~~~shell
-# sudo dnf install -y cockpit cockpit-machines cockpit-podman
-# sudo dnf install -y 
+# sudo dnf install -y cockpit cockpit-machines cockpit-podman 
 ~~~~
 
 ## Ativando a inicialização
@@ -212,3 +224,4 @@ Cockpit um Dashboard web para gerenciar seu Servidores.
 # sudo firewall-cmd --reload
     success
 ~~~~
+
