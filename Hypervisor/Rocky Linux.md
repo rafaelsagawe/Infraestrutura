@@ -41,6 +41,12 @@ Problem: cannot install the best update candidate for package python-unversioned
 ~~~~
 
 ![nmtui](img/nmtui.png)
+![nmtui](img/nmtui-rede-2.png)
+![nmtui](img/nmtui-rede-3.png)
+**Necessario a colocação da mascara de rede no IP**
+
+## Trocando o nome
+![nmtui](img/nmtui-hostname-1.png)
 
 # Instalação do Podman e cockpit
 
@@ -224,4 +230,8 @@ Cockpit um Dashboard web para gerenciar seu Servidores.
 # sudo firewall-cmd --reload
     success
 ~~~~
+
+## Ajustando o IP
+
+## Trocando o nome
 
