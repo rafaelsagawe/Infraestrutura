@@ -4,9 +4,11 @@ kubelet: the component that runs on all of the machines in your cluster and does
 kubectl: the command line util to talk to your cluster.
 ~~~~
 
-[Documentação](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
+[Documentação oficial](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
 
-[Title](https://www.howtoforge.com/how-to-setup-kubernetes-cluster-with-kubeadm-on-rocky-linux/)
+[How to Install a Kubernetes Cluster with Kubeadm on Rocky Linux](https://www.howtoforge.com/how-to-setup-kubernetes-cluster-with-kubeadm-on-rocky-linux/)
+
+[Install Kubernetes Master Node on Rocky Linux 9](https://www.centlinux.com/2022/11/install-kubernetes-master-node-rocky-linux.html)
 
 IP | Hostname | Memoria | HD 
 --|--|--|--
@@ -253,6 +255,10 @@ Here is one example how you may list all running Kubernetes containers by using 
 error execution phase wait-control-plane: couldn't initialize a Kubernetes cluster
 To see the stack trace of this error execute with --v=5 or higher
 ~~~~
+
+[dia - 30-6, refente ao erro a cima](https://github.com/containerd/containerd/issues/8139)
+
+
 
 
 aplicar o codigo do token
