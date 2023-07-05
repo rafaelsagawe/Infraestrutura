@@ -12,278 +12,15 @@
 
 [Kubernetes with Kubeadm: Cluster Installation from Scratch](https://admantium.medium.com/kubernetes-with-kubeadm-cluster-installation-from-scratch-810adc1b0a64)
 
-IP | Hostname | Memoria | HD 
+IP | Hostname | Memoria | HD Sistema |
 --|--|--|--
-https://172.15.5.1:9090 | kube-master | 32GB |
-https://172.15.5.2:9090 | kube-worker-1 | 16GB |
-https://172.15.5.3:9090 | kube-worker-2 | 16GB |
+https://172.15.5.1:9090 | kube-master | 32GB | |
+https://172.15.5.2:9090 | kube-worker-1 | 16GB | |
+https://172.15.5.3:9090 | kube-worker-2 | 16GB | |
 
 
 ## Preparações iniciais
 
-Usando o usuário root.
-
-Ajustar o mome de cada maquina
-~~~~shell
-# hostnamectl set-hostname kube-master.semed.intra
-# echo 192.168.116.131 kubemaster-01.semed.intra kubemas
-ter-01 >> /etc/hosts
-~~~~
-~~~~shell
-# dnf makecache --refresh
-Extra Packages for Enterprise Linux 9 - x86_64                                                                                                  58 kB/s |  62 kB     00:01    
-Rocky Linux 9 - BaseOS                                                                                                                         7.8 kB/s | 4.1 kB     00:00    
-Rocky Linux 9 - AppStream                                                                                                                      7.6 kB/s | 4.5 kB     00:00    
-Rocky Linux 9 - AppStream                                                                                                                      875 kB/s | 7.0 MB     00:08     
-Rocky Linux 9 - Extras                                                                                                                         3.6 kB/s | 2.9 kB     00:00    
-Rocky Linux 9 - Extras                                                                                                                         9.3 kB/s | 9.5 kB     00:01     
-Metadata cache created.
-~~~~
-
-Trocando o modo do SeLinux para Permissive.
-~~~~shell
-# setenforce 0
-# sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
-~~~~
-
-Desativando o swap
-~~~~shell
-# sudo swapoff -a
-# sudo sed -e '/swap/s/^/#/g' -i /etc/fstab
-~~~~
-
-
-
-
-### Loading K8s required Kernel Modules:
-
-~~~~shell
-$sudo modprobe overlay
-$ sudo modprobe br_netfilter
-
-$ cat > /etc/modules-load.d/k8s.conf << EOF
-overlay
-br_netfilter
-EOF
-
-~~~~ 
-
-~~~~shell
-$ cat > /etc/sysctl.d/k8s.conf << EOF
-    net.ipv4.ip_forward = 1
-    net.bridge.bridge-nf-call-ip6tables = 1
-    net.bridge.bridge-nf-call-iptables = 1
-EOF
-~~~~
-
-É necessario recarregar os parametros do kernel
-
-~~~~shell
-$ sudo sysctl --system
-* Applying /usr/lib/sysctl.d/10-default-yama-scope.conf ...
-* Applying /usr/lib/sysctl.d/50-coredump.conf ...
-* Applying /usr/lib/sysctl.d/50-default.conf ...
-* Applying /usr/lib/sysctl.d/50-libkcapi-optmem_max.conf ...
-* Applying /usr/lib/sysctl.d/50-pid-max.conf ...
-* Applying /usr/lib/sysctl.d/50-redhat.conf ...
-* Applying /usr/lib/sysctl.d/60-libvirtd.conf ...
-* Applying /usr/lib/sysctl.d/60-qemu-postcopy-migration.conf ...
-* Applying /etc/sysctl.d/99-sysctl.conf ...
-* Applying /etc/sysctl.d/k8s.conf ...
-* Applying /etc/sysctl.conf ...
-kernel.yama.ptrace_scope = 0
-kernel.core_pattern = |/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h
-kernel.core_pipe_limit = 16
-fs.suid_dumpable = 2
-kernel.sysrq = 16
-kernel.core_uses_pid = 1
-net.ipv4.conf.default.rp_filter = 2
-net.ipv4.conf.eno1.rp_filter = 2
-net.ipv4.conf.lo.rp_filter = 2
-net.ipv4.conf.default.accept_source_route = 0
-net.ipv4.conf.eno1.accept_source_route = 0
-net.ipv4.conf.lo.accept_source_route = 0
-net.ipv4.conf.default.promote_secondaries = 1
-net.ipv4.conf.eno1.promote_secondaries = 1
-net.ipv4.conf.lo.promote_secondaries = 1
-net.ipv4.ping_group_range = 0 2147483647
-net.core.default_qdisc = fq_codel
-fs.protected_hardlinks = 1
-fs.protected_symlinks = 1
-fs.protected_regular = 1
-fs.protected_fifos = 1
-net.core.optmem_max = 81920
-kernel.pid_max = 4194304
-kernel.kptr_restrict = 1
-net.ipv4.conf.default.rp_filter = 1
-net.ipv4.conf.eno1.rp_filter = 1
-net.ipv4.conf.lo.rp_filter = 1
-fs.aio-max-nr = 1048576
-vm.unprivileged_userfaultfd = 1
-net.ipv4.ip_forward = 1
-net.bridge.bridge-nf-call-ip6tables = 1
-net.bridge.bridge-nf-call-iptables = 1
-~~~~
-
-## Instalando containerd.io
-
-~~~~shell
-$ wget https://github.com/containerd/containerd/releases/download/v1.7.0/containerd-1.7.0-linux-amd64.tar.gz
-
-$ sudo tar Cxzvf /usr/local containerd-1.7.0-linux-amd64.tar.gz
-
-$ cd /etc/systemd/system/
-
-$ sudo wget https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
-
-$ cat /etc/systemd/system/containerd.service
-# Copyright The containerd Authors.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-[Unit]
-Description=containerd container runtime
-Documentation=https://containerd.io
-After=network.target local-fs.target
-
-[Service]
-#uncomment to enable the experimental sbservice (sandboxed) version of containerd/cri integration
-#Environment="ENABLE_CRI_SANDBOXES=sandboxed"
-ExecStartPre=-/sbin/modprobe overlay
-ExecStart=/usr/local/bin/containerd
-
-Type=notify
-Delegate=yes
-KillMode=process
-Restart=always
-RestartSec=5
-# Having non-zero Limit*s causes performance problems due to accounting overhead
-# in the kernel. We recommend using cgroups to do container-local accounting.
-LimitNPROC=infinity
-LimitCORE=infinity
-LimitNOFILE=infinity
-# Comment TasksMax if your systemd version does not supports it.
-# Only systemd 226 and above support this version.
-TasksMax=infinity
-OOMScoreAdjust=-999
-
-[Install]
-WantedBy=multi-user.target
-~~~~
-
-~~~~shell
-
-$ sudo systemctl daemon-reload
-
-$ sudo systemctl enable --now containerd
-Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /etc/systemd/system/containerd.service.
-
-$ sudo systemctl status containerd
-● containerd.service - containerd container runtime
-     Loaded: loaded (/etc/systemd/system/containerd.service; enabled; preset: disabled)
-     Active: active (running) since Tue 2023-07-04 08:42:46 -03; 51s ago
-       Docs: https://containerd.io
-    Process: 5046 ExecStartPre=/sbin/modprobe overlay (code=exited, status=0/SUCCESS)
-   Main PID: 5047 (containerd)
-      Tasks: 9
-     Memory: 16.1M
-        CPU: 85ms
-     CGroup: /system.slice/containerd.service
-             └─5047 /usr/local/bin/containerd
-
-Jul 04 08:42:46 kube-master.semed.intra containerd[5047]: time="2023-07-04T08:42:46.695115581-03:00" level=info msg="Start subscribing containerd event"
-Jul 04 08:42:46 kube-master.semed.intra containerd[5047]: time="2023-07-04T08:42:46.695173342-03:00" level=info msg="Start recovering state"
-Jul 04 08:42:46 kube-master.semed.intra containerd[5047]: time="2023-07-04T08:42:46.695244593-03:00" level=info msg="Start event monitor"
-Jul 04 08:42:46 kube-master.semed.intra containerd[5047]: time="2023-07-04T08:42:46.695260395-03:00" level=info msg="Start snapshots syncer"
-Jul 04 08:42:46 kube-master.semed.intra containerd[5047]: time="2023-07-04T08:42:46.695271221-03:00" level=info msg="Start cni network conf syncer for default"
-Jul 04 08:42:46 kube-master.semed.intra containerd[5047]: time="2023-07-04T08:42:46.695282628-03:00" level=info msg="Start streaming server"
-Jul 04 08:42:46 kube-master.semed.intra containerd[5047]: time="2023-07-04T08:42:46.695571075-03:00" level=info msg=serving... address=/run/containerd/containerd.sock.ttrpc
-Jul 04 08:42:46 kube-master.semed.intra containerd[5047]: time="2023-07-04T08:42:46.695630110-03:00" level=info msg=serving... address=/run/containerd/containerd.sock
-Jul 04 08:42:46 kube-master.semed.intra systemd[1]: Started containerd container runtime.
-Jul 04 08:42:46 kube-master.semed.intra containerd[5047]: time="2023-07-04T08:42:46.697179010-03:00" level=info msg="containerd successfully booted in 0.131644s"
-~~~~
-
-# Instalando o Kubernetes
-
-~~~~shell
-$ sudo nano /etc/yum.repos.d/kubernetes.repo
-[kubernetes]
-name=Kubernetes
-baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
-enabled=1
-gpgcheck=1
-repo_gpgcheck=1
-gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
-~~~~
-
-Refazendo o repositorio
-~~~~shell
-$ sudo dnf makecache
-~~~~
-
-Verificando o repositorio
-~~~~shell
-sudo dnf search kubeadm                                                                                                                                    
-Last metadata expiration check: 0:00:51 ago on Tue Jul  4 09:04:31 2023.
-=============================================================================== Name Exactly Matched: kubeadm ===============================================================================
-kubeadm.x86_64 : Command-line utility for administering a Kubernetes cluster.
-~~~~
-
-~~~~shell
-$ sudo dnf install kubelet kubeadm kubectl --disableexcludes=kubernetes
-~~~~
-
-~~~~shell
-$ sudo systemctl enable --now kubelet
-Created symlink /etc/systemd/system/multi-user.target.wants/kubelet.service → /usr/lib/systemd/system/kubelet.service.
-
-$ sudo systemctl status kubelet
-● kubelet.service - kubelet: The Kubernetes Node Agent
-     Loaded: loaded (/usr/lib/systemd/system/kubelet.service; enabled; preset: disabled)
-    Drop-In: /usr/lib/systemd/system/kubelet.service.d
-             └─10-kubeadm.conf
-     Active: activating (auto-restart) (Result: exit-code) since Tue 2023-07-04 09:18:31 -03; 7s ago
-       Docs: https://kubernetes.io/docs/
-    Process: 5621 ExecStart=/usr/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_CONFIG_ARGS $KUBELET_KUBEADM_ARGS $KUBELET_EXTRA_ARGS (code=exited, status=1/FAILURE)
-   Main PID: 5621 (code=exited, status=1/FAILURE)
-        CPU: 61ms
-~~~~
-
-## Erro: required cgroups disabled
-
-~~~~shell
-$ sudo sed -i "s/cgroupDriver: systemd/cgroupDriver: cgroupfs/g" /var/lib/kubelet/config.yaml
-$ sudo systemctl daemon-reload
-$ sudo systemctl restart kubelet
-~~~~
-
-~~~~shell
-$ sudo systemctl status kubelet
-● kubelet.service - kubelet: The Kubernetes Node Agent
-     Loaded: loaded (/usr/lib/systemd/system/kubelet.service; enabled; preset: disabled)
-    Drop-In: /usr/lib/systemd/system/kubelet.service.d
-             └─10-kubeadm.conf
-     Active: active (running) since Tue 2023-07-04 13:04:05 -03; 1min 2s ago
-       Docs: https://kubernetes.io/docs/
-   Main PID: 59364 (kubelet)
-      Tasks: 11 (limit: 48176)
-     Memory: 35.4M
-        CPU: 570ms
-     CGroup: /system.slice/kubelet.service
-             └─59364 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml --contai>
-
-Jul 04 13:05:05 kube-master.semed.intra kubelet[59364]: E0704 13:05:05.140758   59364 pod_workers.go:1294] "Error syncing pod, skipping" err="failed to \"CreatePodSandbox\" for \"kube-sche>
-~~~~
 
 ## Limpar o Cluster
 
@@ -301,120 +38,10 @@ sudo systemctl restart kubelet
 sudo kubeadm reset
 ~~~~
 
-## Plugin: Flannel
+===============//===============//============= 
 
-~~~~shell
-$ sudo mkdir -p /opt/bin/
-$ sudo curl -fsSLo /opt/bin/flanneld https://github.com/flannel-io/flannel/releases/download/v0.19.0/flanneld-amd64
-$ sudo chmod +x /opt/bin/flanneld
-~~~~
-
-## Initializing Kubernetes Control Plane
-
-~~~~shell
-$ lsmod | grep br_netfilter
-br_netfilter           32768  0
-bridge                323584  1 br_netfilter
-~~~~
-
-~~~~shell
-$ sudo kubeadm config images pull
-[config/images] Pulled registry.k8s.io/kube-apiserver:v1.27.3
-[config/images] Pulled registry.k8s.io/kube-controller-manager:v1.27.3
-[config/images] Pulled registry.k8s.io/kube-scheduler:v1.27.3
-[config/images] Pulled registry.k8s.io/kube-proxy:v1.27.3
-[config/images] Pulled registry.k8s.io/pause:3.9
-[config/images] Pulled registry.k8s.io/etcd:3.5.7-0
-[config/images] Pulled registry.k8s.io/coredns/coredns:v1.10.1
-~~~~
-
-## Iniciando o control-plane
-
-~~~~shell
-$ sudo kubeadm init
-[init] Using Kubernetes version: v1.27.3
-[preflight] Running pre-flight checks
-        [WARNING Firewalld]: firewalld is active, please ensure ports [6443 10250] are open or your cluster may not function correctly
-        [WARNING Hostname]: hostname "kube-master.semed.intra" could not be reached
-        [WARNING Hostname]: hostname "kube-master.semed.intra": lookup kube-master.semed.intra on 172.15.1.3:53: no such host
-[preflight] Pulling images required for setting up a Kubernetes cluster
-[preflight] This might take a minute or two, depending on the speed of your internet connection
-[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
-W0704 18:41:53.927143   33551 checks.go:835] detected that the sandbox image "registry.k8s.io/pause:3.8" of the container runtime is inconsistent with that used by kubeadm. It is recommended that using "registry.k8s.io/pause:3.9" as the CRI sandbox image.
-[certs] Using certificateDir folder "/etc/kubernetes/pki"
-[certs] Generating "ca" certificate and key
-[certs] Generating "apiserver" certificate and key
-[certs] apiserver serving cert is signed for DNS names [kube-master.semed.intra kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 172.15.46.4]
-[certs] Generating "apiserver-kubelet-client" certificate and key
-[certs] Generating "front-proxy-ca" certificate and key
-[certs] Generating "front-proxy-client" certificate and key
-[certs] Generating "etcd/ca" certificate and key
-[certs] Generating "etcd/server" certificate and key
-[certs] etcd/server serving cert is signed for DNS names [kube-master.semed.intra localhost] and IPs [172.15.46.4 127.0.0.1 ::1]
-[certs] Generating "etcd/peer" certificate and key
-[certs] etcd/peer serving cert is signed for DNS names [kube-master.semed.intra localhost] and IPs [172.15.46.4 127.0.0.1 ::1]
-[certs] Generating "etcd/healthcheck-client" certificate and key
-[certs] Generating "apiserver-etcd-client" certificate and key
-[certs] Generating "sa" key and public key
-[kubeconfig] Using kubeconfig folder "/etc/kubernetes"
-[kubeconfig] Writing "admin.conf" kubeconfig file
-[kubeconfig] Writing "kubelet.conf" kubeconfig file
-[kubeconfig] Writing "controller-manager.conf" kubeconfig file
-[kubeconfig] Writing "scheduler.conf" kubeconfig file
-[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
-[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
-[kubelet-start] Starting the kubelet
-[control-plane] Using manifest folder "/etc/kubernetes/manifests"
-[control-plane] Creating static Pod manifest for "kube-apiserver"
-[control-plane] Creating static Pod manifest for "kube-controller-manager"
-[control-plane] Creating static Pod manifest for "kube-scheduler"
-[etcd] Creating static Pod manifest for local etcd in "/etc/kubernetes/manifests"
-[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests". This can take up to 4m0s
-[apiclient] All control plane components are healthy after 7.501644 seconds
-[upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
-[kubelet] Creating a ConfigMap "kubelet-config" in namespace kube-system with the configuration for the kubelets in the cluster
-[upload-certs] Skipping phase. Please see --upload-certs
-[mark-control-plane] Marking the node kube-master.semed.intra as control-plane by adding the labels: [node-role.kubernetes.io/control-plane node.kubernetes.io/exclude-from-external-load-balancers]
-[mark-control-plane] Marking the node kube-master.semed.intra as control-plane by adding the taints [node-role.kubernetes.io/control-plane:NoSchedule]
-[bootstrap-token] Using token: jjreiy.zwh09048raqkxydz
-[bootstrap-token] Configuring bootstrap tokens, cluster-info ConfigMap, RBAC Roles
-[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to get nodes
-[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
-[bootstrap-token] Configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
-[bootstrap-token] Configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
-[bootstrap-token] Creating the "cluster-info" ConfigMap in the "kube-public" namespace
-[kubelet-finalize] Updating "/etc/kubernetes/kubelet.conf" to point to a rotatable kubelet client certificate and key
-[addons] Applied essential addon: CoreDNS
-[addons] Applied essential addon: kube-proxy
-
-Your Kubernetes control-plane has initialized successfully!
-
-To start using your cluster, you need to run the following as a regular user:
-
-  mkdir -p $HOME/.kube
-  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-  sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
-Alternatively, if you are the root user, you can run:
-
-  export KUBECONFIG=/etc/kubernetes/admin.conf
-
-You should now deploy a pod network to the cluster.
-Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
-  https://kubernetes.io/docs/concepts/cluster-administration/addons/
-
-Then you can join any number of worker nodes by running the following on each as root:
-
-kubeadm join 172.15.46.4:6443 --token jjreiy.zwh09048raqkxydz \
-        --discovery-token-ca-cert-hash sha256:e92cdc185fde01349e84eb9e339fa923268af7c1de24d6cea9be1213380b6034
-
-~~~~
-
-===============//===============//=============
-
-# Seguindo o tutorial 
-
-## Ajustes iniciais
+Usando o usuário root
+## Ajustes iniciais 
 
 Usando o usuário root
 ~~~~shell
@@ -523,7 +150,7 @@ net.bridge.bridge-nf-call-iptables = 1
 ## Desativando o Swap do Linux
 ~~~~shell
 # swapoff -a
-sed -e '/swap/s/^/#/g' -i /etc/fstab
+# sed -e '/swap/s/^/#/g' -i /etc/fstab
 
 # free -m
                total        used        free      shared  buff/cache   available
@@ -565,7 +192,7 @@ Total download size: 33 M
 Installed size: 114 M
 Downloading Packages:
 containerd.io-1.6.21-3.1.el9.x86_64.rpm                           9.4 MB/s |  33 MB     00:03     
----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 Total                                                             9.4 MB/s |  33 MB     00:03     
 Docker CE Stable - x86_64                                          33 kB/s | 1.6 kB     00:00    
 Importing GPG key 0x621E9F35:
@@ -590,9 +217,261 @@ Complete!
 
 # mv /etc/containerd/config.toml /etc/containerd/config.toml.orig
 containerd config default > /etc/containerd/config.toml
+~~~~
+Ativar a função SystemdCgroup, por volta da linha 125, ``SystemdCgroup = true``
 
+~~~~shell
 # nano /etc/containerd/config.toml
+disabled_plugins = []
+imports = []
+oom_score = 0
+plugin_dir = ""
+required_plugins = []
+root = "/var/lib/containerd"
+state = "/run/containerd"
+temp = ""
+version = 2
 
+[cgroup]
+  path = ""
+
+[debug]
+  address = ""
+  format = ""
+  gid = 0
+  level = ""
+  uid = 0
+
+[grpc]
+  address = "/run/containerd/containerd.sock"
+  gid = 0
+  max_recv_message_size = 16777216
+  max_send_message_size = 16777216
+  tcp_address = ""
+  tcp_tls_ca = ""
+  tcp_tls_cert = ""
+  tcp_tls_key = ""
+  uid = 0
+
+[metrics]
+  address = ""
+  grpc_histogram = false
+
+[plugins]
+
+  [plugins."io.containerd.gc.v1.scheduler"]
+    deletion_threshold = 0
+    mutation_threshold = 100
+    pause_threshold = 0.02
+    schedule_delay = "0s"
+    startup_delay = "100ms"
+
+  [plugins."io.containerd.grpc.v1.cri"]
+    device_ownership_from_security_context = false
+    disable_apparmor = false
+    disable_cgroup = false
+    disable_hugetlb_controller = true
+    disable_proc_mount = false
+    disable_tcp_service = true
+    enable_selinux = false
+    enable_tls_streaming = false
+    enable_unprivileged_icmp = false
+    enable_unprivileged_ports = false
+    ignore_image_defined_volumes = false
+    max_concurrent_downloads = 3
+    max_container_log_line_size = 16384
+    netns_mounts_under_state_dir = false
+    restrict_oom_score_adj = false
+    sandbox_image = "registry.k8s.io/pause:3.6"
+    selinux_category_range = 1024
+    stats_collect_period = 10
+    stream_idle_timeout = "4h0m0s"
+    stream_server_address = "127.0.0.1"
+    stream_server_port = "0"
+    systemd_cgroup = false
+    tolerate_missing_hugetlb_controller = true
+    unset_seccomp_profile = ""
+
+    [plugins."io.containerd.grpc.v1.cri".cni]
+      bin_dir = "/opt/cni/bin"
+      conf_dir = "/etc/cni/net.d"
+      conf_template = ""
+      ip_pref = ""
+      max_conf_num = 1
+
+    [plugins."io.containerd.grpc.v1.cri".containerd]
+      default_runtime_name = "runc"
+      disable_snapshot_annotations = true
+      discard_unpacked_layers = false
+      ignore_rdt_not_enabled_errors = false
+      no_pivot = false
+      snapshotter = "overlayfs"
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime.options]
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+          base_runtime_spec = ""
+          cni_conf_dir = ""
+          cni_max_conf_num = 0
+          container_annotations = []
+          pod_annotations = []
+          privileged_without_host_devices = false
+          runtime_engine = ""
+          runtime_path = ""
+          runtime_root = ""
+          runtime_type = "io.containerd.runc.v2"
+
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+            BinaryName = ""
+            CriuImagePath = ""
+            CriuPath = ""
+            CriuWorkPath = ""
+            IoGid = 0
+            IoUid = 0
+            NoNewKeyring = false
+            NoPivotRoot = false
+            Root = ""
+            ShimCgroup = ""
+            SystemdCgroup = true
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime.options]
+
+    [plugins."io.containerd.grpc.v1.cri".image_decryption]
+      key_model = "node"
+
+    [plugins."io.containerd.grpc.v1.cri".registry]
+      config_path = ""
+
+      [plugins."io.containerd.grpc.v1.cri".registry.auths]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.configs]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.headers]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+
+    [plugins."io.containerd.grpc.v1.cri".x509_key_pair_streaming]
+      tls_cert_file = ""
+      tls_key_file = ""
+
+  [plugins."io.containerd.internal.v1.opt"]
+    path = "/opt/containerd"
+
+  [plugins."io.containerd.internal.v1.restart"]
+    interval = "10s"
+
+  [plugins."io.containerd.internal.v1.tracing"]
+    sampling_ratio = 1.0
+    service_name = "containerd"
+
+  [plugins."io.containerd.metadata.v1.bolt"]
+    content_sharing_policy = "shared"
+
+  [plugins."io.containerd.monitor.v1.cgroups"]
+    no_prometheus = false
+
+  [plugins."io.containerd.runtime.v1.linux"]
+    no_shim = false
+    runtime = "runc"
+    runtime_root = ""
+    shim = "containerd-shim"
+    shim_debug = false
+
+  [plugins."io.containerd.runtime.v2.task"]
+    platforms = ["linux/amd64"]
+    sched_core = false
+
+  [plugins."io.containerd.service.v1.diff-service"]
+    default = ["walking"]
+
+  [plugins."io.containerd.service.v1.tasks-service"]
+    rdt_config_file = ""
+
+  [plugins."io.containerd.snapshotter.v1.aufs"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.devmapper"]
+    async_remove = false
+    base_image_size = ""
+    discard_blocks = false
+    fs_options = ""
+    fs_type = ""
+    pool_name = ""
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.native"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.overlayfs"]
+    root_path = ""
+    upperdir_label = false
+
+  [plugins."io.containerd.snapshotter.v1.zfs"]
+    root_path = ""
+
+  [plugins."io.containerd.tracing.processor.v1.otlp"]
+    endpoint = ""
+    insecure = false
+    protocol = ""
+
+[proxy_plugins]
+
+[stream_processors]
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar"
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar.gzip"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+gzip+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar+gzip"
+
+[timeouts]
+  "io.containerd.timeout.bolt.open" = "0s"
+  "io.containerd.timeout.shim.cleanup" = "5s"
+  "io.containerd.timeout.shim.load" = "5s"
+  "io.containerd.timeout.shim.shutdown" = "3s"
+  "io.containerd.timeout.task.state" = "2s"
+
+[ttrpc]
+  address = ""
+  gid = 0
+  uid = 0
+~~~~
+
+~~~~shell
 # systemctl enable --now containerd.service
 Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /usr/lib/systemd/system/containerd.service.
 
@@ -879,16 +758,6 @@ kubeadm join 172.15.46.3:6443 --token pefwzs.qgtfraiikw3kl43s \
 # mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
-
-# kubectl get nodes
-kubectl cluster-info
-NAME                          STATUS     ROLES           AGE   VERSION
-kubemaster-01.semed.intra   NotRe
-ady   control-plane   33s   v1.27.3
-Kubernetes control plane is running at https://172.15.46.3:6443
-CoreDNS is running at https://172.15.46.3:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
-
-To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
 # kubectl get nodes
 NAME                          STATUS     ROLES           AGE   VERSION
