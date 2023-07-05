@@ -18,7 +18,7 @@ O Rocky Linux é um sistema operacional empresarial de código aberto projetado 
 
 ~~~~shell
 # sudo dnf -y install epel-release
-# sudo dnf install nano htop
+# sudo dnf install nano htop wget
 ~~~~
 
 ### Erro de pacote
