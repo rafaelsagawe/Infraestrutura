@@ -1,41 +1,32 @@
 
-* kubeadm: the command to bootstrap the cluster.
-* kubelet: the component that runs on all of the machines in your cluster and does things like starting pods and containers.
-* kubectl: the command line util to talk to your cluster.
+* kubeadm: the comando para inicializar o cluster.
+* kubelet: componente que é executado em todas as máquinas em seu cluster e faz coisas como iniciar pods e contêineres.
+* kubectl: utilitário de linha de comando para comunicação a API do Kubernetes.
 
 
 [Documentação oficial](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
 
 [How to Install a Kubernetes Cluster with Kubeadm on Rocky Linux](https://www.howtoforge.com/how-to-setup-kubernetes-cluster-with-kubeadm-on-rocky-linux/)
 
-[Install Kubernetes Master Node on Rocky Linux 9](https://www.centlinux.com/2022/11/install-kubernetes-master-node-rocky-linux.html)
+[Install Kubernetes Master Node on Rocky Linux 9](https://www.centlinux.com/2022/11de-rocky-linux.html)
 
 [Kubernetes with Kubeadm: Cluster Installation from Scratch](https://admantium.medium.com/kubernetes-with-kubeadm-cluster-installation-from-scratch-810adc1b0a64)
 
 IP | Hostname | Memoria | HD Sistema |
 --|--|--|--
-https://172.15.5.1:9090 | kube-master | 32GB | |
+https://17232GB | |
 https://172.15.5.2:9090 | kube-worker-1 | 16GB | |
 https://172.15.5.3:9090 | kube-worker-2 | 16GB | |
-
-
-## Preparações iniciais
-
 
 ## Limpar o Cluster
 
 ~~~~shell
-sudo rm -r  /etc/kubernetes/manifests/*
-
-sudo rm -rf /etc/cni/net.d/*
-
-sudo systemctl restart kubelet
-
-sudo systemctl restart containerd
-
-sudo systemctl restart kubelet
-
-sudo kubeadm reset
+rm -r  /etc/kubernetes/manifests/*
+rm -rf /etc/cni/net.d/*
+systemctl restart kubelet
+systemctl restart containerd
+systemctl restart kubelet
+kubeadm reset
 ~~~~
 
 ===============//===============//============= 
@@ -50,7 +41,7 @@ $ sudo su
 
 Arrumando o nome
 ~~~~shell
-# echo 172.15.5.1 kubemaster-01.semed.intra kubemaster-01 >> /etc/hosts                                                                     
+# echo 172.15.5.1 kubemaster.semed.intra kubemaster >> /etc/hosts                                                                     
 ~~~~
 
 Modo permissivo do SELinux
@@ -82,12 +73,10 @@ Rocky Linux release 9.2 (Blue Onyx)
 
 # uname -r
 5.14.0-284.18.1.el9_2.x86_64
-
 ~~~~
 
 ## Carregando os modulos K8s
 ~~~~shell
-
 # modprobe overlay
 modprobe br_netfilter
 cat > /etc/modules-load.d/k8s.conf << EOF
@@ -100,7 +89,10 @@ net.ipv4.ip_forward = 1
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 EOF
+~~~~
 
+Recarregando o systemctl para ativar os moadulos
+~~~~shell
 # sysctl --system
 * Applying /usr/lib/sysctl.d/10-default-yama-scope.conf ...
 * Applying /usr/lib/sysctl.d/50-coredump.conf ...
@@ -156,10 +148,10 @@ net.bridge.bridge-nf-call-iptables = 1
                total        used        free      shared  buff/cache   available
 Mem:            7566         587        6761           8         460        6979
 Swap:              0           0           0
-
 ~~~~
 
 ## Instalando o Containerd
+É um daemon que gerencia o ciclo de vida do contêiner desde baixar e desempacotar a imagem de contêiner até a execução e a supervisão do contêiner.
 
 ~~~~shell
 # dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
@@ -770,7 +762,7 @@ CoreDNS is running at https://172.15.46.3:6443/api/v1/namespaces/kube-system/ser
 
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
-# kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
+# kubectl apply -f https://raw.githubusercontent.comcumentation/kube-flannel.yml
 namespace/kube-flannel created
 clusterrole.rbac.authorization.k8s.io/flannel created
 clusterrolebinding.rbac.authorization.k8s.io/flannel created
@@ -796,7 +788,7 @@ kube-system    kube-scheduler-kubemaster-01.semed.intra              1/1     Run
 NAME                          STATUS     ROLES           AGE   VERSION
 kubemaster-01.semed.intra   NotReady   control-plane   43s   v1.27.3
 ~~~~
-[Ativando](https://stackoverflow.com/questions/46172741/kubernetes-cluster-master-node-not-ready)
+[Ativando](https://stackoverflow.com/questions/46172741de-not-ready)
 ~~~~shell
 # kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.
@@ -807,4 +799,47 @@ Unable to connect to the server: dial tcp: lookup cloud.weave.works on 172.15.1.
 # kubectl get nodes
 NAME                          STATUS   ROLES           AGE   VERSION
 kubemaster-01.semed.intra     Ready    control-plane   12m   v1.27.3
+~~~~
+
+# Primeiros teste
+
+## Exemplo - 1
+Criar. ver se iniciou e deletar
+
+~~~~shell
+# kubectl run nginx --image nginx
+pod/nginx created
+
+# kubectl get pods
+NAME    READY   STATUS    RESTARTS   AGE
+nginx   0/1     Pending   0          11s
+
+# kubectl delete pod nginx
+pod "nginx" deleted
+~~~~
+
+## Exemplo - 2
+
+~~~~shell
+$ curl -lo nginx.yaml "https://gist.githubusercontent.com/nonanom/498b913a69cede7037d55e28bb00344e/raw"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   577  100   577    0     0   1814      0 --:--:-- --:--:-- --:--:--  1814
+# kubectl apply --filename nginx.yaml
+service/nginx created
+deployment.apps/nginxministrador]# kubectl get pods
+NAME                     READY   STATUS    RESTARTS   AGE
+nginx-57d84f57dc-gfwxk   0/1     Pending   0    
+
+# kubectl get deployments
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   0/1     1            0      
+
+# kubectl get services
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP   115m
+nginx        ClusterIP   10.106.239.22   <none>        80/TCministrador]
+
+# kubectl port-forward service/nginx 8080:80
+error: unable to forward port because pod is not running. Current status=Pending
 ~~~~
