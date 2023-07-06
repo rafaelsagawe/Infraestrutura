@@ -649,7 +649,8 @@ Created symlink /etc/systemd/system/multi-user.target.wants/kubelet.service → 
 kubectl completion bash > /etc/bash_completion.d/kubectl
 
 # mkdir /opt/bin
-curl -fsSLo /opt/bin/flanneld https://github.com/flannel-io/flannel/releases/download/v0.20.1/flannel-v0.20.1-linux-amd64.tar.gz
+
+# curl -fsSLo /opt/bin/flanneld https://github.com/flannel-io/flannel/releases/download/v0.20.1/flannel-v0.20.1-linux-amd64.tar.gz
 
 # chmod +x /opt/bin/flanneld
 
@@ -662,7 +663,7 @@ curl -fsSLo /opt/bin/flanneld https://github.com/flannel-io/flannel/releases/dow
 [config/images] Pulled registry.k8s.io/etcd:3.5.7-0
 [config/images] Pulled registry.k8s.io/coredns/coredns:v1.10.1
 
-# kubeadm init
+# kubeadm init --pod-network-cidr=10.244.0.0/16
 [init] Using Kubernetes version: v1.27.3
 [preflight] Running pre-flight checks
         [WARNING Firewalld]: firewalld is active, please ensure ports [6443 10250] are open or your cluster may not function correctly
@@ -920,16 +921,16 @@ $ curl -lo nginx.yaml "https://gist.githubusercontent.com/nonanom/498b913a69cede
 service/nginx created
 deployment.apps/nginxministrador]# kubectl get pods
 NAME                     READY   STATUS    RESTARTS   AGE
-nginx-57d84f57dc-gfwxk   0/1     Pending   0    
+nginx-57d84f57dc-gfwxk   1/1     Pending   0    
 
 # kubectl get deployments
 NAME    READY   UP-TO-DATE   AVAILABLE   AGE
-nginx   0/1     1            0      
+nginx   1/1     1            0      
 
 # kubectl get services
 NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
-kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP   115m
-nginx        ClusterIP   10.106.239.22   <none>        80/TCministrador]
+kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP   12m
+nginx        ClusterIP   10.106.27.238   <none>        80/TCP    104s
 
 # kubectl port-forward service/nginx 8080:80
 error: unable to forward port because pod is not running. Current status=Pending
