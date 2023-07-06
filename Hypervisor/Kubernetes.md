@@ -14,11 +14,11 @@
 
 IP | Hostname | Memoria | HD Sistema |
 --|--|--|--
-https://17232GB | |
+https://172.15.5.1:9090 | kube-worker   | 32GB | |
 https://172.15.5.2:9090 | kube-worker-1 | 16GB | |
 https://172.15.5.3:9090 | kube-worker-2 | 16GB | |
 
-## Limpar o Cluster
+## Limpar o Cluster 
 
 ~~~~shell
 rm -r  /etc/kubernetes/manifests/*
@@ -801,6 +801,97 @@ NAME                          STATUS   ROLES           AGE   VERSION
 kubemaster-01.semed.intra     Ready    control-plane   12m   v1.27.3
 ~~~~
 
+# Adicionando os Workers
+
+Itens necessarios kubelet,kubeadm,kubectl, desativar o swap, os modulos 8ks
+
+Ajustendo o DNS
+~~~~shell
+# nano   /etc/hosts
+        172.15.5.1 kube-master  kube-master.semed.intra
+        172.15.5.2 kube-worker-1  kube-worker-1.semed.intra
+        172.15.5.3 kube-worker-2  kube-worker-2.semed.intra
+
+~~~~
+
+Instalando as aplicações do kubernetes
+~~~~shell
+# cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+exclude=kubelet kubeadm kubectl
+EOF
+
+# dnf install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+
+# swapoff -a
+# sed -e '/swap/s/^/#/g' -i /etc/fstab
+
+# modprobe overlay
+
+# modprobe br_netfilter
+
+# cat > /etc/modules-load.d/k8s.conf << EOF
+overlay
+br_netfilter
+EOF
+
+# cat > /etc/sysctl.d/k8s.conf << EOF
+net.ipv4.ip_forward = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+
+# sysctl --system
+
+# dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+# dnf makecache
+
+# dnf install -y containerd.io nano
+
+# mv /etc/containerd/config.toml /etc/containerd/config.toml.orig
+
+# containerd config default > /etc/containerd/config.toml
+
+# nano /etc/containerd/config.toml
+..........
+            SystemdCgroup = true
+.........
+
+# systemctl enable --now containerd.service
+
+# kubeadm join 172.15.5.1:6443 --token bkh2lw.dicznliycgv6qw2l \ --discovery-token-ca-cert-hash sha256:e9c920d323e820e80bbe082c049345952abe5703964d79d5f8059fd93cebabaf
+
+[preflight] Running pre-flight checks
+        [WARNING Service-Kubelet]: kubelet service is not enabled, please run 'systemctl enable kubelet.service' 
+[preflight] Reading configuration from the cluster...
+[preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'    
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Starting the kubelet
+[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...
+
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+~~~~
+
+## Verificando conexão
+~~~~shell
+$ sudo kubectl get nodes
+NAME            STATUS   ROLES           AGE     VERSION
+kube-master     Ready    control-plane   19h     v1.27.3
+kube-worker-1   Ready    <none>          7m22s   v1.27.3
+~~~~
+
 # Primeiros teste
 
 ## Exemplo - 1
@@ -843,3 +934,4 @@ nginx        ClusterIP   10.106.239.22   <none>        80/TCministrador]
 # kubectl port-forward service/nginx 8080:80
 error: unable to forward port because pod is not running. Current status=Pending
 ~~~~
+
