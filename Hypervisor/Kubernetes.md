@@ -3,14 +3,27 @@
 * kubelet: componente que é executado em todas as máquinas em seu cluster e faz coisas como iniciar pods e contêineres.
 * kubectl: utilitário de linha de comando para comunicação a API do Kubernetes.
 
+# Documentação
 
 [Documentação oficial](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
 
-[How to Install a Kubernetes Cluster with Kubeadm on Rocky Linux](https://www.howtoforge.com/how-to-setup-kubernetes-cluster-with-kubeadm-on-rocky-linux/)
+[Documentação extra](https://www.golinuxcloud.com/kubernetes-tutorial/)
+
+## Tutoriais de instalação
 
 [Install Kubernetes Master Node on Rocky Linux 9](https://www.centlinux.com/2022/11de-rocky-linux.html)
 
+[How to Install a Kubernetes Cluster with Kubeadm on Rocky Linux](https://www.howtoforge.com/how-to-setup-kubernetes-cluster-with-kubeadm-on-rocky-linux/)
+
+[Em português "não usei"](https://pt.linux-console.net/?p=3526#gsc.tab=0)
+
 [Kubernetes with Kubeadm: Cluster Installation from Scratch](https://admantium.medium.com/kubernetes-with-kubeadm-cluster-installation-from-scratch-810adc1b0a64)
+
+## Tutoriais de operação
+
+[Rodando o Nginx](https://nonanom.medium.com/run-nginx-on-kubernetes-ee6ea937bc99)
+
+[Acessando os logs](https://sematext.com/blog/tail-kubernetes-logs/)
 
 IP | Hostname | Memoria | HD Sistema |
 --|--|--|--
