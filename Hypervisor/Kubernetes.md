@@ -830,6 +830,10 @@ EOF
 
 # dnf install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 
+# firewall-cmd --permanent --add-port={6443,2379,2380,10250,10251,10252}/tcp
+
+# firewall-cmd --reload
+
 # swapoff -a
 # sed -e '/swap/s/^/#/g' -i /etc/fstab
 
