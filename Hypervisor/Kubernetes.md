@@ -910,6 +910,25 @@ kube-master     Ready    control-plane   19h     v1.27.3
 kube-worker-1   Ready    <none>          7m22s   v1.27.3
 ~~~~
 
+
+Descrição dos nodes
+~~~~shell
+# kubectl describe node
+~~~~
+
+Verificar as informações sobre os nodes e pod's
+~~~~shell
+# kubectl get nodes -o wide
+NAME            STATUS   ROLES           AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                      KERNEL-VERSION                 CONTAINER-RUNTIME
+kube-master     Ready    control-plane   5d16h   v1.27.3   172.15.5.1    <none>        Rocky Linux 9.2 (Blue Onyx)   5.14.0-284.18.1.el9_2.x86_64   containerd://1.6.21
+kube-worker-1   Ready    <none>          5d16h   v1.27.3   172.15.5.2    <none>        Rocky Linux 9.2 (Blue Onyx)   5.14.0-284.11.1.el9_2.x86_64   containerd://1.6.21
+kube-worker-2   Ready    <none>          5d16h   v1.27.3   172.15.5.3    <none>        Rocky Linux 9.2 (Blue Onyx)   5.14.0-284.18.1.el9_2.x86_64   containerd://1.6.21
+
+# kubectl get pod -o wide                                                                                                                                                                            
+NAME                     READY   STATUS    RESTARTS      AGE     IP           NODE            NOMINATED NODE   READINESS GATES
+nginx-57d84f57dc-kbhll   1/1     Running   2 (21m ago)   5d16h   10.244.2.2   kube-worker-2   <none>           <none>
+~~~~
+
 # Primeiros teste
 
 ## Exemplo - 1
@@ -934,9 +953,11 @@ $ curl -lo nginx.yaml "https://gist.githubusercontent.com/nonanom/498b913a69cede
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   577  100   577    0     0   1814      0 --:--:-- --:--:-- --:--:--  1814
+
 # kubectl apply --filename nginx.yaml
 service/nginx created
-deployment.apps/nginxministrador]# kubectl get pods
+
+# kubectl get pods
 NAME                     READY   STATUS    RESTARTS   AGE
 nginx-57d84f57dc-gfwxk   1/1     Pending   0    
 
@@ -950,6 +971,16 @@ kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP   12m
 nginx        ClusterIP   10.106.27.238   <none>        80/TCP    104s
 
 # kubectl port-forward service/nginx 8080:80
-error: unable to forward port because pod is not running. Current status=Pending
+Forwarding from 127.0.0.1:8080 -> 80
+Forwarding from [::1]:8080 -> 80
+(O port-forward fica rodando em primeiro plano, para rodar no fundo usa-se o & no final do comando)
+
+# kubectl delete pod nginx-57d84f57dc-7g4fs
+~~~~
+
+## Deletar tudo de uma vez
+
+~~~~shell
+kubectl delete all --all --namespace default
 ~~~~
 
