@@ -1,0 +1,203 @@
+{
+  "main": {
+    "id": "7d260be4d5057296",
+    "type": "split",
+    "children": [
+      {
+        "id": "d764e3b193cb9b5a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "55194adfe3395fb2",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c145b91c977f0952",
+    "type": "split",
+    "children": [
+      {
+        "id": "bb17cf607cc8c755",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fca99671964b2be8",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "f041ac6ee1bc47c0",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "a8a772c79bb47856",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "dc6f0721676088b6",
+    "type": "split",
+    "children": [
+      {
+        "id": "0b1e2a004d36fd51",
+        "type": "tabs",
+        "dimension": 69.47674418604652,
+        "children": [
+          {
+            "id": "05a17e97a7fbfc5a",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "b584097f4f6ac290",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "a9e873165acde054",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "638abc32252b2d21",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "708789574def46dc",
+        "type": "tabs",
+        "dimension": 30.523255813953487,
+        "children": [
+          {
+            "id": "f1d0d98b85344ffd",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 537.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "graph:Abrir visualização em gráfico": false,
+      "switcher:Abrir a troca rápida": false,
+      "canvas:Criar novo canvas": false,
+      "daily-notes:Abrir a nota de hoje": false,
+      "templates:Inserir modelo": false,
+      "command-palette:Abrir paleta de comandos": false
+    }
+  },
+  "active": "55194adfe3395fb2",
+  "lastOpenFiles": [
+    "README.md",
+    "Extras/win.md",
+    "Sistemas/SqlServer/DBeaver-SQLServer.png",
+    "Sistemas/Rocketchat/Instalacao.md",
+    "Sistemas/SqlServer/Sqlserver.md",
+    "Extras/sistema.md",
+    "Extras/comandos.md",
+    "ADSERVER/AD DESCONTINUADO.md",
+    "NAS/freenas.md",
+    "Sistemas/Univention/Univention.md",
+    "Sistemas/Univention",
+    "Sistemas/pfsense/pfsense.md",
+    "Sistemas/OnlyOffice/Onlyoffice.md",
+    "Sem título.canvas",
+    "Sem título 1.canvas",
+    "Sem título 2.canvas",
+    "Sem título 3.canvas",
+    "SGBD/PostgreSQL.md",
+    "SGBD/Mysql.md",
+    "Sistemas/Grafana/grafana.md",
+    "Sistemas/JasperServer/Jasperserver.md",
+    "Sistemas/I-educar/i-Educar.md",
+    "Hypervisor/Tipos de Plataformas.md",
+    "Hypervisor/Proxmox.md",
+    "2023-07-19.md",
+    "Sistemas/Compilação do Apache, PHP e PostgreSQL.md",
+    "Sistemas/Moodle/duas camadas.md",
+    "Sistemas/Moodle/moodle.md",
+    "Sistemas/Nextcloud/Usando template.md",
+    "Sistemas/Nextcloud/Nextcloud (Produção).md",
+    "Sistemas/Nextcloud/Nextcloud.md",
+    "Sistemas/Nextcloud/Imagens/Manual/01.png",
+    "Sistemas/JasperServer/01.png",
+    "Sistemas/Grafana/moni_hori.png",
+    "Sistemas/Grafana/Storages.png",
+    "Sistemas/Grafana/moni_imp_B.png",
+    "Sistemas/Grafana/moni_imp_A.png",
+    "Cluster/Node_2/Grafana",
+    "Cluster/Node_2",
+    "Cluster"
+  ]
+}

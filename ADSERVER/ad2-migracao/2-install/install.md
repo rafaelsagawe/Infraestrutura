@@ -2,7 +2,7 @@
 
 A instalação do Zentyal é a mesma do Ubuntu na versão simples. Foi escolhida a instalação *expert mode* para a melhor montagem do sistema.
  
-![](10.png)
+![](ADSERVER/ad2-migracao/2-install/10.png)
 * Menu escolha de inicialização, sendo possível:
     
     * Instalação mais simples (delete all disk);

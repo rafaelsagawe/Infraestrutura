@@ -190,7 +190,7 @@ Installing:
  containerd.io                             x86_64                             1.6.21-3.1.el9                                docker-ce-stable                              33 M 
 
 Transaction Summary
-=====================================================================================================================
+==================================================================================================================
 Install  1 Package
 
 Total download size: 33 M
@@ -983,4 +983,6 @@ Forwarding from [::1]:8080 -> 80
 ~~~~shell
 kubectl delete all --all --namespace default
 ~~~~
+
+# Instalando o Kubernetes Dashboard
 

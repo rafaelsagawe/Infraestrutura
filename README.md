@@ -5,9 +5,7 @@ Matérias e anotações de estudos de TI de forma geral.
 
 1. Central da TI
 * [Administração Remota](Central_de_TI(Athena)/adm_linux.md)
-
 * [Zabbix (Monitoramento)](Central_de_TI(Athena)/zabbix.md)
-
 * [GLPI (Inventario)](Central_de_TI(Athena)/glpi.md)
 
 -----
@@ -16,17 +14,36 @@ Matérias e anotações de estudos de TI de forma geral.
 * [Zentyal - AdServer e Ad2Server](ADSERVER/AD.md)
 
 ----
-3. Cluster de Virtualização
+# Plataformas
 
-* ProxMox
+[[Tipos de Plataformas]]
+* [[Proxmox]]
+* [[Kubernetes]] sobre [[Rocky Linux]]
+* [[vmware]]
 
-    * Containers
+# Storage
+[[freenas]]
 
-        * [Grafana](Cluster/Node_2/Grafana/grafana.md)
+# Sistemas
+[[grafana]]
+[[i-Educar]]
+[[Jasperserver]]
+[[moodle]] e [[duas camadas]]
+[[Nextcloud]] e [[Nextcloud (Produção)]]
+[[Onlyoffice]]
+[[pfsense]]
+[[pihole]]
+[[Instalacao]]
+[[Sqlserver]]
+[[Univention]]
+[[zabbix]]
 
-## Dicas Extras
+## SGBD
 
-[MySQL](Extras/mysql.md)
+[[SGBD/Sobre]]
+[[Mysql]]
+[[PostgreSQL]]
+
 
 [Windows](Extras/win.md)
 
