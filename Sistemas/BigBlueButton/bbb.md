@@ -4,7 +4,7 @@
     4  apt update
     5  apt install software-properties-common
     6  wget -qO- https://ubuntu.bigbluebutton.org/bbb-install.sh | bash -s -- -v xenial-220 -a
-    7  Acd /var/www/bigbluebutton
+    7  cd /var/www/bigbluebutton
     8  cd /var/www/bigbluebutton
     9  ls
    10  cd client/
@@ -18,8 +18,7 @@
    18  poweroff 
    19  bbb-conf --setip bbb-educoon.ddns.net
    20  cat >/etc/nginx/ssl/bigbluebutton.example.com.key <<'END'
-   21  sdfg
-   22  asdf
+
    23  END
    24  cat >/etc/nginx/ssl/bigbluebutton.example.com.key
    25  nano /etc/nginx/ssl/bigbluebutton.example.com.key

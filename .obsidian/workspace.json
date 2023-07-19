@@ -11,8 +11,15 @@
             "id": "55194adfe3395fb2",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "canvas",
+              "state": {
+                "file": "Zabbix.canvas",
+                "viewState": {
+                  "x": 235.6937318213296,
+                  "y": -7,
+                  "zoom": -0.3333333333333333
+                }
+              }
             }
           }
         ]
@@ -74,7 +81,7 @@
       {
         "id": "0b1e2a004d36fd51",
         "type": "tabs",
-        "dimension": 69.47674418604652,
+        "dimension": 24.224806201550386,
         "children": [
           {
             "id": "05a17e97a7fbfc5a",
@@ -82,6 +89,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Zabbix.canvas",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -98,7 +106,8 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "linksCollapsed": false,
+                "file": "Zabbix.canvas",
+                "linksCollapsed": true,
                 "unlinkedCollapsed": true
               }
             }
@@ -119,16 +128,18 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Zabbix.canvas"
+              }
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       },
       {
         "id": "708789574def46dc",
         "type": "tabs",
-        "dimension": 30.523255813953487,
+        "dimension": 75.7751937984496,
         "children": [
           {
             "id": "f1d0d98b85344ffd",
@@ -136,7 +147,8 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "linksCollapsed": false,
+                "file": "Zabbix.canvas",
+                "linksCollapsed": true,
                 "unlinkedCollapsed": false
               }
             }
@@ -145,7 +157,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 537.5
+    "width": 382.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -159,37 +171,38 @@
   },
   "active": "55194adfe3395fb2",
   "lastOpenFiles": [
+    "Sistemas/Grafana/grafana.md",
+    "Zabbix.canvas",
     "README.md",
+    "Extras/comandos.md",
+    "Extras/sistema.md",
+    "NAS/freenas.md",
+    "SGBD/Sobre.md",
+    "SGBD/PostgreSQL.md",
+    "SGBD/Mysql.md",
+    "Sistemas/GLPI/glpi.md",
+    "Sistemas/BigBlueButton/bbb.md",
+    "Sistemas/Moodle/moodle.md",
+    "Sistemas/Moodle/duas camadas.md",
+    "Sistemas/Nextcloud/Nextcloud.md",
+    "Sistemas/Nextcloud/Nextcloud (Produção).md",
+    "Sistemas/Nextcloud/Usando template.md",
+    "Sistemas/OnlyOffice/Onlyoffice.md",
+    "Sistemas/OnlyOffice/Senha.png",
+    "Sistemas/Openfire/sobre.md",
     "Extras/win.md",
     "Sistemas/SqlServer/DBeaver-SQLServer.png",
     "Sistemas/Rocketchat/Instalacao.md",
     "Sistemas/SqlServer/Sqlserver.md",
-    "Extras/sistema.md",
-    "Extras/comandos.md",
     "ADSERVER/AD DESCONTINUADO.md",
-    "NAS/freenas.md",
     "Sistemas/Univention/Univention.md",
     "Sistemas/Univention",
     "Sistemas/pfsense/pfsense.md",
-    "Sistemas/OnlyOffice/Onlyoffice.md",
-    "Sem título.canvas",
     "Sem título 1.canvas",
     "Sem título 2.canvas",
     "Sem título 3.canvas",
-    "SGBD/PostgreSQL.md",
-    "SGBD/Mysql.md",
-    "Sistemas/Grafana/grafana.md",
     "Sistemas/JasperServer/Jasperserver.md",
     "Sistemas/I-educar/i-Educar.md",
-    "Hypervisor/Tipos de Plataformas.md",
-    "Hypervisor/Proxmox.md",
-    "2023-07-19.md",
-    "Sistemas/Compilação do Apache, PHP e PostgreSQL.md",
-    "Sistemas/Moodle/duas camadas.md",
-    "Sistemas/Moodle/moodle.md",
-    "Sistemas/Nextcloud/Usando template.md",
-    "Sistemas/Nextcloud/Nextcloud (Produção).md",
-    "Sistemas/Nextcloud/Nextcloud.md",
     "Sistemas/Nextcloud/Imagens/Manual/01.png",
     "Sistemas/JasperServer/01.png",
     "Sistemas/Grafana/moni_hori.png",

@@ -24,6 +24,7 @@ a2enmod rewrite && a2enmod headers
 /etc/init.d/apache2 restart
 
 # Servidor de Banco de dados (Postgres)
+~~~~shell
 apt install postgresql libpq5 postgresql postgresql-client postgresql-client-common postgresql-contrib
 
 $ su postgres
@@ -33,8 +34,11 @@ $ psql
 # GRANT ALL ON DATABASE "nextcloud" TO root;
 # \q
 $ exit
+~~~~
+
 
 # Nextcloud
+~~~~
 cd /var/www/
 wget https://download.nextcloud.com/server/releases/nextcloud-14.0.0.zip
  unzip nextcloud-14.0.0.zip
@@ -42,9 +46,13 @@ wget https://download.nextcloud.com/server/releases/nextcloud-14.0.0.zip
  mv nextcloud /var/www/html
  rm nextcloud-14.0.0.zip
  chown -R www-data:www-data html
+~~~~
+
 
 ## Ajuste
-     O PHP OPcache não está configurado corretamente.
+
+	 O PHP OPcache não está configurado corretamente.
+~~~~ 
      nano /etc/php/7.0/apache2/php.ini
          opcache.enable=1
          opcache.enable_cli=1
@@ -54,28 +62,39 @@ wget https://download.nextcloud.com/server/releases/nextcloud-14.0.0.zip
          opcache.save_comments=1
          opcache.revalidate_freq=1
      service apache2 restart
+~~~~
 
-     Verifica integidade dos arquivos
-     sudo -u www-data php occ integrity:check-core
 
-     Cota de usuario
+## Verifica integridade dos arquivos
+~~~~
+	 sudo -u www-data php occ integrity:check-core
+~~~~
+
+### Cota de usuario
      Na pagina de criação de usuario, no canto inferior esquerdo engrenagem
 
      alterar o valor memory_limit para 512M
-     nano /etc/php/7.0/apache2/php.ini
-
-     Portugues como Idioma padão
-     Alterar o arquivo nano config/config.php
+~~~~
+# nano /etc/php/7.0/apache2/php.ini
+~~~~
+     
+Português como Idioma padrão
+     Alterar o arquivo 
+~~~~
+nano config/config.php
         'default_language' => 'pt'
+~~~~
 
-
-    O cabeçalho HTTP "Referrer-Policy" não está definido como "no-referrer", "no-referrer-when-downgrade", "strict-origin" ou "strict-origin-when-cross-origin".
+O cabeçalho HTTP "Referrer-Policy" não está definido como "no-referrer", "no-referrer-when-downgrade", "strict-origin" ou "strict-origin-when-cross-origin".
     Adicione as linhas no arquivo 000-default.conf
-    nano /etc/apache2/sites-enabled/000-default.conf
+~~~~
+nano /etc/apache2/sites-enabled/000-default.conf
               Header add Strict-Transport-Security: "max-age=15768000;includeSubdomains"
               Header always set Referrer-Policy "strict-origin"
+~~~~
 
     Nenhum cache de memória foi configurado. Para melhorar o desempenho, configure um memcache, se disponível.
+
     Adicione a linha "'memcache.local' => '\OC\Memcache\APCu',"  em nano /var/www/html/config/config.php
 
 ## Apps Instalados
@@ -124,7 +143,7 @@ Podemos obter um certificado TLS/SSL grátis vamos usar o Let’s Encrypt CA.
 Caso queira deixar seu servidor sem https pule esta etapa.
 
 Primeiro vamos instalar o cliente certbot/letsnecrypt. Para isso será necessario ativar o repositório backports.
-
+~~~~
 # echo 'deb http://ftp.debian.org/debian jessie-backports main' >> /etc/apt/sources.list.d/backports.list
 # apt update
 # apt install letsencrypt python-certbot-apache -t jessie-backports
@@ -143,6 +162,7 @@ nano  /var/www/html/config/config.php
 [...]
 'overwrite.cli.url' => 'https://cloud.remontti.com.br',
 [...]
+~~~~
 
 # OnlyOffice
 
@@ -152,22 +172,26 @@ Com o ONLYOFFICE conectado à instalação do ownCloud/Nextcloud, você será ca
 – Usar centenas de recursos de formatação. Adicione gráficos, formas automáticas, equações matemáticas complexas, decore a fonte, edite cabeçalhos / rodapés, crie estilos, altere o design do documento inteiro com dois cliques e mais.
 – Editar documentos em tempo real com outras pessoas. Use o modo rápido para ver o que seus colegas estão digitando no momento ou o modo estrito para trabalhar no fragmento do documento sem ser distraído por outros.
 
+~~~~
 apt install git
 cd /var/www/
 git clone https://github.com/ONLYOFFICE/onlyoffice-owncloud.git onlyoffice
 chown  www-data. onlyoffice -R
+~~~~
 
 Docker se encontra nos repositório backports, caso você tenha instalado o letsencrypt (https) você ja fez este procedimento, pode pular para a instalacao do docker.io
 
+~~~~
 echo 'deb http://ftp.debian.org/debian jessie-backports main' >> /etc/apt/sources.list.d/backports.list
 apt update
 apt install docker.io
 systemctl enable docker
-
+~~~~
 ________________________________
 Sem NÃO instalou os certificados https rode o comando abaixo.
-docker run -i -t -d -p 88:80 --restart always onlyoffice/documentserver
+``# docker run -i -t -d -p 88:80 --restart always onlyoffice/documentserver
 ________________________________
+~~~~
 cd /tmp/
 openssl genrsa -out onlyoffice.key 2048
 openssl req -new -key onlyoffice.key -out onlyoffice.csr
@@ -180,8 +204,10 @@ cp dhparam.pem /app/onlyoffice/DocumentServer/data/certs/
 chmod 400 /app/onlyoffice/DocumentServer/data/certs/onlyoffice.key
 docker run -i -t -d -p 448:443 --restart always -v /app/onlyoffice/DocumentServer/data:/var/www/onlyoffice/Data onlyoffice/documentserver
 docker pull onlyoffice/documentserver
+~~~~
 
 ## JavaScript XMPP Chat
+~~~~
 nano 000-default.conf
     ProxyPass /http-bind/ http://openfire.semed-ni.intra:7070/http-bind/
     ProxyPassReverse /http-bind/ http://openfire.semed-ni.intra:7070/http-bind/
@@ -189,6 +215,7 @@ nano 000-default.conf
     a2enmod proxy
     a2enmod proxy_http
     service apache2 restart
+~~~~
 
 ## Fontes
 https://blog.remontti.com.br/1557

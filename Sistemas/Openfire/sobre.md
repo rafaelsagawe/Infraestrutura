@@ -14,6 +14,7 @@ Plataforma de chat entre escolas e SEMED;
 -----------
 
 ## Recursos de hardware
+
 Recurso | quantidade
 --|--
 Memoria | 1024mb
@@ -60,21 +61,21 @@ mv downloadServlet\?filename\=openfire%2Fopenfire_4.3.2_all.deb openfire.deb
 
 1. Language Selection: Português Brasileiro (pt_BR);
 
-![Tela de Idiomas](Sistemas/Destinado/Openfire/web_install/01.png)
+![Tela de Idiomas](Sistemas/Openfire/web_install/01.png)
 
 2. Configurações do Servidor, esses itens são ligados ao hostname:
 * Domínio:	openfire.semed-ni.intra;
 * Setup Host Settings FQDN: openfire.semed-ni.intra;
 
-![Configurações do DNS](Sistemas/Destinado/Openfire/web_install/02.png)
+![Configurações do DNS](Sistemas/Openfire/web_install/02.png)
 
 3. Configurações do Banco de Dados: Banco de Dados Interno;
 
-![Configuração do banco de dados](Sistemas/Destinado/Openfire/web_install/03.png)
+![Configuração do banco de dados](Sistemas/Openfire/web_install/03.png)
 
 4. Configurações de Perfis: Servidor de Diretórios (LDAP), assim todos os usuários cadastrados no AD serão importados para o openfire;
 
-![Configuração do AD](Sistemas/Destinado/Openfire/web_install/04.png)
+![Configuração do AD](Sistemas/Openfire/web_install/04.png)
 
 
                 a) Configurações de Conexão:
@@ -86,7 +87,7 @@ mv downloadServlet\?filename\=openfire%2Fopenfire_4.3.2_all.deb openfire.deb
         Senha: openfire
         Testar configurações -> Salvar & continuar
 
-![Configuração do AD-1](Sistemas/Destinado/Openfire/web_install/05.png)
+![Configuração do AD-1](Sistemas/Openfire/web_install/05.png)
 
        
                 b) Mapeamento de Usuário:
@@ -117,11 +118,11 @@ Usando o usuário **administrator** do AD para acessar a dashboard de configura�
 ![Tela de login](00.png)
 
 A seguir as telas inicias da plataforma
-![](Sistemas/Destinado/Openfire/dashboard/01.png)
-![](Sistemas/Destinado/Openfire/dashboard/02.png)
-![](Sistemas/Destinado/Openfire/dashboard/03.png)
-![](Sistemas/Destinado/Openfire/dashboard/04.png)
-![](Sistemas/Destinado/Openfire/dashboard/05.png)
+![](Sistemas/Openfire/dashboard/01.png)
+![](Sistemas/Openfire/dashboard/02.png)
+![](Sistemas/Openfire/dashboard/03.png)
+![](Sistemas/Openfire/dashboard/04.png)
+![](Sistemas/Openfire/dashboard/05.png)
 ![](05-2.png)
 
 ## Ajustes para melhor usabilidade do recurso
@@ -136,8 +137,8 @@ Para isso foi criado um grupo chat no AD, no openfire na aba *Usuários/Grupos -
 
 Nas configurações padrão do servidor o Thunderbird não consegue se conectar ao Openfire, devido a requisição de certificados, para contornar esté problema foi só desativar o recurso **STARTTLS policy**, que fica em *Servidor -> Configurações do Servidor -> Client Connections -> Configurações Avançadas...*
 
-![Configuração padrão](Sistemas/Destinado/Openfire/ajustes/01.png)
+![Configuração padrão](Sistemas/Openfire/ajustes/01.png)
 STARTTLS policy **Ativo**
 
-![Configuração padrão](Sistemas/Destinado/Openfire/ajustes/01-2.png)
+![Configuração padrão](Sistemas/Openfire/ajustes/01-2.png)
 STARTTLS policy **Desativado**

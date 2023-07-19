@@ -1,12 +1,14 @@
 Matérias e anotações de estudos de TI de forma geral.
 
+
+
 ## Índice dos projetos
 ---
 
 1. Central da TI
 * [Administração Remota](Central_de_TI(Athena)/adm_linux.md)
 * [Zabbix (Monitoramento)](Central_de_TI(Athena)/zabbix.md)
-* [GLPI (Inventario)](Central_de_TI(Athena)/glpi.md)
+* [GLPI (Inventario)](glpi.md)
 
 -----
 2. Controladores de Domino
