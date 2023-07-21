@@ -1,0 +1,16 @@
+{
+	"nodes":[
+		{"type":"file","file":"Sistemas/Zabbix/zabbix.md","id":"c6f13d4d041d0983","x":-620,"y":-400,"width":660,"height":400,"color":"4"},
+		{"id":"55d5dc033a732996","x":220,"y":-400,"width":700,"height":400,"color":"4","type":"file","file":"Sistemas/Grafana/grafana.md"},
+		{"id":"d9c31cdce554c8d6","x":-1040,"y":180,"width":660,"height":400,"color":"4","type":"file","file":"SGBD/PostgreSQL.md"},
+		{"id":"11a2f10f73181c25","x":-620,"y":760,"width":660,"height":400,"type":"file","file":"Sistemas/Moodle/moodle.md"},
+		{"id":"63a0e5b2fff40ede","x":-1460,"y":960,"width":660,"height":400,"type":"file","file":"Sistemas/Openfire/sobre.md"}
+	],
+	"edges":[
+		{"id":"63b09fa37388e4df","fromNode":"d9c31cdce554c8d6","fromSide":"top","toNode":"c6f13d4d041d0983","toSide":"bottom","fromEnd":"arrow"},
+		{"id":"7306e9c7de31dd9a","fromNode":"c6f13d4d041d0983","fromSide":"right","toNode":"55d5dc033a732996","toSide":"left"},
+		{"id":"fc0ee549335bd5bb","fromNode":"11a2f10f73181c25","fromSide":"top","toNode":"d9c31cdce554c8d6","toSide":"bottom"},
+		{"id":"7b11569e40e821bb","fromNode":"11a2f10f73181c25","fromSide":"top","toNode":"55d5dc033a732996","toSide":"bottom"},
+		{"id":"c83d6de8ad023dd3","fromNode":"63a0e5b2fff40ede","fromSide":"top","toNode":"d9c31cdce554c8d6","toSide":"bottom"}
+	]
+}

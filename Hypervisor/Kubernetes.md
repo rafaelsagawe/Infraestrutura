@@ -981,8 +981,71 @@ Forwarding from [::1]:8080 -> 80
 ## Deletar tudo de uma vez
 
 ~~~~shell
-kubectl delete all --all --namespace default
+# kubectl delete all --all --namespace default
+~~~~
+
+## Deletar configmap via arquivo
+
+~~~~shell
+# kubectl delete -f metallb-config.yml -n metallb-system
+~~~~
+
+## Implementando o LoadBalancer
+[Site](https://www.debontonline.com/2020/09/loadbalancing-on-raberry-pi-kubernetes.html)
+~~~~shell
+# kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/namespace.yaml
+
+# kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/metallb.yaml
+
+# kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+
+# nano metallb-config.yml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      namespace: metallb-system
+      name: config
+    data:
+      config: |
+        address-pools:
+        - name: default
+          protocol: layer2
+          addresses:
+          - 172.15.5.10-172.15.5.20  # < example ip range you reserve for MetalLB
+
+# kubectl create -f metallb-config.yml
+
+# kubectl get configmap -n metallb-system
+
+# kubectl expose deployment nginx --port 80 --type=LoadBalancer --name=nginx
+
+# kubectl get service
+NAME         TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+grafana      LoadBalancer   10.96.147.235    172.15.5.12   3000:32316/TCP   10m
+kubernetes   ClusterIP      10.96.0.1        <none>        443/TCP          34m
+nginx        LoadBalancer   10.107.195.143   172.15.5.11   80:30625/TCP     16m
+nginx-name   LoadBalancer   10.110.255.91    172.15.5.10   80:30967/TCP     19m
 ~~~~
 
 # Instalando o Kubernetes Dashboard
+[Base](https://adamtheautomator.com/kubernetes-dashboard/)
+
+~~~~shell
+# kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml
+
+# kubectl get all -n kubernetes-dashboard
+
+# kubectl edit service/kubernetes-dashboard -n kubernetes-dashboard
+    type: LoadBalancer
+
+# kubectl get pods --all-namespaces
+
+# kubectl create serviceaccount dashboard -n kubernetes-dashboard
+
+~~~~
+
+[Gerendo o token](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md)
+~~~~shell
+# kubectl -n kubernetes-dashboard create token admin-user
+~~~~
 

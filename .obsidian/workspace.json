@@ -4,22 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "d764e3b193cb9b5a",
+        "id": "92d739ffe2c35b71",
         "type": "tabs",
         "children": [
           {
-            "id": "55194adfe3395fb2",
+            "id": "ebcb5c534df49901",
             "type": "leaf",
             "state": {
-              "type": "canvas",
-              "state": {
-                "file": "Zabbix.canvas",
-                "viewState": {
-                  "x": 235.6937318213296,
-                  "y": -7,
-                  "zoom": -0.3333333333333333
-                }
-              }
+              "type": "graph",
+              "state": {}
             }
           }
         ]
@@ -89,11 +82,10 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Zabbix.canvas",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
-                "showSearch": false,
+                "showSearch": true,
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
@@ -106,7 +98,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Zabbix.canvas",
                 "linksCollapsed": true,
                 "unlinkedCollapsed": true
               }
@@ -128,13 +119,10 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Zabbix.canvas"
-              }
+              "state": {}
             }
           }
-        ],
-        "currentTab": 3
+        ]
       },
       {
         "id": "708789574def46dc",
@@ -147,7 +135,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Zabbix.canvas",
                 "linksCollapsed": true,
                 "unlinkedCollapsed": false
               }
@@ -157,7 +144,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 382.5
+    "width": 303.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -169,10 +156,16 @@
       "command-palette:Abrir paleta de comandos": false
     }
   },
-  "active": "55194adfe3395fb2",
+  "active": "fca99671964b2be8",
   "lastOpenFiles": [
+    "Hypervisor/Kubernetes.md",
+    "2023-07-19.md",
+    "Sem título.canvas",
+    "Sistemas/Moodle/duas camadas.md",
+    "Sistemas.canvas",
+    "Sistemas/SqlServer/DBeaver-SQLServer.png",
+    "Sistemas/SqlServer/Sqlserver.md",
     "Sistemas/Grafana/grafana.md",
-    "Zabbix.canvas",
     "README.md",
     "Extras/comandos.md",
     "Extras/sistema.md",
@@ -183,7 +176,6 @@
     "Sistemas/GLPI/glpi.md",
     "Sistemas/BigBlueButton/bbb.md",
     "Sistemas/Moodle/moodle.md",
-    "Sistemas/Moodle/duas camadas.md",
     "Sistemas/Nextcloud/Nextcloud.md",
     "Sistemas/Nextcloud/Nextcloud (Produção).md",
     "Sistemas/Nextcloud/Usando template.md",
@@ -191,9 +183,7 @@
     "Sistemas/OnlyOffice/Senha.png",
     "Sistemas/Openfire/sobre.md",
     "Extras/win.md",
-    "Sistemas/SqlServer/DBeaver-SQLServer.png",
     "Sistemas/Rocketchat/Instalacao.md",
-    "Sistemas/SqlServer/Sqlserver.md",
     "ADSERVER/AD DESCONTINUADO.md",
     "Sistemas/Univention/Univention.md",
     "Sistemas/Univention",
@@ -202,7 +192,6 @@
     "Sem título 2.canvas",
     "Sem título 3.canvas",
     "Sistemas/JasperServer/Jasperserver.md",
-    "Sistemas/I-educar/i-Educar.md",
     "Sistemas/Nextcloud/Imagens/Manual/01.png",
     "Sistemas/JasperServer/01.png",
     "Sistemas/Grafana/moni_hori.png",
