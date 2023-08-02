@@ -843,7 +843,7 @@ EOF
 
 # dnf install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 
-# firewall-cmd --permanent --add-port={6443,2379,2380,10250,10251,10252}/tcp
+# firewall-cmd --permanent --add-port={443,6443,2379,2380,10250,10251,10252}/tcp
 
 # firewall-cmd --reload
 
@@ -988,14 +988,18 @@ Forwarding from [::1]:8080 -> 80
 
 ~~~~shell
 # kubectl delete -f metallb-config.yml -n metallb-system
+# kubectl delete  configmaps kube-root-ca.crt -n metallb-system
 ~~~~
 
 ## Implementando o LoadBalancer
-[Site](https://www.debontonline.com/2020/09/loadbalancing-on-raberry-pi-kubernetes.html)
-~~~~shell
-# kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/namespace.yaml
 
-# kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/metallb.yaml
+[Site](https://www.debontonline.com/2020/09/loadbalancing-on-raberry-pi-kubernetes.html)
+
+~~~~shell
+
+´´# kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/namespace.yaml´´
+
+# kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.10/config/manifests/metallb-native.yaml
 
 # kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 
@@ -1017,6 +1021,8 @@ Forwarding from [::1]:8080 -> 80
 
 # kubectl get configmap -n metallb-system
 
+(# kubectl apply -f /home/administrador/nginx.yaml)
+
 # kubectl expose deployment nginx --port 80 --type=LoadBalancer --name=nginx
 
 # kubectl get service
@@ -1026,6 +1032,22 @@ kubernetes   ClusterIP      10.96.0.1        <none>        443/TCP          34m
 nginx        LoadBalancer   10.107.195.143   172.15.5.11   80:30625/TCP     16m
 nginx-name   LoadBalancer   10.110.255.91    172.15.5.10   80:30967/TCP     19m
 ~~~~
+
+# Limpando o LoadBalance
+
+~~~~shell
+# kubectl delete secret  memberlist -n metallb-system
+secret "memberlist" deleted
+
+# kubectl delete -f metallb-config.yml 
+configmap "config" deleted
+
+# kubectl delete -f metallb-config.yml -n metallb-system
+
+# kubectl delete  configmaps kube-root-ca.crt -n metallb-system
+~~~~
+
+
 
 # Instalando o Kubernetes Dashboard
 [Base](https://adamtheautomator.com/kubernetes-dashboard/)
@@ -1049,4 +1071,3 @@ nginx-name   LoadBalancer   10.110.255.91    172.15.5.10   80:30967/TCP     19m
 # kubectl -n kubernetes-dashboard create token admin-user
 ~~~~
 
-ghfghfghvghfgh
