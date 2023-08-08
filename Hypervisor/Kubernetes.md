@@ -34,12 +34,12 @@ https://172.15.5.3:9090 | kube-worker-2 | 16GB | |
 ## Limpar o Cluster 
 
 ~~~~shell
-rm -r  /etc/kubernetes/manifests/*
-rm -rf /etc/cni/net.d/*
-systemctl restart kubelet
-systemctl restart containerd
-systemctl restart kubelet
-kubeadm reset
+# rm -r  /etc/kubernetes/manifests/*
+# rm -rf /etc/cni/net.d/*
+# systemctl restart kubelet
+# systemctl restart containerd
+# systemctl restart kubelet
+# kubeadm reset
 ~~~~
 
 ===============//===============//============= 
@@ -153,6 +153,7 @@ net.bridge.bridge-nf-call-iptables = 1
 ~~~~
 
 ## Desativando o Swap do Linux
+
 ~~~~shell
 # swapoff -a
 # sed -e '/swap/s/^/#/g' -i /etc/fstab
@@ -767,8 +768,7 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 
 # kubectl get nodes
 NAME                          STATUS     ROLES           AGE   VERSION
-kubemaster-01.semed.intra   NotRe
-ady   control-plane   43s   v1.27.3
+kubemaster-01.semed.intra   NotReady   control-plane   43s   v1.27.3
 
 # kubectl cluster-info
 Kubernetes control plane is running at https://172.15.46.3:6443
@@ -776,7 +776,7 @@ CoreDNS is running at https://172.15.46.3:6443/api/v1/namespaces/kube-system/ser
 
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
-# kubectl apply -f https://raw.githubusercontent.comcumentation/kube-flannel.yml
+# kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
 namespace/kube-flannel created
 clusterrole.rbac.authorization.k8s.io/flannel created
 clusterrolebinding.rbac.authorization.k8s.io/flannel created
@@ -802,7 +802,10 @@ kube-system    kube-scheduler-kubemaster-01.semed.intra              1/1     Run
 NAME                          STATUS     ROLES           AGE   VERSION
 kubemaster-01.semed.intra   NotReady   control-plane   43s   v1.27.3
 ~~~~
+
 [Ativando](https://stackoverflow.com/questions/46172741de-not-ready)
+
+## Verificar função
 ~~~~shell
 # kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.
@@ -910,7 +913,6 @@ kube-master     Ready    control-plane   19h     v1.27.3
 kube-worker-1   Ready    <none>          7m22s   v1.27.3
 ~~~~
 
-
 Descrição dos nodes
 ~~~~shell
 # kubectl describe node
@@ -924,7 +926,7 @@ kube-master     Ready    control-plane   5d16h   v1.27.3   172.15.5.1    <none> 
 kube-worker-1   Ready    <none>          5d16h   v1.27.3   172.15.5.2    <none>        Rocky Linux 9.2 (Blue Onyx)   5.14.0-284.11.1.el9_2.x86_64   containerd://1.6.21
 kube-worker-2   Ready    <none>          5d16h   v1.27.3   172.15.5.3    <none>        Rocky Linux 9.2 (Blue Onyx)   5.14.0-284.18.1.el9_2.x86_64   containerd://1.6.21
 
-# kubectl get pod -o wide                                                                                                                                                                            
+# kubectl get pod -o wide                    
 NAME                     READY   STATUS    RESTARTS      AGE     IP           NODE            NOMINATED NODE   READINESS GATES
 nginx-57d84f57dc-kbhll   1/1     Running   2 (21m ago)   5d16h   10.244.2.2   kube-worker-2   <none>           <none>
 ~~~~
@@ -997,7 +999,7 @@ Forwarding from [::1]:8080 -> 80
 
 ~~~~shell
 
-´´# kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/namespace.yaml´´
+# kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/namespace.yaml
 
 # kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.10/config/manifests/metallb-native.yaml
 
@@ -1046,7 +1048,6 @@ configmap "config" deleted
 
 # kubectl delete  configmaps kube-root-ca.crt -n metallb-system
 ~~~~
-
 
 
 # Instalando o Kubernetes Dashboard
