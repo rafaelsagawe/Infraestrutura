@@ -9,7 +9,7 @@ Item | Descrição
 --|--
 CPU | intel celeron j1800
 Memoria |
-Armazenamento |
+Armazenamento | 2 HDs de 500gb, sistema e roms em um, no outro apenas as roms
 Conectividade |
 API Grafica |
 
