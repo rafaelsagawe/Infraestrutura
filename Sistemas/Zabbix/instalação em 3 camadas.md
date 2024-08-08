@@ -222,16 +222,16 @@ Iniciar o front junto com o sistema
 
 Acessando o Zabbix, 
 
-![](front-1.png)
-![](front-2.png)
-![](front-3-erro.png)
+![](3-camadas/front-1.png)
+![](3-camadas/front-2.png)
+![](3-camadas/front-3-erro.png)
 
 Para contornar esse erro recriei o banco de dados, por isso esta diferente da documentação oficial.
-![](front-3.png)
-![](front-4.png)
-![](front-5.png)
-![](front-6.png)
-![](front-7.png)
+![](3-camadas/front-3.png)
+![](3-camadas/front-4.png)
+![](3-camadas/front-5.png)
+![](3-camadas/front-6.png)
+![](3-camadas/front-7.png)
 
 ## 4. Agent e criação dos hosts
 Um dos itens instalado era o agent do zabbix, agora será configurado.
@@ -251,7 +251,7 @@ Hostname | PostgreSQL | ZabbixFront
 service zabbix-agent restart
 ~~~~
 
-![Adição do host](add-host.png)
+![Adição do host](3-camadas/add-host.png)
 
 Item | Valor
 --|--
@@ -292,7 +292,7 @@ Como template é utilizado o ``Nginx by Zabbix agent``.
 
 ## 5 Consertando erros iniciais
 
-![Erros iniciais](erros_iniciais.png)
+![Erros iniciais](3-camadas/erros_iniciais.png)
 
 ### 5.1 Zabbix server: Utilization of discoverer processes over 75%
 

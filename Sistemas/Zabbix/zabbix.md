@@ -95,23 +95,23 @@ Start Zabbix server and agent processes and make it start at system boot.
 # sudo service apache2 restart
 ~~~~
 ### Finalização da instalação no frontend
-![tela 01](Sistemas/Zabbix/img-zabbix/1.png)
+![tela 01](img-zabbix/1.png)
 Confirmação das dependências
-![tela 02](Sistemas/Zabbix/img-zabbix/2.png)
+![tela 02](img-zabbix/2.png)
 Configurações do acesso ao banco de dados
-![tela 03](Sistemas/Zabbix/img-zabbix/3.png)
+![tela 03](img-zabbix/3.png)
 Detalhes do servidor, host, porta, hostname
-![tela 04](Sistemas/Zabbix/img-zabbix/4.png)
+![tela 04](img-zabbix/4.png)
 Sumário da Pre-instalação
-![tela 05](Sistemas/Zabbix/img-zabbix/5.png)
+![tela 05](img-zabbix/5.png)
 Finalização da instalação
-![tela 06](Sistemas/Zabbix/img-zabbix/6.png)
+![tela 06](img-zabbix/6.png)
 Tela login
-![tela 07](Sistemas/Zabbix/img-zabbix/7.png)
+![tela 07](img-zabbix/7.png)
 Dashboard inicial
-![tela 08](Sistemas/Zabbix/img-zabbix/8.png)
+![tela 08](img-zabbix/8.png)
 Tela de configuração do perfil administrador 
-![tela 09](Sistemas/Zabbix/img-zabbix/9.png)
+![tela 09](img-zabbix/9.png)
 
 ### Ativação da tradução
 A tradução é ativada através da localização do sistema
@@ -120,7 +120,7 @@ A tradução é ativada através da localização do sistema
 sudo locale-gen pt_BR && sudo locale-gen pt_BR.UTF-8
 ~~~~
 
-![tela 10](Sistemas/Zabbix/img-zabbix/10.png)
+![tela 10](img-zabbix/10.png)
 
 ## Zabbix agent
 
