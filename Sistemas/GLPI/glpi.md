@@ -46,23 +46,23 @@ sudo apt-get -y install libapache2-mod-php php php-{curl,gd,imagick,intl,apcu,re
 
 O restante da instalação é feita através da interface web.
 
-![tela1](glpi_install_01.png)
-![tela2](glpi_install_02.png)
-![tela3](glpi_install_03.png)
-![tela4](glpi_install_04.png)
-![tela5](glpi_install_05.png)
-![tela6](glpi_install_06.png)
-![tela7](glpi_install_07.png)
-![tela8](glpi_install_08.png)
-![tela9](glpi_install_09.png)
-![tela10](glpi_install_10.png)
-![tela11](glpi_install_11.png)
+![tela1](img-glpi/glpi_install_01.png)
+![tela2](img-glpi/glpi_install_02.png)
+![tela3](img-glpi/glpi_install_03.png)
+![tela4](img-glpi/glpi_install_04.png)
+![tela5](img-glpi/glpi_install_05.png)
+![tela6](img-glpi/glpi_install_06.png)
+![tela7](img-glpi/glpi_install_07.png)
+![tela8](img-glpi/glpi_install_08.png)
+![tela9](img-glpi/glpi_install_09.png)
+![tela10](img-glpi/glpi_install_10.png)
+![tela11](img-glpi/glpi_install_11.png)
 
 
-![tela12](glpi_01.png)
+![tela12](img-glpi/glpi_01.png)
 Tela de login do GLPI
 
-![tela13](glpi_02.png)
+![tela13](img-glpi/glpi_02.png)
 Tela Inicial do GLPI 9.5 recém instalado
 
 ## Ajustes pos instalação

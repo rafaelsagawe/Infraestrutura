@@ -181,7 +181,7 @@ A solução que encontrei foi adicionar os dois endereços de IP do servidor do 
 Para facilitar o cadastro dos equipamentos foi utilizado o recurso de auto descoberta.
 
 ### Tela da Regra de Descoberta
-![tela 11](Regras_descoberta.png)
+![tela 11](img-zabbix/Regras_descoberta.png)
 
 # Instalação avançada
 

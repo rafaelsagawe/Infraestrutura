@@ -16,16 +16,19 @@ senha (padrão)
 
 # Servidor web
 
-apt update && apt upgrade
-apt install zip apache2 apache2-utils php php-xml php-gd php-mbstring php-zip php-pclzip php-curl php-xmlrpc php-imagick php-redis php-memcached php-apcu php-gmp php-imap php-ldap php-intl php-pgsql
+~~~~shell
+# apt update && apt upgrade
+# apt install zip apache2 apache2-utils php php-xml php-gd php-mbstring php-zip php-pclzip php-curl php-xmlrpc php-imagick php-redis php-memcached php-apcu php-gmp php-imap php-ldap php-intl php-pgsql
 
-a2enmod rewrite && a2enmod headers
+# a2enmod rewrite && a2enmod headers
 
-/etc/init.d/apache2 restart
+# /etc/init.d/apache2 restart
+
+~~~~
 
 # Servidor de Banco de dados (Postgres)
 ~~~~shell
-apt install postgresql libpq5 postgresql postgresql-client postgresql-client-common postgresql-contrib
+# apt install postgresql libpq5 postgresql postgresql-client postgresql-client-common postgresql-contrib
 
 $ su postgres
 $ psql
